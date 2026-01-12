@@ -1444,10 +1444,124 @@
       background: var(--sage);
       color: #fff
     }
+
+    #introOverlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #introOverlay.active {
+      animation: introFade 4s forwards;
+      pointer-events: auto;
+    }
+
+    @keyframes introFade {
+      0% {
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .intro-content {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-family: var(--fb);
+      font-size: 1.6rem;
+      color: var(--ink);
+    }
+
+    .intro-gold {
+      background: linear-gradient(135deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: var(--ff);
+      /* Serif */
+      font-weight: 700;
+      font-style: italic;
+      filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
+    }
+
+    .intro-season {
+      font-family: var(--ff);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .intro-pages {
+      font-family: var(--ff);
+      font-size: 1.2rem;
+      opacity: .6;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .intro-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .intro-icon.gold {
+      fill: #DFBD69;
+    }
+
+    .intro-icon.ink {
+      fill: var(--ink);
+      opacity: .6;
+    }
+
+    .coll-label {
+      font-family: var(--fs);
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--stone);
+      margin: 0 0 .5rem 0;
+      text-transform: uppercase;
+    }
   </style>
 </head>
 
 <body>
+  <div id="introOverlay">
+    <div class="intro-content">
+      <svg class="intro-icon gold" viewBox="0 0 24 24">
+        <path
+          d="M20 12h-2V5c0-.55-.45-1-1-1h-4.2c.42-.64.65-1.37.6-2.14-.08-1.24-1.12-2.17-2.36-2.11C9.69.8 8.84 1.76 8.94 3c.05.77.28 1.5.7 2.14H5c-.55 0-1 .45-1 1v7H2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8zM12 2.75c.41 0 .75.34.75.75 0 .41-.34.75-.75.75-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75zM10.5 5h3c-.22.84-.79 1.53-1.5 1.95A3.75 3.75 0 0 1 10.5 5zm-5 7h4v9H7c-.55 0-1-.45-1-1v-8zm6 9v-9h4v8c0 .55-.45 1-1 1h-3z" />
+      </svg>
+      <span class="intro-gold">Gifting</span> <span class="intro-season">Season</span> — <span class="intro-pages">pages
+        forward <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg></span>
+      <svg class="intro-icon ink" viewBox="0 0 24 24">
+        <path
+          d="M9.16 2.5a2 2 0 0 0-2 2v7.33a2 2 0 0 1-.59 1.42L4 15.83a2 2 0 0 0 0 2.83l2.83 2.83a2 2 0 0 0 2.83 0l6.58-6.58a2 2 0 0 0 0-2.83L13.17 6.17a2 2 0 0 1-1.42-.59V4.5a2 2 0 0 0-2-2z" />
+      </svg>
+    </div>
+  </div>
   <div class="blur-c">
     <div class="blur-bg" id="bb1"></div>
     <div class="blur-bg" id="bb2"></div>
@@ -1468,6 +1582,7 @@
         <span class="folder-badge" id="folderBadge">0</span>
       </button>
       <div class="coll-preview" id="collPreview">
+        <div class="coll-label">Recents</div>
         <div class="coll-items" id="collItems"></div>
         <button class="view-all-btn" id="viewAllBtn">View / Edit Collection</button>
       </div>
@@ -1846,6 +1961,15 @@
     let tsx = 0; document.addEventListener('touchstart', e => { tsx = e.touches[0].clientX }, { passive: true }); document.addEventListener('touchend', e => { const d = tsx - e.changedTouches[0].clientX; if (Math.abs(d) > 60) navigate(d > 0 ? 1 : -1) }, { passive: true });
     document.addEventListener('click', e => { if (!e.target.closest('.folder-btn') && !e.target.closest('.coll-preview')) collPreview.classList.remove('open') });
     initSlider(); updateCollUI();
+
+    // Intro Logic
+    if (!localStorage.getItem('giftingIntroSeen')) {
+      const ios = document.getElementById('introOverlay');
+      ios.classList.add('active');
+      setTimeout(() => { ios.remove(); localStorage.setItem('giftingIntroSeen', 'true'); }, 4000);
+    } else {
+      document.getElementById('introOverlay').remove();
+    }
   </script>
 </body>
 
