@@ -39,9 +39,9 @@
       --fs: 'Jost', sans-serif;
       --ease: cubic-bezier(.4, 0, .2, 1);
       --ep: cubic-bezier(.22, .61, .36, 1);
-      --dp: 650ms;
-      --db: 1200ms;
-      --dm: 350ms
+      --dp: 600ms;
+      --db: 300ms;
+      --dm: 100ms
     }
 
     [data-theme="dark"] {
@@ -138,7 +138,7 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: 52.4%;
+      width: 50%;
       background: var(--bg2);
       z-index: 1
     }
@@ -369,24 +369,44 @@
     }
 
     .slider-track {
-      display: flex;
+      position: relative;
+      width: 100%;
       height: 100%;
-      transition: transform var(--dp) var(--ep), filter var(--dp) var(--ep), opacity var(--dp) var(--ep)
     }
 
     .slider-track.transitioning {
-      filter: blur(8px);
-      opacity: 0.7
+      animation: fadeBlur 600ms ease;
     }
 
+    @keyframes fadeBlur {
+
+      0%,
+      100% {
+        filter: blur(0);
+      }
+
+      50% {
+        filter: blur(4px);
+      }
+    }
 
     .slide {
-      flex: 0 0 100%;
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      position: relative
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dp) var(--ease);
+      z-index: 1
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2
     }
 
     .slide::after {
@@ -394,7 +414,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      left: calc(100%/2.1);
+      left: 50%;
       width: 1px;
       background: var(--div);
       z-index: 3
@@ -405,7 +425,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding: 5rem 4rem 5rem 3rem;
+      padding: 5rem 2.5rem 5rem 3rem;
       overflow: hidden
     }
 
@@ -438,7 +458,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 5rem 4rem 5rem 4rem;
+      padding: 5rem 4rem 5rem 2.5rem;
       overflow-y: auto
     }
 
@@ -678,13 +698,28 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 150px;
+      height: 140px;
       z-index: 200;
       display: flex;
       justify-content: center;
       align-items: flex-end;
       padding-bottom: 16px;
-      overflow: hidden;
+      overflow: visible;
+      pointer-events: none
+    }
+
+    .arc-car::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent, var(--bg) 30%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--div);
+      z-index: -1;
       pointer-events: none
     }
 
@@ -701,21 +736,23 @@
       position: absolute;
       bottom: 0;
       left: 50%;
-      display: flex;
-      align-items: flex-end;
-      transform: translateX(-50%)
+      width: 0;
+      height: 0;
     }
 
-    .arc-item {
-      flex: 0 0 auto;
-      width: 85px;
+    .arc-slot {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform-origin: center bottom;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: .4rem;
       cursor: pointer;
-      transform-origin: center bottom;
-      transition: transform var(--dp) var(--ep), opacity var(--dp) var(--ep), filter var(--dp) var(--ep)
+      width: 85px;
+      margin-left: -42.5px;
+      /* Center centered */
     }
 
     .arc-thumb {
@@ -726,34 +763,48 @@
       box-shadow: 0 3px 10px rgba(30, 25, 20, .12);
       border: 2px solid transparent;
       background: var(--bg3);
-      transition: all var(--dp) var(--ep);
-      filter: blur(2px);
-      opacity: .5
+      position: relative;
     }
 
-    .arc-item.current .arc-thumb {
+    .arc-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity var(--dp) var(--ep);
+    }
+
+    .arc-thumb img.active {
+      opacity: 1;
+    }
+
+    /* Slot specific styling - Static */
+    .arc-slot[data-pos="0"] .arc-thumb {
       width: 56px;
       height: 84px;
       border-color: var(--char);
       box-shadow: 0 8px 28px rgba(30, 25, 20, .3);
-      filter: blur(0);
-      opacity: 1;
-      border-radius: 12px
+      border-radius: 12px;
     }
 
-    .arc-item.adj .arc-thumb {
+    .arc-slot:not([data-pos="0"]) .arc-thumb {
       filter: blur(1px);
-      opacity: .7
+      opacity: .7;
     }
 
-    .arc-thumb img {
+    .arc-label-c {
+      position: relative;
+      height: 20px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px
+      display: flex;
+      justify-content: center;
     }
 
     .arc-label {
+      position: absolute;
+      top: 0;
       font-family: var(--ff);
       font-size: .58rem;
       font-weight: 500;
@@ -763,39 +814,53 @@
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: center;
-      opacity: .5;
-      transition: all var(--dp) var(--ep);
-      filter: blur(1px)
+      opacity: 0;
+      transition: opacity var(--dp) var(--ep);
     }
 
-    .arc-item.current .arc-label {
+    .arc-label.active {
+      opacity: .5;
+    }
+
+    .arc-slot[data-pos="0"] .arc-label.active {
       font-size: .72rem;
       font-weight: 500;
       color: var(--ink);
-      max-width: 100px;
+      max-width: 140px;
       opacity: 1;
-      filter: blur(0)
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      line-height: 1.1;
+      height: auto;
     }
 
-    .arc-item.adj .arc-label {
-      opacity: .7;
-      filter: blur(.5px)
+    .arc-slot[data-pos="-3"] {
+      transform: translateX(-204px) rotate(-7.5deg) translateY(3px) scale(.75)
     }
 
-    .arc-item[data-pos="-3"] {
-      transform: rotate(-12deg) translateY(18px) scale(.75)
+    .arc-slot[data-pos="-2"] {
+      transform: translateX(-136px) rotate(-5deg) translateY(-5px) scale(.85)
     }
 
-    .arc-item[data-pos="-2"] {
-      transform: rotate(-8deg) translateY(10px) scale(.85)
+    .arc-slot[data-pos="-1"] {
+      transform: translateX(-68px) rotate(-2.5deg) translateY(-11px) scale(.95)
     }
 
-    .arc-item[data-pos="-1"] {
-      transform: rotate(-4deg) translateY(4px) scale(.95)
+    .arc-slot[data-pos="0"] {
+      transform: translateX(0) rotate(0) translateY(-21px) scale(1.1)
     }
 
-    .arc-item[data-pos="0"] {
-      transform: rotate(0) translateY(-6px) scale(1.1)
+    .arc-slot[data-pos="1"] {
+      transform: translateX(68px) rotate(2.5deg) translateY(-11px) scale(.95)
+    }
+
+    .arc-slot[data-pos="2"] {
+      transform: translateX(136px) rotate(5deg) translateY(-5px) scale(.85)
+    }
+
+    .arc-slot[data-pos="3"] {
+      transform: translateX(204px) rotate(7.5deg) translateY(3px) scale(.75)
     }
 
     .arc-item[data-pos="1"] {
@@ -887,29 +952,30 @@
     .gallery-cover {
       width: 100%;
       aspect-ratio: .67;
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(30, 25, 20, .14);
       margin-bottom: .75rem;
-      position: relative
+      position: relative;
+      border: 2px solid var(--sand)
     }
 
     .gallery-cover img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px
+      border-radius: 12px
     }
 
     .gallery-add-btn {
       position: absolute;
       bottom: .5rem;
       right: .5rem;
-      width: 1.6rem;
-      height: 1.6rem;
-      border-radius: 6px;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 8px;
       background: var(--bg2);
-      border: 1px solid var(--sand);
+      border: 2px solid var(--sand);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -945,7 +1011,7 @@
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      border-radius: 4px;
+      border-radius: 6px;
       z-index: 5
     }
 
@@ -1044,11 +1110,15 @@
     }
 
     .coll-empty-state {
+      grid-column: 1 / -1;
+      height: 100%;
+      min-height: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 1.5rem;
-      padding: 4rem 2rem
+      padding: 2rem
     }
 
     .coll-empty-text {
@@ -1172,7 +1242,7 @@
       right: .75rem;
       width: 1.6rem;
       height: 1.6rem;
-      border-radius: 50%;
+      border-radius: 2rem;
       background: var(--bg2);
       border: 1px solid var(--sand);
       cursor: pointer;
@@ -1182,7 +1252,9 @@
       font-size: .9rem;
       font-weight: 600;
       color: var(--stone);
-      transition: all var(--dm) var(--ease)
+      transition: all var(--dm) var(--ease);
+      overflow: hidden;
+      white-space: nowrap
     }
 
     .coll-remove:hover {
@@ -1192,10 +1264,23 @@
     }
 
     .coll-remove.confirm {
+      width: 5rem;
       background: var(--red);
       color: #fff;
       border-color: var(--red);
-      transform: rotate(180deg) scale(1.1)
+      font-size: .7rem;
+      letter-spacing: 0.05em
+    }
+
+    .gallery-add-btn.buy {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--amber)
+    }
+
+    .gallery-add-btn.buy:hover {
+      background: var(--char);
+      border-color: var(--char)
     }
 
     .coll-empty-modal {
@@ -1278,6 +1363,87 @@
         height: 78px
       }
     }
+
+    .gallery-filters {
+      position: relative;
+      margin-left: auto;
+      margin-right: 1.5rem;
+      display: flex;
+      align-items: center
+    }
+
+    .filter-trigger {
+      background: transparent;
+      border: none;
+      font-family: var(--fs);
+      font-size: .75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--umber);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      letter-spacing: .05em
+    }
+
+    .filter-icon {
+      font-size: .6rem;
+      transition: transform var(--dm)
+    }
+
+    .gallery-filters.active .filter-icon {
+      transform: rotate(180deg)
+    }
+
+    .filter-opts {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--bg2);
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      padding: .5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-5px);
+      transition: all var(--dm);
+      min-width: 140px;
+      box-shadow: 0 4px 12px rgba(30, 25, 20, .1);
+      z-index: 10
+    }
+
+    .gallery-filters.active .filter-opts {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(8px)
+    }
+
+    .filter-opt {
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: .5rem .8rem;
+      font-family: var(--fs);
+      font-size: .7rem;
+      color: var(--stone);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all var(--dm)
+    }
+
+    .filter-opt:hover {
+      background: var(--bg3);
+      color: var(--ink)
+    }
+
+    .filter-opt.active {
+      background: var(--sage);
+      color: #fff
+    }
   </style>
 </head>
 
@@ -1323,7 +1489,16 @@
   </nav>
   <div class="gallery-ov" id="galleryOv">
     <div class="gallery-hdr">
-      <h2 class="gallery-title">Complete Collection</h2><button class="gallery-close" id="galleryClose">&times;</button>
+      <h2 class="gallery-title">Complete Collection</h2>
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="filter-trigger" id="filterTrigger">Filter <span class="filter-icon">▼</span></button>
+        <div class="filter-opts" id="filterOpts">
+          <button class="filter-opt" data-type="category">Category</button>
+          <button class="filter-opt" data-type="length">Length</button>
+          <button class="filter-opt" data-type="popularity">Popularity</button>
+        </div>
+      </div>
+      <button class="gallery-close" id="galleryClose">&times;</button>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
@@ -1372,14 +1547,46 @@
       { id: 33, title: "Untamed", author: "Glennon Doyle", subtitle: "Start Living", description: "Explores the joy we discover when we stop striving to meet others' expectations.", coverImage: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=900&fit=crop", genres: ["Self-Help", "Memoir"], status: "available", bestsellers: 7 }
     ];
     const books = [...booksData].sort(() => Math.random() - .5);
-    let currentIndex = 0, isTransitioning = false, activeBg = 1, collection = [];
+    let currentIndex = 0, isTransitioning = false, activeBg = 1, collection = [], currentFilter = null, arcToggle = false;
     const bb1 = document.getElementById('bb1'), bb2 = document.getElementById('bb2'), sliderTrack = document.getElementById('sliderTrack'), arcTrack = document.getElementById('arcTrack'), galleryOv = document.getElementById('galleryOv'), galleryGrid = document.getElementById('galleryGrid'), collOv = document.getElementById('collOv'), collGrid = document.getElementById('collGrid'), collPreview = document.getElementById('collPreview'), collItems = document.getElementById('collItems'), folderBadge = document.getElementById('folderBadge');
 
+    function getFilteredBooks() {
+      if (!currentFilter) return booksData;
+      if (currentFilter === 'popularity') return booksData.filter(b => b.bestsellers >= 5);
+      if (currentFilter === 'length') return booksData.filter(b => b.description.length > 80);
+      if (currentFilter === 'category') return booksData.filter(b => b.genres.some(g => ['Fiction', 'Literary Fiction', 'Fantasy'].includes(g)));
+      return booksData;
+    }
+
+    const galleryFilters = document.getElementById('galleryFilters');
+    const filterTrigger = document.getElementById('filterTrigger');
+    filterTrigger.addEventListener('click', () => galleryFilters.classList.toggle('active'));
+
+    document.querySelectorAll('.filter-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const type = opt.dataset.type;
+        if (currentFilter === type) {
+          currentFilter = null;
+          opt.classList.remove('active');
+        } else {
+          currentFilter = type;
+          document.querySelectorAll('.filter-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+        }
+        galleryFilters.classList.remove('active');
+        openGallery();
+      });
+    });
+
+    document.addEventListener('click', e => {
+      if (!galleryFilters.contains(e.target)) galleryFilters.classList.remove('active');
+    });
+
     function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
-    function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable – Purchased' }
+    function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable' }
     function isInColl(id) { return collection.some(c => c.id === id) }
     function getButtonState(book) {
-      if (book.status === 'unavailable') return { text: 'Unavailable – Purchased', cls: '', disabled: true };
+      if (book.status === 'unavailable') return { text: 'Purchased', cls: '', disabled: true };
       if (book.status === 'reserved') return { text: 'Pay to get it now', cls: 'reserved', disabled: false };
       if (isInColl(book.id)) return { text: 'Remove', cls: 'in-coll', disabled: false };
       return { text: 'Add', cls: '', disabled: false };
@@ -1394,11 +1601,15 @@
       sliderTrack.innerHTML = books.map((b, i) => createSlide(b, i)).join('');
       updateSliderPosition();
       updateBg(true);
-      buildArc();
+      initArc();
       bindAddBtns();
     }
 
-    function updateSliderPosition() { sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)` }
+    function updateSliderPosition() {
+      Array.from(sliderTrack.children).forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentIndex);
+      });
+    }
 
     function updateBg(imm = false) {
       const book = books[currentIndex], inc = activeBg === 1 ? bb2 : bb1, out = activeBg === 1 ? bb1 : bb2;
@@ -1408,45 +1619,68 @@
       activeBg = activeBg === 1 ? 2 : 1;
     }
 
-    function buildArc() {
-      const h = 3;
-      let html = '';
-      for (let i = -h; i <= h; i++) {
-        const idx = (currentIndex + i + books.length) % books.length, b = books[idx], cur = i === 0, adj = Math.abs(i) === 1;
-        html += `<div class="arc-item${cur ? ' current' : ''}${adj ? ' adj' : ''}" data-pos="${i}" data-index="${idx}"><div class="arc-thumb"><img src="${b.coverImage}" alt="${b.title}"></div><div class="arc-label">${b.title}</div></div>`;
+    function initArc() {
+      const track = document.getElementById('arcTrack');
+      track.innerHTML = '';
+      for (let i = -3; i <= 3; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'arc-slot';
+        slot.dataset.pos = i;
+        slot.innerHTML = `<div class="arc-thumb"><img class="l1 active" src=""><img class="l2" src=""></div><div class="arc-label-c"><div class="arc-label l1 active"></div><div class="arc-label l2"></div></div>`;
+        slot.addEventListener('click', () => navigate(i));
+        track.appendChild(slot);
       }
-      arcTrack.innerHTML = html;
-      arcTrack.querySelectorAll('.arc-item').forEach(el => el.addEventListener('click', () => goToBook(parseInt(el.dataset.index))));
+      updateArc();
+    }
+
+    function updateArc() {
+      const track = document.getElementById('arcTrack');
+      for (let i = -3; i <= 3; i++) {
+        const idx = (currentIndex + i + books.length) % books.length;
+        const book = books[idx];
+        const slot = track.querySelector(`.arc-slot[data-pos="${i}"]`);
+        if (!slot) continue;
+
+        const imgInc = arcToggle ? slot.querySelector('.l2') : slot.querySelector('.l1');
+        const imgOut = arcToggle ? slot.querySelector('.l1') : slot.querySelector('.l2');
+        const txtInc = arcToggle ? slot.querySelector('.arc-label.l2') : slot.querySelector('.arc-label.l1');
+        const txtOut = arcToggle ? slot.querySelector('.arc-label.l1') : slot.querySelector('.arc-label.l2');
+
+        imgInc.src = book.coverImage;
+        txtInc.textContent = book.title;
+
+        imgInc.classList.add('active');
+        imgOut.classList.remove('active');
+        txtInc.classList.add('active');
+        txtOut.classList.remove('active');
+      }
+      arcToggle = !arcToggle;
     }
 
     function goToBook(idx) {
       if (isTransitioning || idx === currentIndex) return;
       isTransitioning = true;
       sliderTrack.classList.add('transitioning');
-      setTimeout(() => {
-        currentIndex = idx;
-        updateSliderPosition();
-        updateBg();
-        buildArc();
-        bindAddBtns();
-        setTimeout(() => sliderTrack.classList.remove('transitioning'), 50);
-      }, 150);
-      setTimeout(() => isTransitioning = false, 800);
+      currentIndex = idx;
+      updateSliderPosition();
+      updateBg();
+      updateArc();
+      bindAddBtns();
+      setTimeout(() => sliderTrack.classList.remove('transitioning'), 650);
+      setTimeout(() => isTransitioning = false, 650);
     }
 
     function navigate(dir) {
       if (isTransitioning) return;
       isTransitioning = true;
       sliderTrack.classList.add('transitioning');
-      setTimeout(() => {
-        currentIndex = (currentIndex + dir + books.length) % books.length;
-        updateSliderPosition();
-        updateBg();
-        buildArc();
-        bindAddBtns();
-        setTimeout(() => sliderTrack.classList.remove('transitioning'), 50);
-      }, 150);
-      setTimeout(() => isTransitioning = false, 800);
+      currentIndex = (currentIndex + dir + books.length) % books.length;
+      updateSliderPosition();
+      updateBg();
+      updateArc();
+      bindAddBtns();
+      setTimeout(() => sliderTrack.classList.remove('transitioning'), 650);
+      setTimeout(() => isTransitioning = false, 650);
     }
 
     function bindAddBtns() {
@@ -1503,7 +1737,7 @@
               bindAddBtns();
             } else {
               btn.classList.add('confirm');
-              btn.textContent = '?';
+              btn.textContent = 'Remove?';
               setTimeout(() => { if (btn.classList.contains('confirm')) { btn.classList.remove('confirm'); btn.textContent = '−' } }, 2000);
             }
           };
@@ -1513,22 +1747,29 @@
     }
 
     function getStatusTagHTML(book, inColl) {
+      if (!book) return '';
       const sc = getStatusClass(book.status);
       const isAvail = book.status === 'available';
-      if (inColl && isAvail) {
-        return '<span class="gallery-status-tag added">Added</span>';
-      }
-      const text = book.status === 'available' ? 'Available' : book.status === 'reserved' ? 'Reserved' : 'Unavailable';
+      if (inColl && isAvail) return '<span class="gallery-status-tag added">Added</span>';
+
+      let text = 'Available';
+      if (book.status === 'reserved') text = 'Reserved';
+      if (book.status === 'unavailable') text = 'Unavailable';
+
       return `<span class="gallery-status-tag ${sc}">${text}</span>`;
     }
 
     function openGallery() {
-      galleryGrid.innerHTML = booksData.map((b, i) => {
+      galleryGrid.innerHTML = getFilteredBooks().map((b, i) => {
         const origIdx = books.findIndex(x => x.id === b.id);
         const inC = isInColl(b.id);
         const canAdd = b.status === 'available' || b.status === 'reserved';
-        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}" data-status="${b.status}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${canAdd ? `<button class="gallery-add-btn${inC ? ' in-coll' : ''}" data-id="${b.id}">${inC ? '−' : '+'}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
+        const isReserved = b.status === 'reserved';
+        const btnText = inC ? '−' : (isReserved ? '$' : '+');
+        const btnCls = inC ? ' in-coll' : (isReserved ? ' buy' : '');
+        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
       }).join('');
+
       galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
         el.addEventListener('click', e => {
           if (e.target.closest('.gallery-add-btn')) return;
@@ -1536,6 +1777,7 @@
           galleryOv.classList.remove('active');
         });
       });
+
       galleryGrid.querySelectorAll('.gallery-add-btn').forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
@@ -1543,21 +1785,37 @@
           const book = booksData.find(b => b.id === id);
           const galleryItem = btn.closest('.gallery-item');
           const galleryCover = galleryItem.querySelector('.gallery-cover');
-          const statusTag = galleryCover.querySelector('.gallery-status-tag');
+          let statusTag = galleryCover.querySelector('.gallery-status-tag');
+
           if (isInColl(id)) {
             collection = collection.filter(c => c.id !== id);
             btn.classList.remove('in-coll');
-            btn.textContent = '+';
+            if (book.status === 'reserved') {
+              btn.classList.add('buy');
+              btn.textContent = '$';
+            } else {
+              btn.textContent = '+';
+            }
+
+            // Revert logic
+            if (!statusTag) {
+              // Should normally exist, but safety check
+              galleryCover.insertAdjacentHTML('afterbegin', `<span class="gallery-status-tag ${getStatusClass(book.status)}">Available</span>`);
+              statusTag = galleryCover.querySelector('.gallery-status-tag');
+            }
             if (statusTag) {
               const sc = getStatusClass(book.status);
               const text = book.status === 'available' ? 'Available' : 'Reserved';
-              statusTag.className = 'gallery-status-tag ' + sc;
+              statusTag.className = `gallery-status-tag ${sc}`;
               statusTag.textContent = text;
             }
           } else {
             collection.push({ ...book, addedAt: Date.now() });
             btn.classList.add('in-coll');
+            btn.classList.remove('buy');
             btn.textContent = '−';
+
+            // Update logic
             if (statusTag && book.status === 'available') {
               statusTag.className = 'gallery-status-tag added';
               statusTag.textContent = 'Added';
