@@ -5,13 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pages Forward | Curated Book Catalog</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Jost:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
   <style>
     *,
     *::before,
@@ -77,21 +73,18 @@
       background: var(--bg);
       color: var(--char);
       min-height: 100vh;
-      min-width: 1400px;
-      /* Fixed layout width to resist zoom reflow */
       line-height: 1.7;
-      overflow-x: auto;
-      /* Allow scrolling if window is too small */
-      overflow-y: hidden;
+      overflow: hidden;
       opacity: 0;
       filter: blur(12px);
-      /* Animation triggered by JS via .loaded class */
-      transition: opacity 1.2s var(--ease), filter 1.2s var(--ease);
+      animation: blurIn 850ms var(--ease) forwards
     }
 
-    body.loaded {
-      opacity: 1;
-      filter: blur(0);
+    @keyframes blurIn {
+      to {
+        opacity: 1;
+        filter: blur(0)
+      }
     }
 
     .blur-c {
@@ -168,14 +161,11 @@
 
     .header-logo {
       font-family: var(--fs);
-      font-size: 1.25rem;
+      font-size: .8rem;
       font-weight: 600;
       letter-spacing: .2em;
       text-transform: uppercase;
-      color: var(--umber);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      color: var(--umber)
     }
 
     .header-actions {
@@ -204,17 +194,14 @@
       border-color: var(--char)
     }
 
-    .btn-icon,
     .theme-toggle {
-      width: 2.25rem;
-      padding: 0;
+      width: 2.25rem
     }
 
-    .btn-icon svg,
     .theme-toggle svg {
-      width: 1rem;
-      height: 1rem;
-      fill: currentColor;
+      width: .9rem;
+      height: .9rem;
+      fill: currentColor
     }
 
     .btn-control {
@@ -815,12 +802,6 @@
       justify-content: center;
     }
 
-    .arc-slot:not([data-pos="0"]) .arc-label {
-      filter: blur(2px);
-      /* Blurred non-selected text */
-      opacity: .4;
-    }
-
     .arc-label {
       position: absolute;
       top: 0;
@@ -833,29 +814,20 @@
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: center;
-      transition: opacity var(--dp) var(--ep), filter var(--dp) var(--ep);
+      opacity: 0;
+      transition: opacity var(--dp) var(--ep);
     }
 
     .arc-label.active {
       opacity: .5;
     }
 
-    .arc-label:not(.active) {
-      opacity: 0 !important;
-      /* Force hide inactive layer to prevent ghosting */
-    }
-
-    /* Override for selected */
-    .arc-slot[data-pos="0"] .arc-label {
-      filter: blur(0);
-    }
-
     .arc-slot[data-pos="0"] .arc-label.active {
-      opacity: 1;
       font-size: .72rem;
       font-weight: 500;
       color: var(--ink);
       max-width: 140px;
+      opacity: 1;
       white-space: normal;
       overflow: visible;
       text-overflow: clip;
@@ -959,115 +931,87 @@
     }
 
     .gallery-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2.5rem
-    }
-
-    .gallery-letter {
-      font-family: var(--ff);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--ink);
-      border-bottom: 2px solid var(--sand);
-      margin-bottom: 1.5rem;
-      padding-bottom: .5rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    .gallery-letter::after {
-      content: '−';
-      font-family: var(--fs);
-      font-weight: 300;
-      font-size: 1.5rem;
-      line-height: 1;
-      opacity: .5;
-    }
-
-    .gallery-section.collapsed .gallery-letter::after {
-      content: '+';
-    }
-
-    .gallery-section.collapsed .gallery-group {
-      display: none;
-    }
-
-    .gallery-group {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 1.75rem;
+      padding: 2.5rem
     }
 
     .gallery-item {
       cursor: pointer;
+      transition: transform var(--dm);
       position: relative
     }
 
-    .gallery-item:hover .gallery-cover {
-      box-shadow: 0 0 0 3px var(--ink);
-      border-color: transparent;
+    .gallery-item:hover {
+      transform: translateY(-3px)
     }
+
+
 
     .gallery-cover {
       width: 100%;
       aspect-ratio: .67;
-      border-radius: 20px;
-      /* Rounded */
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(30, 25, 20, .14);
       margin-bottom: .75rem;
       position: relative;
-      border: 1px solid var(--sand);
-      transition: box-shadow 300ms var(--ease), border-color 300ms var(--ease);
+      border: 2px solid var(--sand)
     }
 
     .gallery-cover img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 18px
+      border-radius: 12px
     }
 
     .gallery-add-btn {
       position: absolute;
-      bottom: .7rem;
-      right: .7rem;
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 50%;
-      /* Circle */
+      bottom: .5rem;
+      right: .5rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 8px;
       background: var(--bg2);
-      border: 1px solid var(--sand);
+      border: 2px solid var(--sand);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: .9rem;
       font-weight: 600;
       color: var(--umber);
       transition: all var(--dm) var(--ease);
-      box-shadow: 0 4px 12px rgba(30, 25, 20, .2);
+      box-shadow: 0 2px 8px rgba(30, 25, 20, .2);
       z-index: 5
+    }
+
+    .gallery-add-btn:hover {
+      background: var(--char);
+      color: var(--bg2);
+      border-color: var(--char)
+    }
+
+    .gallery-add-btn.in-coll {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red)
     }
 
     .gallery-status-tag {
       position: absolute;
-      top: .7rem;
-      left: .7rem;
-      padding: .3rem .7rem;
+      top: .5rem;
+      left: .5rem;
+      padding: .2rem .5rem;
       color: #fff;
       font-family: var(--fs);
       font-size: .5rem;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      border-radius: 20px;
-      /* Rounded pill */
+      border-radius: 6px;
       z-index: 5
     }
 
@@ -1509,68 +1453,41 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 1;
-      /* Default visible to prevent flash of main content */
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #introOverlay.active {
+      animation: introFade 4s forwards;
       pointer-events: auto;
-    }
-
-    /* Hide immediately if class present */
-    body.skip-intro #introOverlay {
-      display: none !important;
-    }
-
-    /* Animate if NOT skipping */
-    body:not(.skip-intro) #introOverlay {
-      animation: introFade 4.5s forwards;
     }
 
     @keyframes introFade {
       0% {
-        opacity: 1;
-        filter: blur(0);
+        opacity: 0;
       }
 
-      75% {
+      20% {
         opacity: 1;
-        filter: blur(0);
+      }
+
+      80% {
+        opacity: 1;
       }
 
       100% {
         opacity: 0;
-        filter: blur(12px);
         pointer-events: none;
       }
     }
 
     .intro-content {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: .5rem;
-      text-align: center;
-    }
-
-    .intro-huge {
-      font-family: var(--fs);
-      /* Matching logo font */
-      font-size: clamp(4rem, 15vw, 10rem);
-      /* Increased size */
-      font-weight: 700;
-      line-height: .9;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      margin-top: -0.5rem;
-    }
-
-    .intro-sub {
+      gap: 1.2rem;
       font-family: var(--fb);
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      font-style: normal;
-      /* Removed italics */
+      font-size: 1.6rem;
       color: var(--ink);
-      display: flex;
-      gap: .4em;
-      margin-top: .5rem;
     }
 
     .intro-gold {
@@ -1578,22 +1495,41 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-family: var(--ff);
+      /* Serif */
       font-weight: 700;
-      font-style: normal;
-      /* Removed italics */
+      font-style: italic;
       filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
     }
 
+    .intro-season {
+      font-family: var(--ff);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .intro-pages {
+      font-family: var(--ff);
+      font-size: 1.2rem;
+      opacity: .6;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
     .intro-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1rem;
+      width: 28px;
+      height: 28px;
     }
 
     .intro-icon.gold {
-      stroke: #DFBD69;
-      /* Stroke based now */
-      fill: none;
+      fill: #DFBD69;
+    }
+
+    .intro-icon.ink {
+      fill: var(--ink);
+      opacity: .6;
     }
 
     .coll-label {
@@ -1609,26 +1545,20 @@
 </head>
 
 <body>
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#DFBD69;stop-opacity:1" />
-        <stop offset="50%" style="stop-color:#F9ECA5;stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#B88A44;stop-opacity:1" />
-      </linearGradient>
-    </defs>
-  </svg>
-  <script>if (localStorage.getItem('giftingIntroSeen')) { document.body.classList.add('skip-intro') }</script>
   <div id="introOverlay">
     <div class="intro-content">
-      <div class="intro-huge">Pages Forward</div>
-      <div class="intro-sub"><span class="intro-gold">Gifting</span> Season</div>
-      <svg class="intro-icon gold" viewBox="0 0 24 24" style="margin-top: 1rem" fill="none" stroke="url(#gold-grad)"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="8" width="18" height="4" rx="1" />
-        <path d="M12 8v13" />
-        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
-        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      <svg class="intro-icon gold" viewBox="0 0 24 24">
+        <path
+          d="M20 12h-2V5c0-.55-.45-1-1-1h-4.2c.42-.64.65-1.37.6-2.14-.08-1.24-1.12-2.17-2.36-2.11C9.69.8 8.84 1.76 8.94 3c.05.77.28 1.5.7 2.14H5c-.55 0-1 .45-1 1v7H2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8zM12 2.75c.41 0 .75.34.75.75 0 .41-.34.75-.75.75-.41 0-.75-.34-.75-.75 0-.41.34-.75.75-.75zM10.5 5h3c-.22.84-.79 1.53-1.5 1.95A3.75 3.75 0 0 1 10.5 5zm-5 7h4v9H7c-.55 0-1-.45-1-1v-8zm6 9v-9h4v8c0 .55-.45 1-1 1h-3z" />
+      </svg>
+      <span class="intro-gold">Gifting</span> <span class="intro-season">Season</span> — <span class="intro-pages">pages
+        forward <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg></span>
+      <svg class="intro-icon ink" viewBox="0 0 24 24">
+        <path
+          d="M9.16 2.5a2 2 0 0 0-2 2v7.33a2 2 0 0 1-.59 1.42L4 15.83a2 2 0 0 0 0 2.83l2.83 2.83a2 2 0 0 0 2.83 0l6.58-6.58a2 2 0 0 0 0-2.83L13.17 6.17a2 2 0 0 1-1.42-.59V4.5a2 2 0 0 0-2-2z" />
       </svg>
     </div>
   </div>
@@ -1639,32 +1569,18 @@
   </div>
   <div class="bg-right"></div>
   <header class="header">
-    <div class="header-logo">
-      Pages Forward
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad)" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="8" width="18" height="4" rx="1" />
-        <path d="M12 8v13" />
-        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
-        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
-      </svg>
-    </div>
+    <div class="header-logo">Pages Forward</div>
     <div class="header-actions">
       <button class="btn-h theme-toggle" id="themeToggle"><svg viewBox="0 0 24 24">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg></button>
+      <button class="btn-h btn-control" id="fullListBtn">Full List</button>
       <button class="folder-btn" id="folderBtn">
         <svg class="folder-icon" viewBox="0 0 24 24">
           <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
         </svg>
         <span class="folder-badge" id="folderBadge">0</span>
       </button>
-      <button class="btn-h btn-icon" id="filterBtn">
-        <svg viewBox="0 0 24 24">
-          <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
-        </svg>
-      </button>
-      <button class="btn-h btn-control" id="fullListBtn">Full List</button>
       <div class="coll-preview" id="collPreview">
         <div class="coll-label">Recents</div>
         <div class="coll-items" id="collItems"></div>
@@ -1690,11 +1606,7 @@
     <div class="gallery-hdr">
       <h2 class="gallery-title">Complete Collection</h2>
       <div class="gallery-filters" id="galleryFilters">
-        <button class="btn-h btn-icon" id="filterTrigger">
-          <svg viewBox="0 0 24 24">
-            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
-          </svg>
-        </button>
+        <button class="filter-trigger" id="filterTrigger">Filter <span class="filter-icon">▼</span></button>
         <div class="filter-opts" id="filterOpts">
           <button class="filter-opt" data-type="category">Category</button>
           <button class="filter-opt" data-type="length">Length</button>
@@ -1735,7 +1647,7 @@
       { id: 18, title: "A Gentleman in Moscow", author: "Amor Towles", subtitle: "Elegant Confinement", description: "In 1922, Count Rostov is sentenced to house arrest in the Metropol hotel.", coverImage: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=900&fit=crop", genres: ["Historical Fiction"], status: "reserved", bestsellers: 5 },
       { id: 19, title: "The Song of Achilles", author: "Madeline Miller", subtitle: "Love and War", description: "Patroclus and Achilles grow together, their bond blossoms into something deeper.", coverImage: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=900&fit=crop", genres: ["Mythology", "Romance"], status: "available", bestsellers: 6 },
       { id: 20, title: "Project Hail Mary", author: "Andy Weir", subtitle: "Mission to Save Earth", description: "Ryland Grace is the sole survivor on a desperate mission to save humanity.", coverImage: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=900&fit=crop", genres: ["Science Fiction", "Adventure"], status: "available", bestsellers: 7 },
-      { id: 21, "title": "Piranesi", author: "Susanna Clarke", subtitle: "Labyrinth of Wonder", description: "Piranesi's house is no ordinary building: its rooms are infinite.", coverImage: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&h=900&fit=crop", genres: ["Fantasy", "Mystery"], status: "available", bestsellers: 2 },
+      { id: 21, title: "Piranesi", author: "Susanna Clarke", subtitle: "Labyrinth of Wonder", description: "Piranesi's house is no ordinary building: its rooms are infinite.", coverImage: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&h=900&fit=crop", genres: ["Fantasy", "Mystery"], status: "available", bestsellers: 2 },
       { id: 22, title: "Crying in H Mart", author: "Michelle Zauner", subtitle: "Memoir of Food", description: "Michelle traces her relationship with her mother through Korean food.", coverImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=900&fit=crop", genres: ["Memoir", "Food"], status: "unavailable", bestsellers: 3 },
       { id: 23, title: "The House in the Cerulean Sea", author: "TJ Klune", subtitle: "Magical Youth", description: "Linus Baker is sent to evaluate an island orphanage that changes everything.", coverImage: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=600&h=900&fit=crop", genres: ["Fantasy", "LGBTQ+"], status: "available", bestsellers: 4 },
       { id: 24, title: "The Seven Husbands of Evelyn Hugo", author: "Taylor Jenkins Reid", subtitle: "Hollywood's Secret", description: "Aging movie icon Evelyn Hugo is finally ready to tell the truth.", coverImage: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&h=900&fit=crop", genres: ["Historical Fiction", "LGBTQ+"], status: "available", bestsellers: 8 },
@@ -1795,25 +1707,9 @@
       return { text: 'Add', cls: '', disabled: false };
     }
 
-    function getLengthInfo(len) {
-      if (len < 200) return { label: 'Short read', icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-13h-2v6l5.25 3.15.75-1.23-4-2.37z' };
-      if (len < 400) return { label: 'Medium read', icon: 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z' };
-      return { label: 'Long read', icon: 'M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z' };
-    }
-
-    function getCategory(genres) {
-      const nf = ['History', 'Biography', 'Memoir', 'Food', 'Philosophy', 'Self-Help', 'Science', 'Travel', 'Nature', 'Psychology', 'Politics', 'Health', 'Indigenous'];
-      return genres.some(g => nf.includes(g)) ? 'NON-FICTION' : 'FICTION';
-    }
-
     function createSlide(book, idx) {
       const sc = getStatusClass(book.status), st = getStatusText(book.status), bs = getButtonState(book);
-      // Mock length based on description length for demo
-      const len = 150 + (book.description.length * 2);
-      const li = getLengthInfo(len);
-      const cat = getCategory(book.genres);
-
-      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1><button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div><div class="author-acc">${book.bestsellers} × Bestseller books</div></div></div></div></div>`;
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1><button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div><div class="author-acc">${book.bestsellers} × Bestseller books</div></div></div></div></div>`;
     }
 
     function initSlider() {
@@ -1845,7 +1741,7 @@
         const slot = document.createElement('div');
         slot.className = 'arc-slot';
         slot.dataset.pos = i;
-        slot.innerHTML = `<div class="arc-thumb"><img class="l1 active" src=""><img class="l2" src=""></div><div class="arc-label-c"><div class="arc-label"></div></div>`;
+        slot.innerHTML = `<div class="arc-thumb"><img class="l1 active" src=""><img class="l2" src=""></div><div class="arc-label-c"><div class="arc-label l1 active"></div><div class="arc-label l2"></div></div>`;
         slot.addEventListener('click', () => navigate(i));
         track.appendChild(slot);
       }
@@ -1862,17 +1758,16 @@
 
         const imgInc = arcToggle ? slot.querySelector('.l2') : slot.querySelector('.l1');
         const imgOut = arcToggle ? slot.querySelector('.l1') : slot.querySelector('.l2');
-        const txt = slot.querySelector('.arc-label'); // Single label
+        const txtInc = arcToggle ? slot.querySelector('.arc-label.l2') : slot.querySelector('.arc-label.l1');
+        const txtOut = arcToggle ? slot.querySelector('.arc-label.l1') : slot.querySelector('.arc-label.l2');
 
         imgInc.src = book.coverImage;
-        txt.textContent = book.title;
+        txtInc.textContent = book.title;
 
         imgInc.classList.add('active');
         imgOut.classList.remove('active');
-
-        // Ensure text active state matches specific slot
-        // CSS handles slot 0 highlighting logic, we just set content
-        if (i === 0) txt.classList.add('active'); // Keeping class for consistency if used by css
+        txtInc.classList.add('active');
+        txtOut.classList.remove('active');
       }
       arcToggle = !arcToggle;
     }
@@ -1980,36 +1875,15 @@
     }
 
     function openGallery() {
-      const filtered = getFilteredBooks().sort((a, b) => a.title.localeCompare(b.title));
-      const groups = {};
-      filtered.forEach(b => {
-        const l = b.title[0].toUpperCase();
-        if (!groups[l]) groups[l] = [];
-        groups[l].push(b);
-      });
-
-      const letters = Object.keys(groups).sort();
-
-      galleryGrid.innerHTML = letters.map(l => {
-        const list = groups[l];
-        const items = list.map(b => {
-          const origIdx = books.findIndex(x => x.id === b.id);
-          const inC = isInColl(b.id);
-          const canAdd = b.status === 'available' || b.status === 'reserved';
-          const isReserved = b.status === 'reserved';
-          const btnText = inC ? '−' : (isReserved ? '$' : '+');
-          const btnCls = inC ? ' in-coll' : (isReserved ? ' buy' : '');
-          return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
-        }).join('');
-        return `<div class="gallery-section"><div class="gallery-letter">${l}</div><div class="gallery-group">${items}</div></div>`;
+      galleryGrid.innerHTML = getFilteredBooks().map((b, i) => {
+        const origIdx = books.findIndex(x => x.id === b.id);
+        const inC = isInColl(b.id);
+        const canAdd = b.status === 'available' || b.status === 'reserved';
+        const isReserved = b.status === 'reserved';
+        const btnText = inC ? '−' : (isReserved ? '$' : '+');
+        const btnCls = inC ? ' in-coll' : (isReserved ? ' buy' : '');
+        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
       }).join('');
-
-      // Add collapse listeners
-      galleryGrid.querySelectorAll('.gallery-letter').forEach(hdr => {
-        hdr.addEventListener('click', () => {
-          hdr.parentElement.classList.toggle('collapsed');
-        });
-      });
 
       galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
         el.addEventListener('click', e => {
@@ -2063,6 +1937,9 @@
             }
           }
           updateCollUI();
+          sliderTrack.innerHTML = books.map((b, i) => createSlide(b, i)).join('');
+          updateSliderPosition();
+          bindAddBtns();
         });
       });
       galleryOv.classList.add('active');
@@ -2085,33 +1962,14 @@
     document.addEventListener('click', e => { if (!e.target.closest('.folder-btn') && !e.target.closest('.coll-preview')) collPreview.classList.remove('open') });
     initSlider(); updateCollUI();
 
-    // Intro Logic - Moved to inline script for visual stability
-    // Clean up if needed
-    if (!document.body.classList.contains('skip-intro')) {
-      setTimeout(() => {
-        const ios = document.getElementById('introOverlay');
-        if (ios) {
-          // Animation ends
-          ios.style.display = 'none';
-          localStorage.setItem('giftingIntroSeen', 'true');
-        }
-      }, 4500); // 4.5s match css
+    // Intro Logic
+    if (!localStorage.getItem('giftingIntroSeen')) {
+      const ios = document.getElementById('introOverlay');
+      ios.classList.add('active');
+      setTimeout(() => { ios.remove(); localStorage.setItem('giftingIntroSeen', 'true'); }, 4000);
+    } else {
+      document.getElementById('introOverlay').remove();
     }
-
-    // Smooth font loading trigger
-    document.fonts.ready.then(() => {
-      document.body.classList.add('loaded');
-    });
-    // Fallback safety
-    setTimeout(() => document.body.classList.add('loaded'), 2000);
-
-    // Filter button logic
-    document.getElementById('filterBtn').addEventListener('click', () => {
-      openGallery();
-      setTimeout(() => {
-        document.getElementById('galleryFilters').classList.add('active');
-      }, 300);
-    });
   </script>
 </body>
 
