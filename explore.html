@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pages Forward - Explore the full collection. Forward-only selection.">
+  <title>Pages Forward — Explore</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dark.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico">
+
+  <style>
+    /* Explore-specific styles */
+    .explore-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--sand);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .explore-logo {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .explore-logo-arrow {
+      color: var(--gold);
+    }
+
+    .explore-progress {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--stone);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .explore-progress-bar {
+      width: 150px;
+      height: 3px;
+      background: var(--sand);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .explore-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+
+    .explore-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .explore-nav-btn {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--stone);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .explore-nav-btn:hover {
+      color: var(--ink);
+      background: var(--bg2);
+    }
+
+    .explore-nav-btn.active {
+      color: var(--ink);
+      background: var(--bg2);
+    }
+
+    /* Controls */
+    .explore-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--sand);
+      flex-wrap: wrap;
+    }
+
+    .explore-filters {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .explore-filter-btn {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-pill);
+      color: var(--ink2);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .explore-filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .explore-filter-btn.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--bg);
+    }
+
+    .explore-search {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg2);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-pill);
+      padding: 0.4rem 0.75rem;
+      width: 200px;
+      transition: all 0.3s;
+    }
+
+    .explore-search:focus-within {
+      border-color: var(--gold);
+      width: 280px;
+    }
+
+    .explore-search-icon {
+      color: var(--stone);
+    }
+
+    .explore-search input {
+      border: none;
+      background: transparent;
+      font-family: var(--fs);
+      font-size: 0.8rem;
+      color: var(--ink);
+      outline: none;
+      width: 100%;
+    }
+
+    /* Main Grid */
+    .explore-main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .explore-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .explore-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .explore-section-letter {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+
+    .explore-section-count {
+      font-size: 0.7rem;
+      color: var(--stone);
+    }
+
+    .explore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Book Card */
+    .explore-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .explore-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .explore-card-cover {
+      aspect-ratio: 2/3;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg3);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .explore-card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .explore-card:hover .explore-card-cover img {
+      transform: scale(1.05);
+    }
+
+    .explore-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .explore-card:hover .explore-card-overlay {
+      opacity: 1;
+    }
+
+    .explore-card-add {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.5rem 1rem;
+      background: #00FF66;
+      color: #000;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    .explore-card-info {
+      margin-top: 0.75rem;
+    }
+
+    .explore-card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.15rem;
+    }
+
+    .explore-card-author {
+      font-size: 0.7rem;
+      color: var(--stone);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Empty state */
+    .explore-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--stone);
+    }
+
+    .explore-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+    }
+
+    .explore-empty-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Filter Rail */
+    .filter-rail {
+      display: flex;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-pill);
+      height: 2rem;
+      padding: 2px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      width: 2rem;
+    }
+
+    .filter-rail.expanded {
+      width: auto;
+      padding-right: 1rem;
+    }
+
+    .filter-rail.has-sel {
+      width: auto;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+
+    .filter-rail.has-sel .filter-main-btn {
+      display: none;
+    }
+
+    .filter-main-btn {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--umber);
+      flex-shrink: 0;
+    }
+
+    .filter-rail-text {
+      display: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .filter-rail.has-sel .filter-rail-text {
+      display: block;
+    }
+
+    .filter-menu {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 0.5rem;
+    }
+
+    .filter-rail.expanded .filter-menu {
+      display: flex;
+    }
+
+    .filter-level {
+      display: none;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .filter-level.visible {
+      display: flex;
+    }
+
+    .filter-toggle-group {
+      display: flex;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 2px;
+      margin-right: 0.5rem;
+    }
+
+    .filter-toggle-btn {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      color: var(--stone);
+      transition: all 0.2s;
+    }
+
+    .filter-toggle-btn.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .filter-option-btn {
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      color: var(--ink2);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-option-btn:hover {
+      background: var(--bg);
+    }
+
+    .filter-option-btn.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .filter-clear-btn {
+      font-size: 0.6rem;
+      color: var(--stone);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-pill);
+      padding: 0.2rem 0.5rem;
+      margin-left: 0.25rem;
+    }
+
+    .filter-clear-btn:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .filter-back-btn {
+      padding: 0.25rem;
+      color: var(--stone);
+    }
+
+    .filter-options-scroll {
+      display: flex;
+      gap: 0.25rem;
+      overflow-x: auto;
+      max-width: 50vw;
+      scrollbar-width: none;
+    }
+
+    .filter-options-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-scroll-arrow {
+      font-size: 0.7rem;
+      color: var(--stone);
+      padding: 0.25rem;
+      position: sticky;
+      right: 0;
+      background: var(--bg2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .explore-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .explore-controls {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+      }
+
+      .explore-search {
+        width: 100%;
+      }
+
+      .explore-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="explore-header">
+    <a href="index.html" class="explore-logo">
+      PAGES FORWARD <span class="explore-logo-arrow">→</span>
+    </a>
+
+    <div class="explore-progress">
+      <span>LIBRARY PROGRESS</span>
+      <span id="progressText">0 / 100</span>
+      <div class="explore-progress-bar">
+        <div class="explore-progress-fill" id="progressBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <nav class="explore-nav">
+      <a href="forward.html" class="explore-nav-btn">Decide</a>
+      <span class="explore-nav-btn active">Full List</span>
+      <a href="collection.html" class="explore-nav-btn">Collection</a>
+    </nav>
+  </header>
+
+  <!-- Controls -->
+  <div class="explore-controls">
+    <div class="explore-filters" id="filterContainer">
+      <!-- Filter rail injected by filters.js -->
+    </div>
+
+    <div class="explore-search">
+      <svg class="explore-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <main class="explore-main" id="exploreMain">
+    <!-- Content injected by JS -->
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    // Explore Controller
+    (async function () {
+      'use strict';
+
+      // Initialize
+      await PF.State.init();
+      PF.State.applyDarkMode();
+
+      // Check onboarding
+      if (!PF.State.isOnboardingComplete()) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const main = document.getElementById('exploreMain');
+      const progressText = document.getElementById('progressText');
+      const progressBar = document.getElementById('progressBar');
+      const searchInput = document.getElementById('searchInput');
+
+      // Initialize filter system
+      PF.Filters.init('#filterContainer');
+
+      // Initialize search
+      PF.Search.init('#searchInput');
+
+      // Update progress
+      function updateProgress() {
+        const stats = PF.State.getStats(PF.booksData.length);
+        progressText.textContent = `${stats.collected + stats.dismissed} / ${stats.total}`;
+        progressBar.style.width = `${stats.progress}%`;
+      }
+
+      // Render gallery
+      function renderGallery() {
+        // Get available books
+        let books = PF.State.getAvailableBooks(PF.booksData);
+
+        // Apply search
+        if (PF.Search.isActive()) {
+          books = PF.Search.search(books);
+        }
+
+        // Apply filters
+        books = PF.Filters.apply(books);
+
+        if (books.length === 0) {
+          main.innerHTML = `
+            <div class="explore-empty">
+              <div class="explore-empty-icon">🔍</div>
+              <h2 class="explore-empty-title">No books found</h2>
+              <p>Try adjusting your search or filters.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Group by first letter
+        const groups = {};
+        books.forEach(book => {
+          const letter = book.title.charAt(0).toUpperCase();
+          if (!groups[letter]) groups[letter] = [];
+          groups[letter].push(book);
+        });
+
+        // Sort letters
+        const sortedLetters = Object.keys(groups).sort();
+
+        // Render
+        main.innerHTML = sortedLetters.map(letter => `
+          <section class="explore-section">
+            <div class="explore-section-header">
+              <span class="explore-section-letter">${letter}</span>
+              <span class="explore-section-count">${groups[letter].length} books</span>
+            </div>
+            <div class="explore-grid">
+              ${groups[letter].map(book => `
+                <article class="explore-card" data-id="${book.id}">
+                  <div class="explore-card-cover">
+                    <img src="${book.coverImage}" alt="${book.title}" loading="lazy">
+                    <div class="explore-card-overlay">
+                      <button class="explore-card-add" data-id="${book.id}">+ ADD</button>
+                    </div>
+                  </div>
+                  <div class="explore-card-info">
+                    <h3 class="explore-card-title">${book.title}</h3>
+                    <p class="explore-card-author">${book.author}</p>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </section>
+        `).join('');
+
+        // Bind add buttons
+        main.querySelectorAll('.explore-card-add').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const bookId = parseInt(btn.dataset.id);
+            await PF.State.acceptBook(bookId);
+            renderGallery();
+            updateProgress();
+          });
+        });
+      }
+
+      // Listen for filter changes
+      PF.Filters.setOnChange(() => {
+        renderGallery();
+      });
+
+      // Listen for search changes
+      PF.Search.setOnChange(() => {
+        renderGallery();
+      });
+
+      // Initial render
+      renderGallery();
+      updateProgress();
+
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+/* ═══════════════════════════════════════════════════════════════
+   PAGES FORWARD — Dark Mode
+   True dark redesign, not a filter
+   ═══════════════════════════════════════════════════════════════ */
+
+.dark {
+  /* Colors — Dark Mode */
+  --bg: #0A0A0A;
+  --bg2: #141414;
+  --bg3: #1E1E1E;
+  --ink: #F5F5F5;
+  --ink2: #CCCCCC;
+  --stone: #888888;
+  --sand: #333333;
+  --gold: #D4AF37;
+  --umber: #A89070;
+  --cream: #2A2520;
+
+  /* Adjusted accents for dark */
+  --accept: #00FF66;
+  --accept-dark: #00DD55;
+  --dismiss: #FF4444;
+  --dismiss-dark: #DD3333;
+}
+
+/* ─── Dark Mode Specific Overrides ──────────────────────────── */
+
+.dark body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.dark .header {
+  background: var(--bg);
+  border-bottom-color: var(--sand);
+}
+
+.dark .card {
+  background: var(--bg2);
+  border-color: var(--sand);
+}
+
+.dark .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dark .card-cover {
+  background: var(--bg3);
+}
+
+.dark .tag {
+  background: var(--bg3);
+  color: var(--ink2);
+}
+
+.dark .tag-gold {
+  background: var(--cream);
+  color: var(--gold);
+}
+
+.dark .search-bar {
+  background: var(--bg2);
+  border-color: var(--sand);
+}
+
+.dark .search-bar:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.dark .search-input {
+  color: var(--ink);
+}
+
+.dark .search-input::placeholder {
+  color: var(--stone);
+}
+
+.dark .btn-outline {
+  border-color: var(--sand);
+  color: var(--ink);
+}
+
+.dark .btn-outline:hover {
+  border-color: var(--ink);
+}
+
+.dark .btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.dark .section-header {
+  border-bottom-color: var(--sand);
+}
+
+.dark .progress-bar {
+  background: var(--sand);
+}
+
+.dark .status-to-read {
+  background: var(--bg3);
+  color: var(--stone);
+}
+
+.dark .status-in-progress {
+  background: rgba(255, 184, 0, 0.2);
+  color: #FFB800;
+}
+
+.dark .status-complete {
+  background: rgba(107, 142, 35, 0.2);
+  color: #8BC34A;
+}
+
+/* ─── Core Decision Mode (Always Dark) ──────────────────────── */
+.decision-mode {
+  --bg: #0A0A0A;
+  --bg2: #141414;
+  --bg3: #1E1E1E;
+  --ink: #F5F5F5;
+  --ink2: #CCCCCC;
+  --stone: #888888;
+  --sand: #333333;
+}
+
+.decision-mode .header {
+  background: var(--bg);
+  border-bottom-color: var(--sand);
+}
+
+/* ─── Onboarding (Always Dark) ──────────────────────────────── */
+.onboarding {
+  background: #0A0A0A;
+  color: #F5F5F5;
+  min-height: 100vh;
+}
+
+.onboarding-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.onboarding-arrow {
+  color: #D4AF37;
+  margin-left: 0.5em;
+}
+
+.onboarding-subtext {
+  font-size: 0.9rem;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 2rem;
+}
+
+.onboarding-btn {
+  margin-top: 3rem;
+  padding: 0.75rem 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: transparent;
+  border: 1px solid #444;
+  color: #F5F5F5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.onboarding-btn:hover {
+  background: #F5F5F5;
+  color: #0A0A0A;
+  border-color: #F5F5F5;
+}

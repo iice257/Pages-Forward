@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pages Forward - My Collection. Your curated library of accepted books.">
+  <title>Pages Forward — My Collection</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dark.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico">
+
+  <style>
+    /* Collection-specific styles */
+    .collection-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .collection-logo {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .collection-logo-arrow {
+      color: var(--gold);
+    }
+
+    .collection-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .collection-nav-btn {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--stone);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .collection-nav-btn:hover {
+      color: var(--ink);
+      background: var(--bg2);
+    }
+
+    .collection-nav-btn.active {
+      color: var(--ink);
+      background: var(--bg2);
+    }
+
+    .collection-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .collection-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .collection-user-name {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .dark-toggle {
+      font-size: 0.7rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-pill);
+      color: var(--stone);
+    }
+
+    .dark-toggle:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    /* Main Content */
+    .collection-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .collection-title-section {
+      margin-bottom: 2rem;
+    }
+
+    .collection-title {
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .collection-subtitle {
+      font-size: 0.9rem;
+      color: var(--stone);
+    }
+
+    .collection-count {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-top: 0.5rem;
+    }
+
+    /* Grid */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Book Card */
+    .collection-card {
+      position: relative;
+    }
+
+    .collection-card-cover {
+      position: relative;
+      aspect-ratio: 2/3;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .collection-card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .collection-card-status {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .collection-card-status.to-read {
+      background: var(--bg3);
+      color: var(--stone);
+    }
+
+    .collection-card-status.in-progress {
+      background: #FFE566;
+      color: #664D00;
+    }
+
+    .collection-card-status.complete {
+      background: #90EE90;
+      color: #006400;
+    }
+
+    .collection-card-info {
+      margin-top: 0.75rem;
+    }
+
+    .collection-card-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+
+    .collection-card-author {
+      font-size: 0.7rem;
+      color: var(--stone);
+    }
+
+    .collection-card-actions {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .collection-status-btn {
+      font-size: 0.55rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-sm);
+      color: var(--stone);
+      transition: all 0.2s;
+    }
+
+    .collection-status-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .collection-status-btn.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Empty state */
+    .collection-empty {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .collection-empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.3;
+    }
+
+    .collection-empty-title {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .collection-empty-text {
+      font-size: 0.9rem;
+      color: var(--stone);
+      margin-bottom: 2rem;
+    }
+
+    .collection-empty-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .collection-empty-btn:hover {
+      background: var(--ink2);
+    }
+
+    /* Footer */
+    .collection-footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--sand);
+    }
+
+    .collection-footer-text {
+      font-size: 0.7rem;
+      color: var(--stone);
+    }
+
+    .collection-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .collection-footer-link {
+      font-size: 0.7rem;
+      color: var(--stone);
+    }
+
+    .collection-footer-link:hover {
+      color: var(--ink);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .collection-header {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .collection-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="collection-header">
+    <a href="index.html" class="collection-logo">
+      PAGES FORWARD <span class="collection-logo-arrow">→</span>
+    </a>
+
+    <nav class="collection-nav">
+      <a href="forward.html" class="collection-nav-btn">Decide</a>
+      <a href="explore.html" class="collection-nav-btn">Explore</a>
+      <span class="collection-nav-btn active">Collection</span>
+    </nav>
+
+    <div class="collection-user">
+      <button class="dark-toggle" id="darkToggle">🌙 Dark</button>
+      <div class="collection-user-avatar">👤</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="collection-main">
+    <div class="collection-title-section">
+      <h1 class="collection-title">My Collection</h1>
+      <p class="collection-subtitle">A curated space for your accepted journeys.</p>
+      <p class="collection-count" id="collectionCount">0 Books Collected</p>
+    </div>
+
+    <div id="collectionGrid" class="collection-grid">
+      <!-- Content injected by JS -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="collection-footer">
+    <p class="collection-footer-text">© 2026 Pages Forward. Your library of progress.</p>
+    <div class="collection-footer-links">
+      <a href="#" class="collection-footer-link">Dark Mode</a>
+      <a href="#" class="collection-footer-link">Stats</a>
+      <a href="#" class="collection-footer-link">Settings</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script>
+    // Collection Controller
+    (async function () {
+      'use strict';
+
+      // Initialize
+      await PF.State.init();
+      PF.State.applyDarkMode();
+
+      // Check onboarding
+      if (!PF.State.isOnboardingComplete()) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const grid = document.getElementById('collectionGrid');
+      const countEl = document.getElementById('collectionCount');
+      const darkToggle = document.getElementById('darkToggle');
+
+      // Dark mode toggle
+      darkToggle.addEventListener('click', async () => {
+        const isDark = await PF.State.toggleDarkMode();
+        darkToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+      });
+
+      // Update toggle text on load
+      darkToggle.textContent = PF.State.state.darkMode ? '☀️ Light' : '🌙 Dark';
+
+      // Render collection
+      function renderCollection() {
+        const books = PF.State.getCollectionBooks(PF.booksData);
+
+        countEl.textContent = `${books.length} Books Collected`;
+
+        if (books.length === 0) {
+          grid.innerHTML = `
+            <div class="collection-empty" style="grid-column: 1 / -1;">
+              <div class="collection-empty-icon">📚</div>
+              <h2 class="collection-empty-title">You haven't added any books yet.</h2>
+              <p class="collection-empty-text">Start exploring to build your personal library.</p>
+              <a href="forward.html" class="collection-empty-btn">
+                Add Books →
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = books.map(book => {
+          const status = PF.State.state.readingStatus[book.id] || 'to-read';
+          const statusLabel = status === 'to-read' ? 'TO READ' :
+            status === 'in-progress' ? 'IN PROGRESS' : 'COMPLETE';
+
+          return `
+            <article class="collection-card">
+              <div class="collection-card-cover">
+                <img src="${book.coverImage}" alt="${book.title}" loading="lazy">
+                <span class="collection-card-status ${status}">${statusLabel}</span>
+              </div>
+              <div class="collection-card-info">
+                <h3 class="collection-card-title">${book.title}</h3>
+                <p class="collection-card-author">${book.author}</p>
+                <div class="collection-card-actions">
+                  <button class="collection-status-btn ${status === 'to-read' ? 'active' : ''}" 
+                          data-id="${book.id}" data-status="to-read">To Read</button>
+                  <button class="collection-status-btn ${status === 'in-progress' ? 'active' : ''}" 
+                          data-id="${book.id}" data-status="in-progress">Reading</button>
+                  <button class="collection-status-btn ${status === 'complete' ? 'active' : ''}" 
+                          data-id="${book.id}" data-status="complete">Done</button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Bind status buttons
+        grid.querySelectorAll('.collection-status-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const bookId = parseInt(btn.dataset.id);
+            const status = btn.dataset.status;
+            await PF.State.updateReadingStatus(bookId, status);
+            renderCollection();
+          });
+        });
+      }
+
+      // Initial render
+      renderCollection();
+
+    })();
+  </script>
+</body>
+
+</html>
