@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pages Forward | Decide</title>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/gifting-theme.css">
-  
+
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
 </head>
@@ -46,8 +46,10 @@
     </a>
     <div class="header-actions">
       <!-- Theme Toggle -->
-      <button class="btn-h btn-icon" id="themeToggle"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg></button>
-      
+      <button class="btn-h btn-icon" id="themeToggle"><svg viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg></button>
+
       <!-- Navigation -->
       <a href="explore.html" class="btn-h">Explore</a>
       <a href="collection.html" class="btn-h">Collection</a>
@@ -70,11 +72,11 @@
 
       // Theme logic
       const themeToggle = document.getElementById('themeToggle');
-      if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
       themeToggle.addEventListener('click', () => {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-          localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
       });
 
       await PF.State.init();
@@ -93,12 +95,12 @@
         const out = activeBg === 1 ? bb1 : bb2;
         inc.style.backgroundImage = `url(${imgUrl})`;
         inc.classList.add('active');
-        
+
         // Small delay to allow fade in before removing old one
         setTimeout(() => {
-            if(inc.classList.contains('active')) out.classList.remove('active');
+          if (inc.classList.contains('active')) out.classList.remove('active');
         }, 300); // match css transition roughly
-        
+
         activeBg = activeBg === 1 ? 2 : 1;
       }
 
@@ -107,7 +109,7 @@
 
       function render() {
         const availableBooks = PF.State.getAvailableBooks(PF.booksData);
-        
+
         if (availableBooks.length === 0) {
           main.innerHTML = `
             <div class="slide active">
@@ -131,21 +133,21 @@
         // Animation transition
         main.style.opacity = '0';
         setTimeout(() => {
-            main.innerHTML = `
+          main.innerHTML = `
             <div class="slide active">
                 <div class="panel-cover">
                     <div class="cover-c">
                         <div class="book-cover">
                             <img src="${book.coverImage}" alt="${book.title}">
                         </div>
+                        ${book.bestseller ? `
+                        <div class="gold-ribbon"></div>
+                        <div class="bestseller-text">International Bestseller</div>
+                        ` : ''}
                     </div>
                 </div>
                 <div class="panel-content">
                     <div class="content-w">
-                        <div class="status-badge">
-                            <span class="status-dot ${sc}"></span>
-                            <span class="status-text ${sc}">${st}</span>
-                        </div>
                         <div class="title-row">
                             <h1 class="book-title">${book.title}</h1>
                         </div>
@@ -157,6 +159,7 @@
                             <span class="genre-tag" style="border-color:var(--amber); color:var(--amber)">${book.tags.type}</span>
                             <span class="genre-tag">${book.tags.category}</span>
                             <span class="genre-tag">${book.tags.niche}</span>
+                            <span class="status-pill ${sc}">${st}</span>
                         </div>
                         <div class="author-sec">
                             <div class="author-name">${book.author}</div>
@@ -170,17 +173,17 @@
                     </div>
                 </div>
             </div>`;
-            
-            main.style.opacity = '1';
 
-            document.getElementById('dismissBtn').onclick = async () => {
-                await PF.State.dismissBook(book.id);
-                render();
-            };
-            document.getElementById('acceptBtn').onclick = async () => {
-                await PF.State.acceptBook(book.id);
-                render();
-            };
+          main.style.opacity = '1';
+
+          document.getElementById('dismissBtn').onclick = async () => {
+            await PF.State.dismissBook(book.id);
+            render();
+          };
+          document.getElementById('acceptBtn').onclick = async () => {
+            await PF.State.acceptBook(book.id);
+            render();
+          };
 
         }, 300);
       }
@@ -189,4 +192,5 @@
     })();
   </script>
 </body>
+
 </html>

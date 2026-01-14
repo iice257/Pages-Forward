@@ -4,355 +4,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pages Forward - Gift a journey. Curated recommendations for friends.">
-  <title>Pages Forward — Gifts</title>
+  <title>Pages Forward | Gifting</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="css/gifting-theme.css">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dark.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
 
   <style>
-    /* Gifts-specific styles */
-    .gifts-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: var(--bg);
+    /* Gifting specific overrides */
+    .gift-header-sec {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(180deg, var(--bg3) 0%, var(--bg) 100%);
       border-bottom: 1px solid var(--sand);
     }
 
-    .gifts-logo {
-      font-family: var(--display);
-      font-size: 0.9rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .gifts-logo-arrow {
-      color: var(--gold);
-    }
-
-    .gifts-nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .gifts-nav-btn {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--stone);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    .gifts-nav-btn:hover {
+    .gift-title {
+      font-family: var(--ff);
+      font-size: 3rem;
       color: var(--ink);
-      background: var(--bg2);
-    }
-
-    /* Hero Section */
-    .gifts-hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(180deg, var(--cream) 0%, var(--bg) 100%);
-    }
-
-    .gifts-hero-title {
-      font-family: var(--display);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    .gifts-hero-subtitle {
-      font-size: 1rem;
-      color: var(--stone);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* Carousel Section */
-    .gifts-section {
-      padding: 3rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .gifts-section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-    }
-
-    .gifts-section-title {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      font-weight: 400;
-    }
-
-    .gifts-section-subtitle {
-      font-size: 0.8rem;
-      color: var(--stone);
-    }
-
-    .gifts-carousel {
-      display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .gifts-carousel::-webkit-scrollbar {
-      display: none;
-    }
-
-    .gifts-carousel-item {
-      flex: 0 0 280px;
-      scroll-snap-align: start;
-    }
-
-    .gifts-card {
-      background: var(--bg);
-      border: 1px solid var(--sand);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .gifts-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
-    }
-
-    .gifts-card-cover {
-      aspect-ratio: 3/2;
-      overflow: hidden;
-    }
-
-    .gifts-card-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .gifts-card-body {
-      padding: 1.25rem;
-    }
-
-    .gifts-card-tag {
-      font-size: 0.6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--gold);
       margin-bottom: 0.5rem;
     }
 
-    .gifts-card-title {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .gifts-card-author {
-      font-size: 0.8rem;
+    .gift-sub {
+      font-family: var(--fb);
       color: var(--stone);
-      margin-bottom: 0.75rem;
+      font-style: italic;
     }
 
-    .gifts-card-desc {
-      font-size: 0.8rem;
-      color: var(--ink2);
-      line-height: 1.5;
+    .carousel-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--div);
     }
 
-    .gifts-card-btn {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    .gifts-card-btn:hover {
-      background: var(--ink2);
-    }
-
-    /* CTA Section */
-    .gifts-cta {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: var(--bg2);
-      margin-top: 2rem;
-    }
-
-    .gifts-cta-title {
-      font-family: var(--display);
+    .carousel-title {
+      font-family: var(--ff);
       font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .gifts-cta-text {
-      font-size: 0.9rem;
-      color: var(--stone);
+      margin-left: 2.5rem;
       margin-bottom: 1.5rem;
+      color: var(--char);
     }
 
-    .gifts-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: var(--gold);
-      color: #000;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 0 2.5rem 2rem;
+      scrollbar-width: none;
     }
 
-    .gifts-cta-btn:hover {
-      background: #B8922B;
+    .carousel-track::-webkit-scrollbar {
+      display: none;
     }
 
-    /* Note about this page */
-    .gifts-note {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      background: var(--ink);
-      color: var(--bg);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.65rem;
-      opacity: 0.8;
+    .gift-card {
+      flex: 0 0 240px;
+      background: var(--bg2);
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform var(--dm) var(--ease);
     }
+
+    .gift-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .gift-img {
+      aspect-ratio: 0.707;
+      /* A4 */
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .gift-body {
+      padding: 1rem;
+    }
+
+    /* ... */
   </style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="gifts-header">
-    <a href="index.html" class="gifts-logo">
-      PAGES FORWARD <span class="gifts-logo-arrow">→</span>
-    </a>
+  /* ... */
+  for (const [title, filterFn] of Object.entries(groups)) {
+  const books = PF.booksData.filter(filterFn).slice(0, 8); // LIMIT 8
+  if (books.length === 0) continue;
 
-    <nav class="gifts-nav">
-      <a href="forward.html" class="gifts-nav-btn">Decide</a>
-      <a href="explore.html" class="gifts-nav-btn">Explore</a>
-      <a href="collection.html" class="gifts-nav-btn">Collection</a>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="gifts-hero">
-    <h1 class="gifts-hero-title">Gift a Journey</h1>
-    <p class="gifts-hero-subtitle">Curated recommendations for the readers in your life. Browse without commitment.</p>
-  </section>
-
-  <!-- Carousel: For the Curious -->
-  <section class="gifts-section">
-    <div class="gifts-section-header">
-      <div>
-        <h2 class="gifts-section-title">For the Curious Mind</h2>
-        <p class="gifts-section-subtitle">Books that expand horizons</p>
+  html += `
+  <div class="carousel-section">
+    <h2 class="carousel-title">${title}</h2>
+    <div class="carousel-track">
+      ${books.map(b => {
+      const ribbon = b.bestseller ?
+      `<div
+        style="margin-bottom:0.4rem;display:inline-block;background:linear-gradient(90deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);padding:0.1rem 0.4rem;font-size:0.5rem;text-transform:uppercase;font-weight:700;letter-spacing:0.1em;color:#4a3b18;border-radius:2px;">
+        ★ Bestseller</div>`
+      : '';
+      return `
+      <div class="gift-card">
+        <img src="${b.coverImage}" class="gift-img" loading="lazy">
+        <div class="gift-body">
+          ${ribbon}
+          <div class="gift-cat">${b.tags.category}</div>
+          <div class="gift-name">${b.title}</div>
+          <div class="gift-auth">by ${b.author}</div>
+          <button class="gift-btn">Select Gift</button>
+        </div>
       </div>
+      `}).join('')}
     </div>
-    <div class="gifts-carousel" id="carousel1">
-      <!-- Injected by JS -->
-    </div>
-  </section>
-
-  <!-- Carousel: For Fiction Lovers -->
-  <section class="gifts-section">
-    <div class="gifts-section-header">
-      <div>
-        <h2 class="gifts-section-title">For Fiction Lovers</h2>
-        <p class="gifts-section-subtitle">Stories that transport</p>
-      </div>
-    </div>
-    <div class="gifts-carousel" id="carousel2">
-      <!-- Injected by JS -->
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="gifts-cta">
-    <h2 class="gifts-cta-title">Ready to commit?</h2>
-    <p class="gifts-cta-text">Take the forward-only journey and build your own collection.</p>
-    <a href="forward.html" class="gifts-cta-btn">Start Deciding →</a>
-  </section>
-
-  <!-- Note -->
-  <div class="gifts-note">
-    This is a browsing-only page. No forward-only rules apply here.
   </div>
+  `;
+  }
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script>
-    // Gifts Controller
-    (function () {
-      'use strict';
+  container.innerHTML = html;
 
-      const carousel1 = document.getElementById('carousel1');
-      const carousel2 = document.getElementById('carousel2');
-
-      // Get sample books
-      const nonFiction = PF.booksData.filter(b => b.tags.type === 'Non-Fiction').slice(0, 8);
-      const fiction = PF.booksData.filter(b => b.tags.type === 'Fiction').slice(0, 8);
-
-      function renderCarousel(container, books) {
-        container.innerHTML = books.map(book => `
-          <div class="gifts-carousel-item">
-            <article class="gifts-card">
-              <div class="gifts-card-cover">
-                <img src="${book.coverImage}" alt="${book.title}" loading="lazy">
-              </div>
-              <div class="gifts-card-body">
-                <p class="gifts-card-tag">${book.tags.category}</p>
-                <h3 class="gifts-card-title">${book.title}</h3>
-                <p class="gifts-card-author">by ${book.author}</p>
-                <p class="gifts-card-desc">${book.description.substring(0, 100)}...</p>
-                <button class="gifts-card-btn">Share This Pick</button>
-              </div>
-            </article>
-          </div>
-        `).join('');
-      }
-
-      renderCarousel(carousel1, nonFiction);
-      renderCarousel(carousel2, fiction);
-
-    })();
+  })();
   </script>
 </body>
 

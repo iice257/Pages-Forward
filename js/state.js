@@ -14,6 +14,7 @@
   // Default state
   const defaultState = {
     onboardingComplete: false,
+    giftingIntroSeen: false,
     currentIndex: 0,
     collection: [],      // Book IDs that were accepted
     dismissed: [],       // Book IDs that were dismissed (permanently excluded)
@@ -168,18 +169,18 @@
      * @param {number} bookId 
      */
     async removeFromCollection(bookId) {
-        const idx = this.state.collection.indexOf(bookId);
-        if (idx > -1) {
-            this.state.collection.splice(idx, 1);
-            if (!this.state.dismissed.includes(bookId)) {
-                this.state.dismissed.push(bookId);
-            }
-            delete this.state.readingStatus[bookId];
-            await this.save();
-            console.log('[PF State] Removed from collection:', bookId);
-            return true;
+      const idx = this.state.collection.indexOf(bookId);
+      if (idx > -1) {
+        this.state.collection.splice(idx, 1);
+        if (!this.state.dismissed.includes(bookId)) {
+          this.state.dismissed.push(bookId);
         }
-        return false;
+        delete this.state.readingStatus[bookId];
+        await this.save();
+        console.log('[PF State] Removed from collection:', bookId);
+        return true;
+      }
+      return false;
     },
 
     /**
@@ -271,11 +272,13 @@
 
     async completeOnboarding() {
       this.state.onboardingComplete = true;
+      this.state.giftingIntroSeen = true;
       await this.save();
     },
 
     isOnboardingComplete() {
-      return this.state.onboardingComplete;
+      // Force new users to see gifting intro
+      return this.state.giftingIntroSeen;
     },
 
     // ═══════════════════════════════════════════════════════════

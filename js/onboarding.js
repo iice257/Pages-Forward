@@ -26,7 +26,7 @@
       if (!container) return;
 
       container.innerHTML = `
-        <div class="onboarding-content animate-fade-in">
+        <div class="onboarding-content" style="opacity: 1; transform: none;">
           <svg width="0" height="0" style="position:absolute">
             <defs>
               <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -46,8 +46,8 @@
           </svg>
           <p style="font-family:var(--fb);font-size:1rem;color:var(--stone);margin-top:1rem;font-style:italic">Once you move on, there is no going back.</p>
           <button class="onboarding-btn" id="onboardingBtn">I Understand</button>
-        </div>
-      `;
+        </div >
+    `;
 
       // Bind the button
       document.getElementById('onboardingBtn').addEventListener('click', () => {

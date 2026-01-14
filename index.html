@@ -33,6 +33,7 @@
       justify-content: center;
       background: var(--bg);
       color: var(--ink);
+      z-index: 9999;
     }
 
     .onboarding-content {
@@ -54,31 +55,31 @@
     }
 
     .onboarding-sub {
-        font-family: var(--fb);
-        font-size: clamp(1.2rem, 3vw, 2rem);
-        font-style: normal;
-        color: var(--ink);
-        display: flex;
-        gap: .4em;
-        margin-top: .5rem;
+      font-family: var(--fb);
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-style: normal;
+      color: var(--ink);
+      display: flex;
+      gap: .4em;
+      margin-top: .5rem;
     }
 
     .onboarding-gold {
-        background: linear-gradient(135deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-family: var(--ff);
-        font-weight: 700;
-        font-style: normal;
-        filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
+      background: linear-gradient(135deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: var(--ff);
+      font-weight: 700;
+      font-style: normal;
+      filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
     }
 
     .onboarding-icon {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 1rem;
-        stroke: #DFBD69;
-        fill: none;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1rem;
+      stroke: #DFBD69;
+      fill: none;
     }
 
     .onboarding-btn {
@@ -101,6 +102,22 @@
       background: var(--char);
       color: var(--bg2);
       border-color: var(--char);
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>

@@ -79,10 +79,115 @@
       border-width: 1px;
     }
 
-    /* Print break */
+    /* A4 Page Dimensions */
+    .page-a4 {
+      width: 210mm;
+      min-height: 297mm;
+      max-width: 210mm;
+    }
+
+    /* 2:3 Aspect Ratio for Book Covers */
+    .book-cover-a4 {
+      aspect-ratio: 0.667;
+    }
+
+    /* Golden Reflective Bestseller Ribbon */
+    .bestseller-ribbon {
+      display: inline-block;
+      background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+      background-size: 200% 200%;
+      animation: shimmer 3s linear infinite;
+      color: #3d2e0a;
+      font-size: 0.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin-bottom: 0.25rem;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Smaller status pill - elongated horizontally */
+    .status-pill-sm {
+      font-size: 0.55rem;
+      padding: 0.15rem 1.25rem;
+      min-width: 3.5rem;
+    }
+
+    /* Print Styles for PDF Export */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
     @media print {
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+
+      body {
+        background: white !important;
+      }
+
+      .page-a4 {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        overflow: hidden !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+
       .page-break {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        overflow: hidden !important;
         page-break-before: always;
+        page-break-inside: avoid;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      /* Ensure backgrounds print */
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+
+      /* Remove shadows for cleaner print */
+      .shadow-lg,
+      .shadow-xl,
+      .shadow-2xl,
+      .shadow-sm {
+        box-shadow: none !important;
       }
     }
   </style>
@@ -93,7 +198,11 @@
 
   <!-- COVER PAGE -->
   <main
-    class="relative w-full max-w-md mx-auto min-h-screen flex flex-col overflow-hidden shadow-2xl bg-background-light dark:bg-background-dark mb-8">
+    class="page-a4 relative mx-auto min-h-screen flex flex-col overflow-hidden shadow-2xl bg-background-light dark:bg-background-dark mb-8">
+    <!-- Background Texture -->
+    <div class="absolute inset-0 z-0 opacity-[0.2] dark:opacity-[0.15] pointer-events-none"
+      style="background-image: url('assets/books-bg.png'); background-repeat: repeat; background-size: 150px;">
+    </div>
     <div
       class="absolute top-4 left-4 w-32 h-40 border-2 border-dashed border-gray-400 dark:border-gray-600 opacity-50 z-0">
     </div>
@@ -101,12 +210,10 @@
       <h1 class="font-display text-5xl text-primary dark:text-gray-100 tracking-tight leading-[0.9]">
         PAGES FORWARD
       </h1>
-      <p class="font-display text-3xl mt-2 tracking-wide">
+      <p class="font-display text-3xl mt-2 tracking-wide flex items-center justify-center gap-2">
         <span class="gold-text italic font-bold">Gifting</span> <span
           class="text-gray-600 dark:text-gray-400 font-light">Season</span>
-      </p>
-      <div class="mt-4 flex justify-center">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad-header)" stroke-width="2"
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad-header)" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <defs>
             <linearGradient id="gold-grad-header" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -120,10 +227,10 @@
           <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
           <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
         </svg>
-      </div>
+      </p>
     </header>
 
-    <div class="flex-grow relative mt-8 px-4 pb-12">
+    <div class="flex-grow relative mt-6 px-4 pb-4">
       <!-- Image 1 -->
       <div class="relative w-2/3 z-10">
         <div class="flex flex-col gap-2 absolute -left-3 top-8 z-20">
@@ -131,43 +238,32 @@
           <div class="w-6 h-6 bg-gray-600 dark:bg-gray-400 shadow-sm"></div>
           <div class="w-6 h-6 bg-gray-300 dark:bg-gray-600 shadow-sm"></div>
         </div>
-        <img alt="Catalogue Cover 1"
-          class="w-full h-64 object-cover shadow-lg border-4 border-white dark:border-gray-800"
-          src="assets/catalog/cat_cover_preview_image_1.png" />
+        <img alt="Catalogue Cover 1" class="w-full shadow-lg border-4 border-white dark:border-gray-800"
+          style="aspect-ratio: 3/4; object-fit: cover;" src="assets/catalog/cat_cover_preview_image_1.png" />
       </div>
       <!-- Image 2 -->
-      <div class="relative w-2/3 ml-auto -mt-16 z-20">
+      <div class="relative w-2/3 ml-auto -mt-12 z-20">
         <div class="absolute -top-6 -right-4 w-24 h-24 border-2 border-dashed border-gray-800 dark:border-gray-300 z-0">
         </div>
-        <img alt="Catalogue Cover 2"
-          class="relative w-full h-80 object-cover shadow-lg border-4 border-white dark:border-gray-800 z-10"
-          src="assets/catalog/cat_cover_preview_image_2.png" />
+        <img alt="Catalogue Cover 2" class="relative w-full shadow-lg border-4 border-white dark:border-gray-800 z-10"
+          style="aspect-ratio: 3/4; object-fit: cover;" src="assets/catalog/cat_cover_preview_image_2.png" />
       </div>
       <!-- Image 3 -->
-      <div class="relative w-full mt-[-40px] flex items-end justify-between">
-        <div class="relative w-1/2 z-10">
-          <img alt="Catalogue Cover 3"
-            class="w-full h-48 object-cover shadow-lg border-4 border-white dark:border-gray-800"
-            src="assets/catalog/cat_cover_preview_image_3.png" />
-        </div>
-        <!-- Curated Text -->
-        <div class="w-1/2 pl-4 pb-4 z-20">
-          <div class="relative">
-            <div
-              class="absolute -top-12 -left-8 w-48 h-48 border-2 border-dashed border-gray-500 dark:border-gray-500 opacity-60 pointer-events-none">
-            </div>
-            <p
-              class="font-script text-3xl leading-tight text-gray-700 dark:text-gray-300 relative z-10 transform -rotate-2">
-              Curated specifically for the discerning reader & collector.
-            </p>
-          </div>
-        </div>
+      <div class="relative w-1/2 -mt-10 z-10">
+        <img alt="Catalogue Cover 3" class="w-full shadow-lg border-4 border-white dark:border-gray-800"
+          style="aspect-ratio: 3/4; object-fit: cover;" src="assets/catalog/cat_cover_preview_image_3.png" />
+      </div>
+      <!-- Curated Text - Below Images -->
+      <div class="mt-6 text-center">
+        <p class="font-display text-xl font-semibold leading-tight text-gray-700 dark:text-gray-300">
+          Curated specifically for the discerning reader &amp; collector.
+        </p>
       </div>
     </div>
 
-    <footer class="w-full py-8 text-center border-t border-gray-200 dark:border-gray-800 mt-auto">
-      <div class="flex flex-col items-center justify-center space-y-2">
-        <p class="font-body text-xs tracking-[0.3em] uppercase text-gray-500 dark:text-gray-400">
+    <footer class="w-full py-4 text-center border-t border-gray-200 dark:border-gray-800 mt-auto">
+      <div class="flex flex-col items-center justify-center space-y-1">
+        <p class="font-body text-xs font-semibold tracking-[0.3em] uppercase text-gray-500 dark:text-gray-400">
           CHOOSE WHAT MOVES YOU FORWARD
         </p>
         <p class="font-display italic text-sm text-primary dark:text-gray-200">
@@ -180,7 +276,7 @@
 
   <!-- INNER PAGE 1 (Books 1-5) -->
   <div
-    class="page-break w-full max-w-md mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative mb-8">
+    class="page-break page-a4 mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative mb-4">
     <header class="pt-8 pb-4 px-6 border-b border-border-light dark:border-border-dark flex justify-between items-end">
       <div>
         <h1 class="font-display text-3xl italic font-semibold tracking-wide text-primary dark:text-white">Pages Forward
@@ -196,20 +292,21 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
+              <span class="bestseller-ribbon">★ Bestseller</span>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">The Runway of Life
               </h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Peter Legge</p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 collection of success lessons and insights from business leader Joe Segal, as told by Peter Legge.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/runway_of_life.png" />
           </div>
         </div>
@@ -219,6 +316,7 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <span class="bestseller-ribbon">★ Bestseller</span>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">The Power of a
                 Praying Woman</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Stormie Omartian
@@ -226,14 +324,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 spiritual guide offering prayers and insights to help women deepen their faith and prayer life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/power_praying_woman.png" />
           </div>
@@ -251,14 +349,14 @@
                 concise guide to personal accountability that helps eliminate blame and procrastination in work and
                 life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/qbq.png" />
           </div>
         </div>
@@ -275,14 +373,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 systematic guide to setting goals and achieving personal success over the course of a year.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/best_year_yet.png" />
           </div>
         </div>
@@ -297,21 +395,21 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 guide to business etiquette and how manners directly impact professional relationships and success.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/class_acts.png" />
           </div>
         </div>
       </article>
     </main>
     <footer
-      class="py-6 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
+      class="py-3 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
       <p class="font-display italic text-sm text-primary dark:text-white">“I do believe something very magical can
         happen when you read a good book.” — J.K. Rowling</p>
     </footer>
@@ -319,7 +417,7 @@
 
   <!-- INNER PAGE 2 (Books 6-10) -->
   <div
-    class="page-break w-full max-w-md mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative mb-8">
+    class="page-break page-a4 mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative mb-4">
     <header class="pt-8 pb-4 px-6 border-b border-border-light dark:border-border-dark flex justify-between items-end">
       <div>
         <h1 class="font-display text-3xl italic font-semibold tracking-wide text-primary dark:text-white">Pages Forward
@@ -341,14 +439,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 collection of the inspiring stories and history behind 101 of the most cherished Christian hymns.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Music</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/hymn_stories.png" />
           </div>
         </div>
@@ -366,14 +464,14 @@
                 strategic guide for managing your career like a business asset to ensure long-term growth and stability.
               </p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/personal_balance_sheet.png" />
           </div>
@@ -392,14 +490,14 @@
                 spiritual and practical guide for women to manage their time and priorities according to biblical
                 principles.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/life_management.png" />
           </div>
         </div>
@@ -415,14 +513,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 daily devotional book offering motivation and inspiration from the founder of the Crystal Cathedral.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/hours_of_power.png" />
           </div>
         </div>
@@ -439,14 +537,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 practical guide to transforming daily problems into opportunities for personal growth and happiness.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/transform_your_life.png" />
           </div>
@@ -454,17 +552,16 @@
       </article>
     </main>
     <footer
-      class="py-6 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
+      class="py-3 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
       <p class="font-display italic text-sm text-primary dark:text-white">“A book is a gift you can open again and
-        again.”
-        <br />— Garrison Keillor
+        again.” — Garrison Keillor
       </p>
     </footer>
   </div>
 
   <!-- BACK PAGE (Books 11-15) -->
   <div
-    class="page-break w-full max-w-md mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative flex flex-col">
+    class="page-break page-a4 mx-auto min-h-screen bg-white dark:bg-[#222222] shadow-xl overflow-hidden border-x border-border-light dark:border-border-dark relative flex flex-col">
     <header class="pt-8 pb-4 px-6 border-b border-border-light dark:border-border-dark flex justify-between items-end">
       <div>
         <h1 class="font-display text-3xl italic font-semibold tracking-wide text-primary dark:text-white">Pages Forward
@@ -487,14 +584,14 @@
                 business guide exploring how senior leadership teams can balance individual performance with collective
                 team goals.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/teams_at_the_top.png" />
           </div>
         </div>
@@ -504,6 +601,7 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <span class="bestseller-ribbon">★ Bestseller</span>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Change Your
                 Thoughts - Change Your Life</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Dr. Wayne W. Dyer
@@ -512,14 +610,14 @@
                 modern interpretation of the Tao Te Ching offering 81 essays on how to apply ancient wisdom to today's
                 life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/change_your_thoughts.png" />
           </div>
@@ -536,14 +634,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 guide revealing seven hidden steps to attracting wealth success and happiness into your life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
               <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/millionaire_formula.png" />
           </div>
@@ -554,6 +652,7 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <span class="bestseller-ribbon">★ Bestseller</span>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Life on the Edge
               </h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Dr. James Dobson
@@ -562,22 +661,46 @@
                 comprehensive guide for young adults navigating the critical decisions and challenges of early
                 adulthood.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Non-Fiction</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/life_on_the_edge.png" />
           </div>
         </div>
       </article>
-      <!-- Book 15 -->
-      <article class="p-6 flex flex-col gap-4">
+      <!-- Book 15 - Essential Manager's Motivating People -->
+      <article class="p-4 flex flex-col gap-4 bg-opacity-50 bg-[#f9f9f9] dark:bg-opacity-10 dark:bg-white">
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Essential Manager's
+                Motivating People</h2>
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">DK Publishing</p>
+              <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
+                practical guide to understanding what drives people and how to inspire them to achieve their best in the
+                workplace.</p>
+            </div>
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
+              <span
+                class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
+            </div>
+          </div>
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
+            <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/motivating_people.png" />
+          </div>
+        </div>
+      </article>
+      <!-- Book 16 - Leviathan -->
+      <article class="p-4 flex flex-col gap-4">
+        <div class="flex gap-5 flex-row-reverse">
+          <div class="flex-1 flex flex-col justify-between text-right">
             <div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Leviathan</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Scott Westerfeld
@@ -585,14 +708,14 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">In
                 an alternate 1914, the opposing sides of World War I are the Darwinians and the Clankers.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center justify-end gap-2 flex-wrap">
+              <span
+                class="border border-primary dark:border-white px-2 py-0.5 rounded-pill text-xs font-bold pill-hollow status-pill-sm">&nbsp;</span>
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Fiction</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
             </div>
           </div>
-          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+          <div class="w-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm book-cover-a4">
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/leviathan.png" />
           </div>
         </div>
@@ -601,15 +724,15 @@
 
     <!-- BACK PAGE FOOTER -->
     <footer
-      class="py-12 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
-      <div class="flex flex-col items-center justify-center space-y-4">
-        <p class="font-display italic text-sm text-primary dark:text-white">“Reading is essential for those who seek to
+      class="py-4 px-6 border-t border-border-light dark:border-border-dark mt-auto bg-background-light dark:bg-background-dark text-center">
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <p class="font-display italic text-sm text-primary dark:text-white">"Reading is essential for those who seek to
           rise above the ordinary." — Jim Rohn</p>
         <div class="w-12 h-0.5 bg-border-light dark:bg-gray-700"></div>
         <p class="font-display italic text-sm text-primary dark:text-gray-200">
           www.pagesforward.com
         </p>
-        <p class="text-[0.6rem] text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wide mt-2">
+        <p class="text-[0.6rem] text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wide">
           Est. 2020 • AREMU
         </p>
       </div>

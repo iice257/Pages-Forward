@@ -82,7 +82,7 @@
       line-height: 1.7;
       overflow-x: auto;
       /* Allow scrolling if window is too small */
-      overflow-y: hidden;
+      overflow-y: auto;
       opacity: 0;
       filter: blur(12px);
       /* Animation triggered by JS via .loaded class */
@@ -455,7 +455,8 @@
 
     .book-cover {
       width: 100%;
-      aspect-ratio: .67;
+      aspect-ratio: 0.707;
+      /* A4 */
       border-radius: 0;
       overflow: hidden;
       box-shadow: -3px 0 0 rgba(30, 25, 20, .25), -6px 0 0 rgba(50, 45, 40, .12), 0 30px 60px -12px rgba(30, 25, 20, .45), -18px 18px 45px -12px rgba(30, 25, 20, .28)
@@ -561,46 +562,40 @@
     .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      margin-bottom: 1rem
+      gap: .3rem;
+      padding: .2rem .5rem;
+      border: 1px solid currentColor;
+      border-radius: 1rem;
+      font-size: .5rem !important;
+      line-height: 1;
+      height: fit-content;
+      margin-top: 0.2rem;
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%
+      display: none;
+      /* Removed dot based on request */
     }
 
-    .status-dot.avail {
-      background: var(--avail)
+    .status-badge.avail {
+      color: var(--avail);
     }
 
-    .status-dot.reserved {
-      background: var(--amber)
+    .status-badge.reserved {
+      color: var(--amber);
     }
 
-    .status-dot.unavail {
-      background: var(--red)
+    .status-badge.unavail {
+      color: var(--red);
     }
 
     .status-text {
       font-family: var(--fs);
-      font-size: .6rem;
+      font-size: inherit;
       font-weight: 600;
       letter-spacing: .15em;
-      text-transform: uppercase
-    }
-
-    .status-text.avail {
-      color: var(--avail)
-    }
-
-    .status-text.reserved {
-      color: var(--amber)
-    }
-
-    .status-text.unavail {
-      color: var(--red)
+      text-transform: uppercase;
+      color: currentColor;
     }
 
     .book-subtitle {
@@ -1683,23 +1678,13 @@
         <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
       </svg>
     </div>
+    <script src="js/data.js"></script>
     <div class="header-actions">
       <button class="btn-h theme-toggle" id="themeToggle"><svg viewBox="0 0 24 24">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg></button>
-      <button class="folder-btn" id="folderBtn">
-        <svg class="folder-icon" viewBox="0 0 24 24">
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-        </svg>
-        <span class="folder-badge" id="folderBadge">0</span>
-      </button>
-
       <button class="btn-h btn-control" id="fullListBtn">Full List</button>
-      <div class="coll-preview" id="collPreview">
-        <div class="coll-label">Recents</div>
-        <div class="coll-items" id="collItems"></div>
-        <button class="view-all-btn" id="viewAllBtn">View / Edit Collection</button>
-      </div>
+    </div>
     </div>
   </header>
   <div class="slider-vp">
@@ -1749,48 +1734,25 @@
       return counts[author] || 0;
     }
 
-    async function loadBooksData() {
-      try {
-        const response = await fetch('assets/gifts_metadata.csv');
-        const text = await response.text();
-        const lines = text.trim().split('\n');
-        const headers = lines[0].split(',').map(h => h.trim());
-
-        booksData = [];
-        for (let i = 1; i < lines.length; i++) {
-          if (!lines[i].trim()) continue;
-          const row = [];
-          let cur = '', inQ = false;
-          for (let c of lines[i]) {
-            if (c === '"') { inQ = !inQ; continue; }
-            if (c === ',' && !inQ) { row.push(cur); cur = ''; continue; }
-            cur += c;
-          }
-          row.push(cur);
-
-          const obj = {};
-          headers.forEach((h, idx) => obj[h] = row[idx]?.trim());
-
-          booksData.push({
-            id: parseInt(obj.id),
-            title: obj.title,
-            author: obj.author,
-            subtitle: obj.subtitle || "",
-            description: obj.description || "",
-            coverImage: `assets/covers/${obj.coverImage}`,
-            genres: [obj.category, obj.niche].filter(Boolean),
-            status: obj.status || 'available',
-            length: obj.length || 'Medium',
-            bestsellers: getBestsellerCount(obj.author),
-            popularity: parseFloat(obj.book_popularity) || 0.5
-          });
-        }
+    function loadBooksData() {
+      if (window.PF && window.PF.booksData) {
+        booksData = window.PF.booksData.map(b => ({
+          id: b.id,
+          title: b.title,
+          author: b.author,
+          subtitle: b.subtitle,
+          description: b.description,
+          coverImage: b.coverImage,
+          genres: [b.tags.category, b.tags.niche],
+          status: b.status,
+          length: b.length,
+          isBestseller: b.bestseller,
+          popularity: b.popularity.book
+        }));
         books = [...booksData].sort(() => Math.random() - .5);
         initSlider();
-      } catch (e) { console.error("CSV Load Failed", e); }
+      }
     }
-
-
 
     function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
     function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable' }
@@ -1803,9 +1765,9 @@
     }
 
     function getLengthInfo(len) {
-      if (len < 200) return { label: 'Short read', icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-13h-2v6l5.25 3.15.75-1.23-4-2.37z' };
-      if (len < 400) return { label: 'Medium read', icon: 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z' };
-      return { label: 'Long read', icon: 'M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z' };
+      if (len < 200) return { label: 'Short read', icon: '' };
+      if (len < 400) return { label: 'Medium read', icon: '' };
+      return { label: 'Long read', icon: '' };
     }
 
     function getCategory(genres) {
@@ -1821,11 +1783,9 @@
       const li = getLengthInfo(len);
       const cat = getCategory(book.genres);
 
-      const bsText = book.bestsellers > 1
-        ? `${book.bestsellers} Bestseller books`
-        : (book.bestsellers === 1 ? '1 Bestseller book' : '');
+      const ribbonHtml = book.isBestseller ? `<div style="margin-bottom:0.5rem;display:inline-block;background:linear-gradient(90deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);padding:0.2rem 0.6rem;font-size:0.55rem;text-transform:uppercase;font-weight:700;letter-spacing:0.1em;color:#4a3b18;border-radius:2px;box-shadow:0 2px 4px rgba(0,0,0,0.1)">★ International Bestseller</div>` : '';
 
-      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1><button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div><div style="margin-top:1rem;text-align:center">${ribbonHtml}</div></div></div><div class="panel-content"><div class="content-w"><div class="title-row"><h1 class="book-title">${book.title}</h1></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}<div class="status-badge ${sc}"><span class="status-text">${st}</span></div></div><div class="author-sec"><div class="author-name">${book.author}</div></div></div></div></div>`;
     }
 
     function initSlider() {
@@ -1916,32 +1876,11 @@
     }
 
     function bindAddBtns() {
-      document.querySelectorAll('.add-btn').forEach(btn => {
-        btn.onclick = () => {
-          const idx = parseInt(btn.dataset.idx), book = books[idx];
-          if (book.status === 'unavailable') return;
-          if (book.status === 'reserved') {
-            if (!isInColl(book.id)) { collection.push({ ...book, addedAt: Date.now() }); btn.classList.add('in-coll'); btn.classList.remove('reserved'); btn.textContent = 'Remove' }
-            else { collection = collection.filter(c => c.id !== book.id); btn.classList.remove('in-coll'); btn.classList.add('reserved'); btn.textContent = 'Pay to get it now' }
-          } else {
-            if (isInColl(book.id)) { collection = collection.filter(c => c.id !== book.id); btn.classList.remove('in-coll'); btn.textContent = 'Add' }
-            else { collection.push({ ...book, addedAt: Date.now() }); btn.classList.add('in-coll'); btn.textContent = 'Remove' }
-          }
-          updateCollUI();
-        };
-      });
+      // Browsing only
     }
 
     function updateCollUI() {
-      const cnt = collection.length;
-      folderBadge.textContent = cnt;
-      folderBadge.classList.toggle('visible', cnt > 0);
-      const recent = [...collection].sort((a, b) => b.addedAt - a.addedAt).slice(0, 3);
-      if (recent.length) {
-        collItems.innerHTML = recent.map(b => `<div class="coll-item"><div class="coll-thumb"><img src="${b.coverImage}"></div><div class="coll-title">${b.title}</div></div>`).join('');
-      } else {
-        collItems.innerHTML = '<div class="coll-empty">No books in collection</div>';
-      }
+      // Browsing only
     }
 
     function openCollModal() {
@@ -2068,15 +2007,12 @@
     document.getElementById('themeToggle').addEventListener('click', () => document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
     document.getElementById('fullListBtn').addEventListener('click', openGallery);
     document.getElementById('galleryClose').addEventListener('click', () => galleryOv.classList.remove('active'));
-    document.getElementById('folderBtn').addEventListener('click', () => collPreview.classList.toggle('open'));
     document.getElementById('viewAllBtn').addEventListener('click', openCollModal);
     document.getElementById('collClose').addEventListener('click', () => collOv.classList.remove('active'));
     document.getElementById('collOv').addEventListener('click', e => { if (e.target === collOv) collOv.classList.remove('active') });
     document.addEventListener('keydown', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active')) { if (e.key === 'Escape') { galleryOv.classList.remove('active'); collOv.classList.remove('active') } return } if (e.key === 'ArrowLeft') navigate(-1); if (e.key === 'ArrowRight') navigate(1) });
     let wt; document.addEventListener('wheel', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active')) return; e.preventDefault(); clearTimeout(wt); wt = setTimeout(() => { if (Math.abs(e.deltaY) > 30) navigate(e.deltaY > 0 ? 1 : -1) }, 50) }, { passive: false });
     let tsx = 0; document.addEventListener('touchstart', e => { tsx = e.touches[0].clientX }, { passive: true }); document.addEventListener('touchend', e => { const d = tsx - e.changedTouches[0].clientX; if (Math.abs(d) > 60) navigate(d > 0 ? 1 : -1) }, { passive: true });
-    document.addEventListener('click', e => { if (!e.target.closest('.folder-btn') && !e.target.closest('.coll-preview')) collPreview.classList.remove('open') });
-    document.addEventListener('click', e => { if (!e.target.closest('.folder-btn') && !e.target.closest('.coll-preview')) collPreview.classList.remove('open') });
 
     // Init App
     loadBooksData();
