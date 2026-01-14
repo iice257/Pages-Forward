@@ -5,11 +5,13 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Pages Forward | Catalogue</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/></svg>" />
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;family=Mrs+Saint+Delafield&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;family=Pinyon+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap"
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
@@ -31,7 +33,7 @@
           },
           fontFamily: {
             display: ["Playfair Display", "serif"],
-            script: ["Mrs Saint Delafield", "cursive"],
+            script: ["Pinyon Script", "cursive"],
             body: ["Lato", "sans-serif"],
           },
           borderRadius: {
@@ -85,6 +87,19 @@
         page-break-before: always;
       }
     }
+
+    .bestseller-ribbon {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: #B88A44;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      display: inline-block;
+      border-bottom: 1px solid #B88A44;
+      padding-bottom: 1px;
+    }
   </style>
 </head>
 
@@ -94,18 +109,17 @@
   <!-- COVER PAGE -->
   <main
     class="relative w-full max-w-md mx-auto min-h-screen flex flex-col overflow-hidden shadow-2xl bg-background-light dark:bg-background-dark mb-8">
-    <div
-      class="absolute top-4 left-4 w-32 h-40 border-2 border-dashed border-gray-400 dark:border-gray-600 opacity-50 z-0">
+    <div class="absolute top-4 left-4 w-32 h-40 opacity-20 z-0">
     </div>
     <header class="relative z-10 pt-12 px-6 text-center">
       <h1 class="font-display text-5xl text-primary dark:text-gray-100 tracking-tight leading-[0.9]">
         PAGES FORWARD
       </h1>
-      <p class="font-display text-3xl mt-2 tracking-wide">
-        <span class="gold-text italic font-bold">Gifting</span> <span
-          class="text-gray-600 dark:text-gray-400 font-light">Season</span>
-      </p>
-      <div class="mt-4 flex justify-center">
+      <div class="flex items-center justify-center gap-3 mt-2">
+        <p class="font-display text-3xl tracking-wide">
+          <span class="gold-text italic font-bold">Gifting</span> <span
+            class="text-gray-600 dark:text-gray-400 font-light">Season</span>
+        </p>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad-header)" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <defs>
@@ -137,7 +151,7 @@
       </div>
       <!-- Image 2 -->
       <div class="relative w-2/3 ml-auto -mt-16 z-20">
-        <div class="absolute -top-6 -right-4 w-24 h-24 border-2 border-dashed border-gray-800 dark:border-gray-300 z-0">
+        <div class="absolute -top-6 -right-4 w-24 h-24 opacity-20 z-0">
         </div>
         <img alt="Catalogue Cover 2"
           class="relative w-full h-80 object-cover shadow-lg border-4 border-white dark:border-gray-800 z-10"
@@ -153,8 +167,7 @@
         <!-- Curated Text -->
         <div class="w-1/2 pl-4 pb-4 z-20">
           <div class="relative">
-            <div
-              class="absolute -top-12 -left-8 w-48 h-48 border-2 border-dashed border-gray-500 dark:border-gray-500 opacity-60 pointer-events-none">
+            <div class="absolute -top-12 -left-8 w-48 h-48 opacity-20 z-0">
             </div>
             <p
               class="font-script text-3xl leading-tight text-gray-700 dark:text-gray-300 relative z-10 transform -rotate-2">
@@ -202,11 +215,10 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 collection of success lessons and insights from business leader Joe Segal, as told by Peter Legge.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -219,18 +231,20 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">The Power of a
                 Praying Woman</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Stormie Omartian
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Stormie Omartian
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">32 Bestsellers • 15 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 spiritual guide offering prayers and insights to help women deepen their faith and prayer life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -244,18 +258,19 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">QBQ! The Question
                 Behind the Question</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">John G. Miller</p>
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">John G. Miller</p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">5 Bestsellers</p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 concise guide to personal accountability that helps eliminate blame and procrastination in work and
                 life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -268,18 +283,19 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Your Best Year Yet!
               </h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Jinny S. Ditzler
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Jinny S. Ditzler
               </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">2 Bestsellers</p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 systematic guide to setting goals and achieving personal success over the course of a year.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -297,11 +313,10 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 guide to business etiquette and how manners directly impact professional relationships and success.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -341,11 +356,10 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 collection of the inspiring stories and history behind 101 of the most cherished Christian hymns.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Music</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -366,11 +380,10 @@
                 strategic guide for managing your career like a business asset to ensure long-term growth and stability.
               </p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -384,19 +397,21 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Life Management for
                 Busy Women</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Elizabeth George
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Elizabeth George
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">80 Bestsellers • 6 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 spiritual and practical guide for women to manage their time and priorities according to biblical
                 principles.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -409,17 +424,19 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Hours of Power</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Robert H. Schuller
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Robert H. Schuller
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">30 Bestsellers • 8 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 daily devotional book offering motivation and inspiration from the founder of the Crystal Cathedral.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -439,11 +456,10 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 practical guide to transforming daily problems into opportunities for personal growth and happiness.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Spirituality</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -479,19 +495,20 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Teams at the Top
               </h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Jon R. Katzenbach
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Jon R. Katzenbach
               </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">6 Bestsellers</p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 business guide exploring how senior leadership teams can balance individual performance with collective
                 team goals.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Business</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -504,19 +521,21 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Change Your
                 Thoughts - Change Your Life</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Dr. Wayne W. Dyer
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Dr. Wayne W. Dyer
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">20 Bestsellers • 5 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 modern interpretation of the Tao Te Ching offering 81 essays on how to apply ancient wisdom to today's
                 life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -536,11 +555,10 @@
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 guide revealing seven hidden steps to attracting wealth success and happiness into your life.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Self-Help</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -554,19 +572,21 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Life on the Edge
               </h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Dr. James Dobson
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Dr. James Dobson
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">30 Bestsellers • 11 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">A
                 comprehensive guide for young adults navigating the critical decisions and challenges of early
                 adulthood.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between flex-row-reverse">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Non-Fiction</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
@@ -579,17 +599,43 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
+              <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Essential Manager:
+                Motivating People</h2>
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Robert Heller</p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">50 Bestsellers</p>
+              <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">
+                Practical techniques for motivating teams and individuals to achieve peak performance.</p>
+            </div>
+            <div class="mt-4 flex items-center gap-3">
+              <span
+                class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Management</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
+            </div>
+          </div>
+          <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/motivating_people.png" />
+          </div>
+        </div>
+      </article>
+      <!-- Book 16 -->
+      <article class="p-6 flex flex-col gap-4 bg-opacity-50 bg-[#f9f9f9] dark:bg-opacity-10 dark:bg-white">
+        <div class="flex gap-5 flex-row-reverse">
+          <div class="flex-1 flex flex-col justify-between text-right">
+            <div>
+              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Leviathan</h2>
-              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-3">Scott Westerfeld
+              <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Scott Westerfeld
+              </p>
+              <p class="text-[0.6rem] uppercase tracking-wider font-bold text-[#B88A44] mb-2">20 Bestsellers • 5 Awards
               </p>
               <p class="text-xs leading-relaxed text-text-secondary-light dark:text-text-secondary-dark line-clamp-3">In
                 an alternate 1914, the opposing sides of World War I are the Darwinians and the Clankers.</p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex items-center flex-row-reverse gap-3">
               <span
                 class="text-xs font-bold tracking-wider uppercase text-text-secondary-light dark:text-text-secondary-dark">Fiction</span>
-              <span
-                class="border border-primary dark:border-white px-3 py-1 rounded-pill text-xs font-bold pill-hollow">available</span>
+              <span class="border border-primary dark:border-white w-8 h-4 rounded-pill pill-hollow block"></span>
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">

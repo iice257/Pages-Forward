@@ -1772,7 +1772,7 @@
           headers.forEach((h, idx) => obj[h] = row[idx]?.trim());
 
           booksData.push({
-            id: parseInt(obj.id),
+            id: obj.id === 'AUTO' ? i : parseInt(obj.id),
             title: obj.title,
             author: obj.author,
             subtitle: obj.subtitle || "",
@@ -1796,10 +1796,9 @@
     function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable' }
     function isInColl(id) { return collection.some(c => c.id === id) }
     function getButtonState(book) {
-      if (book.status === 'unavailable') return { text: 'Purchased', cls: '', disabled: true };
-      if (book.status === 'reserved') return { text: 'Pay to get it now', cls: 'reserved', disabled: false };
-      if (isInColl(book.id)) return { text: 'Remove', cls: 'in-coll', disabled: false };
-      return { text: 'Add', cls: '', disabled: false };
+      if (book.status === 'unavailable' || book.status === 'reserved') return { text: '', cls: '', disabled: true, shouldRender: false };
+      if (isInColl(book.id)) return { text: 'Remove', cls: 'in-coll', disabled: false, shouldRender: true };
+      return { text: 'Add', cls: '', disabled: false, shouldRender: true };
     }
 
     function getLengthInfo(len) {
@@ -1825,7 +1824,7 @@
         ? `${book.bestsellers} Bestseller books`
         : (book.bestsellers === 1 ? '1 Bestseller book' : '');
 
-      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1><button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
     }
 
     function initSlider() {
@@ -1997,11 +1996,12 @@
       galleryGrid.innerHTML = list.map(b => {
         const origIdx = books.findIndex(x => x.id === b.id);
         const inC = isInColl(b.id);
-        const canAdd = b.status === 'available' || b.status === 'reserved';
-        const isReserved = b.status === 'reserved';
-        const btnText = inC ? '−' : (isReserved ? '$' : '+');
-        const btnCls = inC ? ' in-coll' : (isReserved ? ' buy' : '');
-        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
+        const canAdd = b.status === 'available';
+        const inColl = isInColl(b.id);
+        const btnText = inColl ? '−' : '+';
+        const btnCls = inColl ? ' in-coll' : '';
+        const shouldRenderBtn = canAdd || inColl;
+        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${shouldRenderBtn ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
       }).join('');
 
       galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
