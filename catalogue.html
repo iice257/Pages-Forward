@@ -88,17 +88,20 @@
       }
     }
 
-    .bestseller-ribbon {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      color: #B88A44;
-      text-transform: uppercase;
+    .image-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #B88A44;
+      color: #000;
+      font-size: 0.5rem;
       font-weight: 800;
-      margin-bottom: 0.25rem;
-      display: inline-block;
-      border-bottom: 1px solid #B88A44;
-      padding-bottom: 1px;
+      text-align: center;
+      padding: 3px 0;
+      z-index: 20;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -231,7 +234,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">The Power of a
                 Praying Woman</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Stormie Omartian
@@ -248,6 +250,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">OVER 10 MILLION SOLD</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/power_praying_woman.png" />
           </div>
@@ -258,7 +261,6 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">QBQ! The Question
                 Behind the Question</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">John G. Miller</p>
@@ -274,6 +276,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">OVER 1 MILLION SOLD</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/qbq.png" />
           </div>
         </div>
@@ -283,7 +286,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Your Best Year Yet!
               </h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Jinny S. Ditzler
@@ -299,6 +301,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">NYT BESTSELLER</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/best_year_yet.png" />
           </div>
         </div>
@@ -363,6 +366,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">CHRISTIAN CLASSIC</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/hymn_stories.png" />
           </div>
         </div>
@@ -397,7 +401,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Life Management for
                 Busy Women</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Elizabeth George
@@ -415,6 +418,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">OVER 1 MILLION SOLD</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/life_management.png" />
           </div>
         </div>
@@ -424,7 +428,6 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Hours of Power</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Robert H. Schuller
               </p>
@@ -463,6 +466,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">INTERNATIONAL BESTSELLER</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/transform_your_life.png" />
           </div>
@@ -495,7 +499,6 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Teams at the Top
               </h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Jon R. Katzenbach
@@ -521,7 +524,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Change Your
                 Thoughts - Change Your Life</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Dr. Wayne W. Dyer
@@ -539,6 +541,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">NYT BESTSELLER</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90"
               src="assets/covers/change_your_thoughts.png" />
           </div>
@@ -572,7 +575,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Life on the Edge
               </h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Dr. James Dobson
@@ -590,6 +592,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">GOLD MEDALLION AWARD</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/life_on_the_edge.png" />
           </div>
         </div>
@@ -599,7 +602,6 @@
         <div class="flex gap-5">
           <div class="flex-1 flex flex-col justify-between">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Essential Manager:
                 Motivating People</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Robert Heller</p>
@@ -614,6 +616,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">MULTI-MILLION COPY SERIES</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/motivating_people.png" />
           </div>
         </div>
@@ -623,7 +626,6 @@
         <div class="flex gap-5 flex-row-reverse">
           <div class="flex-1 flex flex-col justify-between text-right">
             <div>
-              <div class="bestseller-ribbon">BESTSELLER!</div>
               <h2 class="font-display text-xl font-bold mb-1 text-primary dark:text-white uppercase">Leviathan</h2>
               <p class="text-sm italic text-text-secondary-light dark:text-text-secondary-dark mb-1">Scott Westerfeld
               </p>
@@ -639,6 +641,7 @@
             </div>
           </div>
           <div class="w-24 h-32 flex-shrink-0 bg-gray-200 dark:bg-gray-700 overflow-hidden relative shadow-sm">
+            <div class="image-strip">NYT BESTSELLER</div>
             <img alt="Cover" class="w-full h-full object-cover opacity-90" src="assets/covers/leviathan.png" />
           </div>
         </div>

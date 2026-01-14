@@ -48,6 +48,35 @@
       --dm: 100ms
     }
 
+    .bestseller-strip-hero {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: #B88A44;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      border-bottom: 1px solid #B88A44;
+      padding-bottom: 2px;
+    }
+
+    .bestseller-strip-gallery {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #B88A44;
+      color: #000;
+      font-size: 0.55rem;
+      font-weight: 800;
+      text-align: center;
+      padding: 3px 0;
+      z-index: 20;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     [data-theme="dark"] {
       --bg: #1a1816;
       --bg2: #141210;
@@ -1782,7 +1811,8 @@
             status: obj.status || 'available',
             length: obj.length || 'Medium',
             bestsellers: getBestsellerCount(obj.author),
-            popularity: parseFloat(obj.book_popularity) || 0.5
+            popularity: parseFloat(obj.book_popularity) || 0.5,
+            accolade: obj.accolade_text || ""
           });
         }
         books = [...booksData].sort(() => Math.random() - .5);
@@ -1824,7 +1854,7 @@
         ? `${book.bestsellers} Bestseller books`
         : (book.bestsellers === 1 ? '1 Bestseller book' : '');
 
-      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row"><h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row">${book.accolade ? `<div class="bestseller-strip-hero">${book.accolade}</div>` : ''}<h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
     }
 
     function initSlider() {
@@ -2001,7 +2031,7 @@
         const btnText = inColl ? '−' : '+';
         const btnCls = inColl ? ' in-coll' : '';
         const shouldRenderBtn = canAdd || inColl;
-        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${shouldRenderBtn ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
+        return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${b.accolade ? `<div class="bestseller-strip-gallery">${b.accolade}</div>` : ''}${getStatusTagHTML(b, inC)}<img src="${b.coverImage}">${shouldRenderBtn ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${b.title}</div><div class="gallery-author">${b.author}</div></div></div>`;
       }).join('');
 
       galleryGrid.querySelectorAll('.gallery-item').forEach(el => {
