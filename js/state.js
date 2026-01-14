@@ -164,6 +164,25 @@
     // ═══════════════════════════════════════════════════════════
 
     /**
+     * Remove a book from collection (moves to dismissed)
+     * @param {number} bookId 
+     */
+    async removeFromCollection(bookId) {
+        const idx = this.state.collection.indexOf(bookId);
+        if (idx > -1) {
+            this.state.collection.splice(idx, 1);
+            if (!this.state.dismissed.includes(bookId)) {
+                this.state.dismissed.push(bookId);
+            }
+            delete this.state.readingStatus[bookId];
+            await this.save();
+            console.log('[PF State] Removed from collection:', bookId);
+            return true;
+        }
+        return false;
+    },
+
+    /**
      * Accept a book - adds to collection, permanently removes from pool
      * @param {number} bookId 
      */

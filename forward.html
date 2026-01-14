@@ -1,515 +1,192 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pages Forward - Core Decision Mode. Accept or dismiss. No going back.">
-  <title>Pages Forward — Decide</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-
+  <title>Pages Forward | Decide</title>
+  
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dark.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico">
-
-  <style>
-    /* Decision Mode Specific Styles */
-    body {
-      background: #0A0A0A;
-      color: #F5F5F5;
-      min-height: 100vh;
-    }
-
-    .decision-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #222;
-    }
-
-    .decision-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.9rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #F5F5F5;
-    }
-
-    .decision-logo-arrow {
-      color: #D4AF37;
-    }
-
-    .decision-nav {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .decision-nav-item {
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #888;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .decision-nav-item:hover {
-      color: #F5F5F5;
-    }
-
-    .decision-nav-item.active {
-      color: #00FF66;
-    }
-
-    .decision-progress {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: #666;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .progress-bar-container {
-      width: 150px;
-      height: 3px;
-      background: #333;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #D4AF37, #C9A227);
-      transition: width 0.5s ease;
-    }
-
-    /* Main Decision Area */
-    .decision-main {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      min-height: calc(100vh - 200px);
-    }
-
-    .decision-cover {
-      position: relative;
-    }
-
-    .decision-cover img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      border-radius: 4px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .decision-status {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.75rem;
-      border-radius: 2px;
-    }
-
-    .decision-status.available {
-      background: #00FF66;
-      color: #000;
-    }
-
-    .decision-status.reserved {
-      background: #FFB800;
-      color: #000;
-    }
-
-    .decision-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .decision-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .decision-tag {
-      font-size: 0.6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.25rem 0.75rem;
-      background: #1E1E1E;
-      color: #888;
-      border-radius: 2px;
-    }
-
-    .decision-tag.type {
-      color: #D4AF37;
-      border: 1px solid #D4AF37;
-      background: transparent;
-    }
-
-    .decision-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-
-    .decision-subtitle {
-      font-size: 1rem;
-      color: #888;
-      font-style: italic;
-      margin-bottom: 2rem;
-    }
-
-    .decision-description {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: #AAA;
-      margin-bottom: 2rem;
-      max-width: 500px;
-    }
-
-    .decision-meta {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #222;
-    }
-
-    .decision-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .decision-meta-label {
-      font-size: 0.6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #666;
-    }
-
-    .decision-meta-value {
-      font-size: 0.85rem;
-      color: #F5F5F5;
-    }
-
-    .decision-author {
-      font-size: 1rem;
-      color: #888;
-      margin-bottom: 2rem;
-    }
-
-    /* Action Buttons */
-    .decision-actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: auto;
-    }
-
-    .decision-btn {
-      flex: 1;
-      padding: 1rem 2rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .decision-btn.dismiss {
-      background: transparent;
-      border: 1px solid #FF3B3B;
-      color: #FF3B3B;
-    }
-
-    .decision-btn.dismiss:hover {
-      background: #FF3B3B;
-      color: #FFF;
-    }
-
-    .decision-btn.accept {
-      background: #00FF66;
-      color: #000;
-    }
-
-    .decision-btn.accept:hover {
-      background: #00DD55;
-    }
-
-    /* Empty state */
-    .decision-empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 60vh;
-      color: #888;
-    }
-
-    .decision-empty-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.3;
-    }
-
-    .decision-empty-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #F5F5F5;
-      margin-bottom: 0.5rem;
-    }
-
-    .decision-empty-text {
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-
-    /* Animation */
-    .slide-in {
-      animation: slideIn 0.4s ease forwards;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .decision-main {
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-      }
-
-      .decision-cover {
-        max-width: 200px;
-        margin: 0 auto;
-      }
-
-      .decision-actions {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/gifting-theme.css">
+  
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
 </head>
 
 <body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DFBD69;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#F9ECA5;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#B88A44;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Backgrounds -->
+  <div class="blur-c">
+    <div class="blur-bg" id="bb1"></div>
+    <div class="blur-bg" id="bb2"></div>
+    <div class="blur-ov"></div>
+  </div>
+  <div class="bg-right"></div>
+
   <!-- Header -->
-  <header class="decision-header">
-    <a href="index.html" class="decision-logo">
-      PAGES FORWARD <span class="decision-logo-arrow">→</span>
+  <header class="header">
+    <a href="index.html" class="header-logo">
+      Pages Forward
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      </svg>
     </a>
-
-    <nav class="decision-nav">
-      <span class="decision-nav-item active">DECIDE</span>
-      <a href="explore.html" class="decision-nav-item">EXPLORE</a>
-      <a href="collection.html" class="decision-nav-item">COLLECTION</a>
-    </nav>
-
-    <div class="decision-progress">
-      <span id="progressText">0 / 100</span>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
-      </div>
+    <div class="header-actions">
+      <!-- Theme Toggle -->
+      <button class="btn-h btn-icon" id="themeToggle"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg></button>
+      
+      <!-- Navigation -->
+      <a href="explore.html" class="btn-h">Explore</a>
+      <a href="collection.html" class="btn-h">Collection</a>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="decisionMain" class="decision-main">
-    <!-- Content injected by JS -->
-  </main>
+  <!-- Main Viewport -->
+  <div class="slider-vp">
+    <div class="slider-track" id="mainContainer">
+      <!-- Content injected by JS -->
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
   <script src="js/state.js"></script>
   <script>
-    // Decision Mode Controller
     (async function () {
       'use strict';
 
-      // Initialize state
-      await PF.State.init();
+      // Theme logic
+      const themeToggle = document.getElementById('themeToggle');
+      if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+          localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
 
-      // Check onboarding
+      await PF.State.init();
       if (!PF.State.isOnboardingComplete()) {
         window.location.href = 'index.html';
         return;
       }
 
-      const main = document.getElementById('decisionMain');
-      const progressText = document.getElementById('progressText');
-      const progressBar = document.getElementById('progressBar');
+      const main = document.getElementById('mainContainer');
+      const bb1 = document.getElementById('bb1');
+      const bb2 = document.getElementById('bb2');
+      let activeBg = 1;
 
-      // Get available books
-      let availableBooks = PF.State.getAvailableBooks(PF.booksData);
-      let currentBookIndex = 0;
-
-      // Update progress display
-      function updateProgress() {
-        const stats = PF.State.getStats(PF.booksData.length);
-        progressText.textContent = `${stats.collected + stats.dismissed} / ${stats.total}`;
-        progressBar.style.width = `${stats.progress}%`;
+      function updateBg(imgUrl) {
+        const inc = activeBg === 1 ? bb2 : bb1;
+        const out = activeBg === 1 ? bb1 : bb2;
+        inc.style.backgroundImage = `url(${imgUrl})`;
+        inc.classList.add('active');
+        
+        // Small delay to allow fade in before removing old one
+        setTimeout(() => {
+            if(inc.classList.contains('active')) out.classList.remove('active');
+        }, 300); // match css transition roughly
+        
+        activeBg = activeBg === 1 ? 2 : 1;
       }
 
-      // Render current book
-      function renderBook() {
-        availableBooks = PF.State.getAvailableBooks(PF.booksData);
+      function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
+      function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable' }
 
+      function render() {
+        const availableBooks = PF.State.getAvailableBooks(PF.booksData);
+        
         if (availableBooks.length === 0) {
-          renderEmpty();
+          main.innerHTML = `
+            <div class="slide active">
+                <div class="panel-cover" style="justify-content:center; padding: 0;">
+                    <div style="text-align:center; padding: 2rem;">
+                         <div style="font-family:var(--ff); font-size: 2rem; margin-bottom: 1rem; color: var(--ink);">You've seen all the books!</div>
+                         <p style="font-family:var(--fb); color: var(--umber); margin-bottom: 2rem;">Visit your collection to see what you've saved.</p>
+                         <a href="collection.html" class="add-btn" style="padding: 1rem 2rem; font-size: 0.8rem;">View Collection</a>
+                    </div>
+                </div>
+            </div>`;
           return;
         }
 
-        const book = availableBooks[0]; // Always show first available
+        const book = availableBooks[0];
+        updateBg(book.coverImage);
 
-        main.innerHTML = `
-          <div class="decision-cover slide-in">
-            <img src="${book.coverImage}" alt="${book.title}" loading="lazy">
-            <span class="decision-status ${book.status}">${book.status.toUpperCase()}</span>
-          </div>
-          <div class="decision-details slide-in">
-            <div class="decision-tags">
-              <span class="decision-tag type">${book.tags.type}</span>
-              <span class="decision-tag">${book.tags.category}</span>
-              <span class="decision-tag">${book.tags.niche}</span>
-            </div>
-            <h1 class="decision-title">${book.title}</h1>
-            <p class="decision-subtitle">${book.subtitle}</p>
-            <p class="decision-description">${book.description}</p>
-            <div class="decision-meta">
-              <div class="decision-meta-item">
-                <span class="decision-meta-label">Length</span>
-                <span class="decision-meta-value">⏱ ${book.length} read</span>
-              </div>
-              <div class="decision-meta-item">
-                <span class="decision-meta-label">Author Popularity</span>
-                <span class="decision-meta-value">${getPopularityLabel(book.popularity.author)}</span>
-              </div>
-              <div class="decision-meta-item">
-                <span class="decision-meta-label">Book Rating</span>
-                <span class="decision-meta-value">${getPopularityLabel(book.popularity.book)}</span>
-              </div>
-            </div>
-            <p class="decision-author">${book.author}</p>
-            <div class="decision-actions">
-              <button class="decision-btn dismiss" data-action="dismiss" data-id="${book.id}">
-                ✕ DISMISS
-              </button>
-              <button class="decision-btn accept" data-action="accept" data-id="${book.id}">
-                ✓ ACCEPT
-              </button>
-            </div>
-          </div>
-        `;
+        const sc = getStatusClass(book.status);
+        const st = getStatusText(book.status);
 
-        // Bind action buttons
-        main.querySelectorAll('.decision-btn').forEach(btn => {
-          btn.addEventListener('click', handleAction);
-        });
+        // Animation transition
+        main.style.opacity = '0';
+        setTimeout(() => {
+            main.innerHTML = `
+            <div class="slide active">
+                <div class="panel-cover">
+                    <div class="cover-c">
+                        <div class="book-cover">
+                            <img src="${book.coverImage}" alt="${book.title}">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <div class="content-w">
+                        <div class="status-badge">
+                            <span class="status-dot ${sc}"></span>
+                            <span class="status-text ${sc}">${st}</span>
+                        </div>
+                        <div class="title-row">
+                            <h1 class="book-title">${book.title}</h1>
+                        </div>
+                        <p class="book-subtitle">${book.subtitle}</p>
+                        <div class="book-desc">
+                            <p>${book.description}</p>
+                        </div>
+                        <div class="genre-tags">
+                            <span class="genre-tag" style="border-color:var(--amber); color:var(--amber)">${book.tags.type}</span>
+                            <span class="genre-tag">${book.tags.category}</span>
+                            <span class="genre-tag">${book.tags.niche}</span>
+                        </div>
+                        <div class="author-sec">
+                            <div class="author-name">${book.author}</div>
+                            <div class="author-acc">Pages Forward Selection</div>
+                            
+                            <div style="display:flex; gap: 1rem; margin-top: 2rem;">
+                                <button class="add-btn" id="dismissBtn" style="border-color:var(--red); color:var(--red)">Dismiss</button>
+                                <button class="add-btn" id="acceptBtn" style="background:var(--avail); color:#fff; border-color:var(--avail)">Accept Book</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            
+            main.style.opacity = '1';
 
-        updateProgress();
+            document.getElementById('dismissBtn').onclick = async () => {
+                await PF.State.dismissBook(book.id);
+                render();
+            };
+            document.getElementById('acceptBtn').onclick = async () => {
+                await PF.State.acceptBook(book.id);
+                render();
+            };
+
+        }, 300);
       }
 
-      // Render empty state
-      function renderEmpty() {
-        main.innerHTML = `
-          <div class="decision-empty" style="grid-column: 1 / -1;">
-            <div class="decision-empty-icon">📚</div>
-            <h2 class="decision-empty-title">You've seen all the books!</h2>
-            <p class="decision-empty-text">You've made decisions on every book in the collection.</p>
-            <a href="collection.html" class="decision-btn accept" style="width: auto;">
-              View My Collection
-            </a>
-          </div>
-        `;
-        updateProgress();
-      }
-
-      // Handle accept/dismiss
-      async function handleAction(e) {
-        const btn = e.currentTarget;
-        const action = btn.dataset.action;
-        const bookId = parseInt(btn.dataset.id);
-
-        if (action === 'accept') {
-          await PF.State.acceptBook(bookId);
-        } else if (action === 'dismiss') {
-          await PF.State.dismissBook(bookId);
-        }
-
-        // Animate out and show next
-        const cover = main.querySelector('.decision-cover');
-        const details = main.querySelector('.decision-details');
-
-        if (cover && details) {
-          cover.style.opacity = '0';
-          cover.style.transform = 'translateX(-30px)';
-          details.style.opacity = '0';
-          details.style.transform = 'translateX(-30px)';
-          cover.style.transition = 'all 0.3s ease';
-          details.style.transition = 'all 0.3s ease';
-        }
-
-        setTimeout(renderBook, 300);
-      }
-
-      // Get popularity label
-      function getPopularityLabel(value) {
-        if (value >= 0.8) return 'Renowned';
-        if (value >= 0.5) return 'Moderate';
-        return 'Niche';
-      }
-
-      // Initial render
-      renderBook();
-
+      render();
     })();
   </script>
 </body>
-
 </html>

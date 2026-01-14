@@ -16,8 +16,7 @@
     rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/gifting-theme.css">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico">
@@ -25,107 +24,83 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <style>
-    /* Onboarding-specific styles */
+    /* Onboarding-specific styles matching Gifting Season Intro */
     .onboarding {
-      min-height: 100vh;
+      position: fixed;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0A0A0A;
-      color: #F5F5F5;
+      background: var(--bg);
+      color: var(--ink);
     }
 
     .onboarding-content {
-      text-align: center;
-      padding: 2rem;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
-
-    .onboarding-logo {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .onboarding-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(3rem, 12vw, 7rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
+      gap: .5rem;
       text-align: center;
     }
 
-    .onboarding-arrow {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 8vw, 4rem);
-      color: #D4AF37;
-      margin-top: 0.5rem;
-      animation: arrowPulse 2s ease-in-out infinite;
+    .onboarding-huge {
+      font-family: var(--fs);
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 700;
+      line-height: .9;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-top: -0.5rem;
     }
 
-    @keyframes arrowPulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      50% {
-        opacity: 0.7;
-        transform: translateX(10px);
-      }
+    .onboarding-sub {
+        font-family: var(--fb);
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        font-style: normal;
+        color: var(--ink);
+        display: flex;
+        gap: .4em;
+        margin-top: .5rem;
     }
 
-    .onboarding-subtext {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #666;
-      margin-top: 3rem;
+    .onboarding-gold {
+        background: linear-gradient(135deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: var(--ff);
+        font-weight: 700;
+        font-style: normal;
+        filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
+    }
+
+    .onboarding-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+        stroke: #DFBD69;
+        fill: none;
     }
 
     .onboarding-btn {
       margin-top: 3rem;
-      padding: 0.875rem 2.5rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
+      padding: 0.8rem 2rem;
+      font-family: var(--fs);
+      font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
       background: transparent;
-      border: 1px solid #444;
-      color: #F5F5F5;
-      border-radius: 4px;
+      border: 1px solid var(--sand);
+      color: var(--umber);
+      border-radius: 2rem;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .onboarding-btn:hover {
-      background: #F5F5F5;
-      color: #0A0A0A;
-      border-color: #F5F5F5;
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      background: var(--char);
+      color: var(--bg2);
+      border-color: var(--char);
     }
   </style>
 </head>

@@ -4,379 +4,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pages Forward - My Collection. Your curated library of accepted books.">
-  <title>Pages Forward — My Collection</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-
+  <title>Pages Forward | Collection</title>
+  
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dark.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico">
-
+  <link rel="stylesheet" href="css/gifting-theme.css">
+  
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
+    
   <style>
-    /* Collection-specific styles */
-    .collection-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: var(--bg);
-      border-bottom: 1px solid var(--sand);
-    }
-
-    .collection-logo {
-      font-family: var(--display);
-      font-size: 0.9rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .collection-logo-arrow {
-      color: var(--gold);
-    }
-
-    .collection-nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .collection-nav-btn {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--stone);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    .collection-nav-btn:hover {
-      color: var(--ink);
-      background: var(--bg2);
-    }
-
-    .collection-nav-btn.active {
-      color: var(--ink);
-      background: var(--bg2);
-    }
-
-    .collection-user {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .collection-user-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--bg3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-    }
-
-    .collection-user-name {
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    .dark-toggle {
-      font-size: 0.7rem;
-      padding: 0.4rem 0.75rem;
-      border: 1px solid var(--sand);
-      border-radius: var(--radius-pill);
-      color: var(--stone);
-    }
-
-    .dark-toggle:hover {
-      border-color: var(--ink);
-      color: var(--ink);
-    }
-
-    /* Main Content */
-    .collection-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    .collection-title-section {
-      margin-bottom: 2rem;
-    }
-
-    .collection-title {
-      font-family: var(--display);
-      font-size: 2.5rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-
-    .collection-subtitle {
-      font-size: 0.9rem;
-      color: var(--stone);
-    }
-
-    .collection-count {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--gold);
-      margin-top: 0.5rem;
-    }
-
-    /* Grid */
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Book Card */
-    .collection-card {
-      position: relative;
-    }
-
-    .collection-card-cover {
-      position: relative;
-      aspect-ratio: 2/3;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-    }
-
-    .collection-card-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .collection-card-status {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      font-size: 0.55rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.2rem 0.5rem;
-      border-radius: 2px;
-    }
-
-    .collection-card-status.to-read {
-      background: var(--bg3);
-      color: var(--stone);
-    }
-
-    .collection-card-status.in-progress {
-      background: #FFE566;
-      color: #664D00;
-    }
-
-    .collection-card-status.complete {
-      background: #90EE90;
-      color: #006400;
-    }
-
-    .collection-card-info {
-      margin-top: 0.75rem;
-    }
-
-    .collection-card-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.15rem;
-    }
-
-    .collection-card-author {
-      font-size: 0.7rem;
-      color: var(--stone);
-    }
-
-    .collection-card-actions {
-      display: flex;
-      gap: 0.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .collection-status-btn {
-      font-size: 0.55rem;
-      font-weight: 600;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid var(--sand);
-      border-radius: var(--radius-sm);
-      color: var(--stone);
-      transition: all 0.2s;
-    }
-
-    .collection-status-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .collection-status-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--bg);
-    }
-
-    /* Empty state */
-    .collection-empty {
-      text-align: center;
-      padding: 6rem 2rem;
-    }
-
-    .collection-empty-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.3;
-    }
-
-    .collection-empty-title {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-
-    .collection-empty-text {
-      font-size: 0.9rem;
-      color: var(--stone);
-      margin-bottom: 2rem;
-    }
-
-    .collection-empty-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    .collection-empty-btn:hover {
-      background: var(--ink2);
-    }
-
-    /* Footer */
-    .collection-footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      border-top: 1px solid var(--sand);
-    }
-
-    .collection-footer-text {
-      font-size: 0.7rem;
-      color: var(--stone);
-    }
-
-    .collection-footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .collection-footer-link {
-      font-size: 0.7rem;
-      color: var(--stone);
-    }
-
-    .collection-footer-link:hover {
-      color: var(--ink);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .collection-header {
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 1rem;
+      .coll-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.5rem;
       }
-
-      .collection-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1rem;
+      
+      .coll-card {
+          background: var(--bg3);
+          border-radius: 12px;
+          padding: 1.25rem;
+          position: relative;
+          display: flex;
+          gap: 1rem;
+          border: 1px solid var(--sand);
+          align-items: flex-start;
       }
-    }
+      
+      .coll-card-img {
+          width: 80px;
+          aspect-ratio: 0.67;
+          border-radius: 4px;
+          overflow: hidden;
+          flex-shrink: 0;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      
+      .coll-card-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+      
+      .coll-content {
+          flex: 1;
+          min-width: 0;
+      }
+      
+      .coll-title {
+          font-family: var(--ff);
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--ink);
+          margin-bottom: 0.25rem;
+          line-height: 1.2;
+      }
+      
+      .coll-author {
+          font-family: var(--fs);
+          font-size: 0.75rem;
+          color: var(--stone);
+          margin-bottom: 0.75rem;
+      }
+      
+      .coll-actions {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+      }
+      
+      .status-btn {
+          font-family: var(--fs);
+          font-size: 0.6rem;
+          padding: 0.3rem 0.6rem;
+          border-radius: 2rem;
+          border: 1px solid var(--sand);
+          background: transparent;
+          color: var(--umber);
+          cursor: pointer;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          transition: all 0.2s;
+      }
+      
+      .status-btn:hover {
+          background: var(--bg2);
+          border-color: var(--umber);
+      }
+      
+      .status-btn.active {
+          background: var(--sage);
+          color: #fff;
+          border-color: var(--sage);
+      }
+      
+      .remove-btn {
+          position: absolute;
+          top: 0.75rem;
+          right: 0.75rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+          border: 1px solid var(--sand);
+          background: var(--bg2);
+          color: var(--stone);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+      }
+      
+      .remove-btn:hover {
+          color: var(--red);
+          border-color: var(--red);
+      }
+      
+      .page-header-content {
+          margin-bottom: 3rem;
+          text-align: center;
+      }
+      
+      .page-title {
+          font-family: var(--ff);
+          font-size: 3rem;
+          color: var(--ink);
+          margin-bottom: 0.5rem;
+      }
+      
+      .page-subtitle {
+          font-family: var(--fb);
+          font-size: 1.1rem;
+          color: var(--stone);
+          font-style: italic;
+      }
   </style>
 </head>
 
 <body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DFBD69;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#F9ECA5;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#B88A44;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Backgrounds -->
+  <div class="blur-c">
+    <div class="blur-bg active" id="bb1" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=900&fit=crop');"></div>
+    <div class="blur-ov"></div>
+  </div>
+
   <!-- Header -->
-  <header class="collection-header">
-    <a href="index.html" class="collection-logo">
-      PAGES FORWARD <span class="collection-logo-arrow">→</span>
+  <header class="header">
+    <a href="index.html" class="header-logo">
+      Pages Forward
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      </svg>
     </a>
-
-    <nav class="collection-nav">
-      <a href="forward.html" class="collection-nav-btn">Decide</a>
-      <a href="explore.html" class="collection-nav-btn">Explore</a>
-      <span class="collection-nav-btn active">Collection</span>
-    </nav>
-
-    <div class="collection-user">
-      <button class="dark-toggle" id="darkToggle">🌙 Dark</button>
-      <div class="collection-user-avatar">👤</div>
+    <div class="header-actions">
+       <button class="btn-h btn-icon" id="themeToggle"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg></button>
+       <a href="forward.html" class="btn-h">Decide</a>
+       <a href="explore.html" class="btn-h">Explore</a>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="collection-main">
-    <div class="collection-title-section">
-      <h1 class="collection-title">My Collection</h1>
-      <p class="collection-subtitle">A curated space for your accepted journeys.</p>
-      <p class="collection-count" id="collectionCount">0 Books Collected</p>
-    </div>
-
-    <div id="collectionGrid" class="collection-grid">
-      <!-- Content injected by JS -->
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="collection-footer">
-    <p class="collection-footer-text">© 2026 Pages Forward. Your library of progress.</p>
-    <div class="collection-footer-links">
-      <a href="#" class="collection-footer-link">Dark Mode</a>
-      <a href="#" class="collection-footer-link">Stats</a>
-      <a href="#" class="collection-footer-link">Settings</a>
-    </div>
-  </footer>
+  <div class="page-container">
+      <div class="page-header-content">
+          <h1 class="page-title">My Collection</h1>
+          <p class="page-subtitle" id="collectionCount">Your curated library</p>
+      </div>
+      
+      <div id="collectionGrid" class="coll-grid">
+          <!-- Injected -->
+      </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
   <script src="js/state.js"></script>
   <script>
-    // Collection Controller
     (async function () {
       'use strict';
+      
+      const themeToggle = document.getElementById('themeToggle');
+      if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+          localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
 
-      // Initialize
       await PF.State.init();
-      PF.State.applyDarkMode();
-
-      // Check onboarding
       if (!PF.State.isOnboardingComplete()) {
         window.location.href = 'index.html';
         return;
@@ -384,32 +211,23 @@
 
       const grid = document.getElementById('collectionGrid');
       const countEl = document.getElementById('collectionCount');
-      const darkToggle = document.getElementById('darkToggle');
 
-      // Dark mode toggle
-      darkToggle.addEventListener('click', async () => {
-        const isDark = await PF.State.toggleDarkMode();
-        darkToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-      });
-
-      // Update toggle text on load
-      darkToggle.textContent = PF.State.state.darkMode ? '☀️ Light' : '🌙 Dark';
-
-      // Render collection
       function renderCollection() {
         const books = PF.State.getCollectionBooks(PF.booksData);
-
+        
         countEl.textContent = `${books.length} Books Collected`;
+        
+        // Random bg from collection if available
+        if(books.length > 0) {
+             const randomBook = books[Math.floor(Math.random() * books.length)];
+             document.getElementById('bb1').style.backgroundImage = `url(${randomBook.coverImage})`;
+        }
 
         if (books.length === 0) {
           grid.innerHTML = `
-            <div class="collection-empty" style="grid-column: 1 / -1;">
-              <div class="collection-empty-icon">📚</div>
-              <h2 class="collection-empty-title">You haven't added any books yet.</h2>
-              <p class="collection-empty-text">Start exploring to build your personal library.</p>
-              <a href="forward.html" class="collection-empty-btn">
-                Add Books →
-              </a>
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
+              <h2 style="font-family:var(--ff); font-size:1.5rem; margin-bottom:1rem; color:var(--ink)">No books collected</h2>
+              <a href="forward.html" class="add-btn" style="padding:0.8rem 1.5rem">Start Deciding</a>
             </div>
           `;
           return;
@@ -417,47 +235,44 @@
 
         grid.innerHTML = books.map(book => {
           const status = PF.State.state.readingStatus[book.id] || 'to-read';
-          const statusLabel = status === 'to-read' ? 'TO READ' :
-            status === 'in-progress' ? 'IN PROGRESS' : 'COMPLETE';
-
           return `
-            <article class="collection-card">
-              <div class="collection-card-cover">
-                <img src="${book.coverImage}" alt="${book.title}" loading="lazy">
-                <span class="collection-card-status ${status}">${statusLabel}</span>
-              </div>
-              <div class="collection-card-info">
-                <h3 class="collection-card-title">${book.title}</h3>
-                <p class="collection-card-author">${book.author}</p>
-                <div class="collection-card-actions">
-                  <button class="collection-status-btn ${status === 'to-read' ? 'active' : ''}" 
-                          data-id="${book.id}" data-status="to-read">To Read</button>
-                  <button class="collection-status-btn ${status === 'in-progress' ? 'active' : ''}" 
-                          data-id="${book.id}" data-status="in-progress">Reading</button>
-                  <button class="collection-status-btn ${status === 'complete' ? 'active' : ''}" 
-                          data-id="${book.id}" data-status="complete">Done</button>
-                </div>
-              </div>
-            </article>
+            <div class="coll-card">
+               <button class="remove-btn" data-id="${book.id}">×</button>
+               <div class="coll-card-img"><img src="${book.coverImage}"></div>
+               <div class="coll-content">
+                   <div class="coll-title">${book.title}</div>
+                   <div class="coll-author">${book.author}</div>
+                   <div class="coll-actions">
+                      <button class="status-btn ${status === 'to-read' ? 'active' : ''}" data-id="${book.id}" data-status="to-read">To Read</button>
+                      <button class="status-btn ${status === 'in-progress' ? 'active' : ''}" data-id="${book.id}" data-status="in-progress">Reading</button>
+                      <button class="status-btn ${status === 'complete' ? 'active' : ''}" data-id="${book.id}" data-status="complete">Finished</button>
+                   </div>
+               </div>
+            </div>
           `;
         }).join('');
 
-        // Bind status buttons
-        grid.querySelectorAll('.collection-status-btn').forEach(btn => {
+        grid.querySelectorAll('.status-btn').forEach(btn => {
           btn.addEventListener('click', async () => {
-            const bookId = parseInt(btn.dataset.id);
+            const id = parseInt(btn.dataset.id);
             const status = btn.dataset.status;
-            await PF.State.updateReadingStatus(bookId, status);
+            await PF.State.updateReadingStatus(id, status);
             renderCollection();
           });
         });
+        
+        grid.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if(confirm('Remove this book from your collection?')) {
+                     await PF.State.removeFromCollection(parseInt(btn.dataset.id));
+                     renderCollection();
+                }
+            });
+        });
       }
 
-      // Initial render
       renderCollection();
-
     })();
   </script>
 </body>
-
 </html>
