@@ -441,8 +441,8 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding: 5rem 2.5rem 5rem 3rem;
+      justify-content: center;
+      padding: 4rem 2rem;
       overflow: hidden
     }
 
@@ -450,7 +450,8 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 300px
+      max-width: 85%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
     }
 
     .book-cover {
@@ -1735,6 +1736,7 @@
     }
 
     function loadBooksData() {
+<<<<<<< Updated upstream
       if (window.PF && window.PF.booksData) {
         booksData = window.PF.booksData.map(b => ({
           id: b.id,
@@ -1752,6 +1754,69 @@
         books = [...booksData].sort(() => Math.random() - .5);
         initSlider();
       }
+=======
+      const rawData = [
+        { id: 1, title: "The Runway of Life", author: "Peter Legge", subtitle: "Lessons on Success from Master Business Leader Joe Segal", description: "A collection of success lessons and insights from business leader Joe Segal, as told by Peter Legge.", coverImage: "runway_of_life.png", category: "Business", niche: "Leadership", length: "Medium", status: "reserved", accolade_text: "" },
+        { id: 2, title: "The Power of a Praying Woman", author: "Stormie Omartian", subtitle: "", description: "A spiritual guide offering prayers and insights to help women deepen their faith and prayer life.", coverImage: "power_praying_woman.png", category: "Spirituality", niche: "Christian Life", length: "Medium", status: "reserved", accolade_text: "OVER 10 MILLION SOLD" },
+        { id: 3, title: "QBQ! The Question Behind the Question", author: "John G. Miller", subtitle: "What to Really Ask Yourself to Eliminate Blame Complaining and Procrastination", description: "A concise guide to personal accountability that helps eliminate blame and procrastination in work and life.", coverImage: "qbq.png", category: "Business", niche: "Personal Accountability", length: "Short", status: "reserved", accolade_text: "OVER 1 MILLION SOLD" },
+        { id: 4, title: "Your Best Year Yet!", author: "Jinny S. Ditzler", subtitle: "A Proven Method for Making the Next Twelve Months the Most Successful Ever", description: "A systematic guide to setting goals and achieving personal success over the course of a year.", coverImage: "best_year_yet.png", category: "Self-Help", niche: "Goal Setting", length: "Medium", status: "reserved", accolade_text: "NYT BESTSELLER" },
+        { id: 5, title: "Class Acts", author: "Mary Mitchell", subtitle: "How Good Manners Create Good Relationships and Good Relationships Create Good Business", description: "A guide to business etiquette and how manners directly impact professional relationships and success.", coverImage: "class_acts.png", category: "Business", niche: "Etiquette", length: "Medium", status: "reserved", accolade_text: "" },
+        { id: 6, title: "101 Hymn Stories", author: "Kenneth W. Osbeck", subtitle: "Inspiring factual backgrounds and experiences that prompted the writing of 101 favorite hymns", description: "A collection of the inspiring stories and history behind 101 of the most cherished Christian hymns.", coverImage: "hymn_stories.png", category: "Music", niche: "Christian Hymns", length: "Medium", status: "reserved", accolade_text: "CHRISTIAN CLASSIC" },
+        { id: 7, title: "Personal Balance Sheet", author: "Randall M. Craig", subtitle: "A Practical Career Planning Guide", description: "A strategic guide for managing your career like a business asset to ensure long-term growth and stability.", coverImage: "personal_balance_sheet.png", category: "Business", niche: "Career Management", length: "Medium", status: "reserved", accolade_text: "" },
+        { id: 8, title: "Life Management for Busy Women", author: "Elizabeth George", subtitle: "Living Out God's Plan with Passion and Purpose", description: "A spiritual and practical guide for women to manage their time and priorities according to biblical principles.", coverImage: "life_management.png", category: "Spirituality", niche: "Christian Life for Women", length: "Medium", status: "reserved", accolade_text: "OVER 1 MILLION SOLD" },
+        { id: 9, title: "Hours of Power", author: "Robert H. Schuller", subtitle: "My Daily Book of Motivation and Inspiration", description: "A daily devotional book offering motivation and inspiration from the founder of the Crystal Cathedral.", coverImage: "hours_of_power.png", category: "Spirituality", niche: "Daily Devotional", length: "Long", status: "reserved", accolade_text: "" },
+        { id: 10, title: "Transform Your Life", author: "Geshe Kelsang Gyatso", subtitle: "A Blissful Journey", description: "A practical guide to transforming daily problems into opportunities for personal growth and happiness through Buddhist wisdom.", coverImage: "transform_your_life.png", category: "Spirituality", niche: "Buddhism", length: "Medium", status: "reserved", accolade_text: "INTERNATIONAL BESTSELLER" },
+        { id: 11, title: "Teams at the Top", author: "Jon R. Katzenbach", subtitle: "Unleashing the Potential of Both Teams and Individual Leaders", description: "A business guide exploring how senior leadership teams can balance individual performance with collective team goals for success.", coverImage: "teams_at_the_top.png", category: "Business", niche: "Leadership", length: "Medium", status: "reserved", accolade_text: "" },
+        { id: 12, title: "Change Your Thoughts - Change Your Life", author: "Dr. Wayne W. Dyer", subtitle: "Living the Wisdom of the Tao", description: "A modern interpretation of the Tao Te Ching offering 81 essays on how to apply ancient wisdom to today's life.", coverImage: "change_your_thoughts.png", category: "Self-Help", niche: "Spirituality", length: "Medium", status: "reserved", accolade_text: "NYT BESTSELLER" },
+        { id: 13, title: "The Amazing Millionaire Formula", author: "Andrew Skelly", subtitle: "Discover the 7 Hidden Steps for Attracting Unlimited Wealth Success and Happiness", description: "A guide revealing seven hidden steps to attracting wealth success and happiness into your life.", coverImage: "millionaire_formula.png", category: "Self-Help", niche: "Wealth Creation", length: "Medium", status: "reserved", accolade_text: "" },
+        { id: 14, title: "Life on the Edge", author: "Dr. James Dobson", subtitle: "A Young Adult's Guide to a Meaningful Future", description: "A comprehensive guide for young adults navigating the critical decisions and challenges of early adulthood.", coverImage: "life_on_the_edge.png", category: "Christian Life", niche: "Young Adult", length: "Medium", status: "reserved", accolade_text: "GOLD MEDALLION AWARD" },
+        { id: 15, title: "Essential Manager: Motivating People", author: "Robert Heller", subtitle: "Essential Managers,Practical techniques for motivating teams and individuals to achieve peak performance.", description: "Practical techniques for motivating teams and individuals to achieve peak performance.", coverImage: "motivating_people.png", category: "Business", niche: "Management", length: "Short", status: "reserved", accolade_text: "MULTI-MILLION COPY SERIES" },
+        { id: 16, title: "Leviathan", author: "Scott Westerfeld", subtitle: "", description: "In an alternate 1914, the opposing sides of World War I are the Darwinians, who use fabricated beasts as weapons, and the Clankers, who use steam-powered machines.", coverImage: "leviathan.png", category: "Young Adult", niche: "Steampunk", length: "Medium", status: "reserved", accolade_text: "NYT BESTSELLER" },
+        { id: 17, title: "Wizard and Glass", author: "Stephen King", subtitle: "", description: "The fourth volume in the Dark Tower series featuring Roland Deschain's backstory.", coverImage: "wizard_and_glass.png", category: "Fantasy", niche: "Dark Tower", length: "Long", status: "reserved", accolade_text: "NYT #1 BESTSELLER" },
+        { id: 18, title: "Bag of Bones", author: "Stephen King", subtitle: "", description: "A haunted love story about a writer who tries to resolve his grief at his lakeside retreat.", coverImage: "bag_of_bones.png", category: "Horror", niche: "Ghost Story", length: "Long", status: "reserved", accolade_text: "BRAM STOKER AWARD WINNER" },
+        { id: 19, title: "Dan Brown Collection", author: "Dan Brown", subtitle: "The Da Vinci Code / Angels & Demons / The Lost Symbol", description: "A set of three bestselling thrillers by Dan Brown featuring Robert Langdon.", coverImage: "dan_brown_collection.png", category: "Thriller", niche: "Conspiracy", length: "Medium", status: "reserved", accolade_text: "INTERNATIONAL BESTSELLER" },
+        { id: 20, title: "Speaking Your Way to Success", author: "Sheryl Lindsell-Roberts", subtitle: "Say It So They'll Listen How to Speak Up Speak Well and Get Noticed in Today's Workplace", description: "A guide to effective communication and public speaking in professional environments.", coverImage: "speaking_success.png", category: "Business", niche: "Communication", length: "Medium", status: "available", accolade_text: "" },
+        { id: 21, title: "There's a Spiritual Solution to Every Problem", author: "Wayne W. Dyer", subtitle: "", description: "A guide on how to solve problems by accessing a higher spiritual level.", coverImage: "spiritual_solution.png", category: "Self-Help", niche: "Spirituality", length: "Medium", status: "available", accolade_text: "NYT BESTSELLER" },
+        { id: 22, title: "The Host", author: "Stephenie Meyer", subtitle: "", description: "A sc-fi romance about an alien invasion of Earth where aliens inhabit human bodies.", coverImage: "the_host.png", category: "Sci-Fi", niche: "Romance", length: "Long", status: "reserved", accolade_text: "NYT #1 BESTSELLER" },
+        { id: 23, title: "The Act of Marriage", author: "Tim & Beverly LaHaye", subtitle: "The Beauty of Sexual Love", description: "A Christian guide to sexual intimacy in marriage.", coverImage: "act_of_marriage.png", category: "Relationships", niche: "Christian Marriage", length: "Medium", status: "available", accolade_text: "OVER 2.5 MILLION SOLD" },
+        { id: 24, title: "Secrets of the Millionaire Mind", author: "T. Harv Eker", subtitle: "Mastering the Inner Game of Wealth", description: "A book identifying the personal blueprints that determine financial success.", coverImage: "millionaire_mind.png", category: "Finance", niche: "Wealth Mindset", length: "Medium", status: "available", accolade_text: "NYT #1 BESTSELLER" },
+        { id: 25, title: "The Business Model Book", author: "Adam J. Bock & Gerard George", subtitle: "Design Build and Adapt Business Ideas That Thrive", description: "A workbook for designing and adapting successful business models.", coverImage: "business_model_book.png", category: "Business", niche: "Strategy", length: "Medium", status: "available", accolade_text: "" },
+        { id: 26, title: "Leaving the Mother Ship", author: "Randall M. Craig", subtitle: "Having the Courage to Leave and Charting the Path to Get There", description: "A career guide on making big transitions and leaving a secure job for new opportunities.", coverImage: "leaving_mother_ship.png", category: "Business", niche: "Career Transition", length: "Medium", status: "available", accolade_text: "" },
+        { id: 27, title: "The Cottage The Spider Brooch and The Second Wife", author: "Sandy Cardy", subtitle: "How to Overcome the Challenges of Estate Planning", description: "A narrative guide to understanding and overcoming estate planning challenges.", coverImage: "the_cottage.png", category: "Finance", niche: "Estate Planning", length: "Medium", status: "available", accolade_text: "" },
+        { id: 28, title: "Wealth", author: "Stuart E. Lucas", subtitle: "Grow It Protect It Spend It and Share It", description: "A comprehensive guide to managing family wealth for long-term preservation.", coverImage: "wealth.png", category: "Finance", niche: "Wealth Management", length: "Medium", status: "available", accolade_text: "" },
+        { id: 29, title: "Danger in the Comfort Zone", author: "Judith M. Bardwick", subtitle: "From Boardroom to Mailroom - How to Break the Entitlement Habit That's Killing American Business", description: "A management book about overcoming complacency and entitlement in organizations.", coverImage: "danger_comfort_zone.png", category: "Business", niche: "Management", length: "Medium", status: "available", accolade_text: "BUSINESS WEEK BESTSELLER" },
+        { id: 30, title: "How to Stay Lovers for Life", author: "Sharyn Wolf", subtitle: "Discover a Marriage Counselor's Tricks of the Trade", description: "Practical advice for maintaining romance and intimacy in long-term relationships.", coverImage: "stay_lovers_for_life.png", category: "Relationships", niche: "Marriage", length: "Medium", status: "available", accolade_text: "" },
+        { id: 31, title: "Building Wealth", author: "Russ Whitney", subtitle: "Achieving Personal and Financial Success in Real Estate and Business Without Money Credit or Luck", description: "Strategies for building wealth through real estate and business ventures.", coverImage: "building_wealth.png", category: "Finance", niche: "Real Estate", length: "Medium", status: "available", accolade_text: "NYT BESTSELLER" },
+        { id: 32, title: "The Confident Decision Maker", author: "Roger Dawson", subtitle: "How to Make the Right Business and Personal Decisions Every Time", description: "A guide to making better decisions in business and life with confidence.", coverImage: "confident_decision_maker.png", category: "Business", niche: "Decision Making", length: "Medium", status: "available", accolade_text: "" },
+        { id: 33, title: "Motivating People", author: "Robert Heller", subtitle: "Essential Managers", description: "A concise guide to motivating employees and teams effectively.", coverImage: "motivating_people.png", category: "Business", niche: "Management", length: "Short", status: "reserved", accolade_text: "MULTI-MILLION COPY SERIES" },
+        { id: 34, title: "Managing Your Mind", author: "Gillian Butler & Tony Hope", subtitle: "The Mental Fitness Guide", description: "A guide to mental health and overcoming anxiety depression and stress.", coverImage: "managing_your_mind.png", category: "Psychology", niche: "Mental Health", length: "Medium", status: "available", accolade_text: "" },
+        { id: 35, title: "100 Ways to Motivate Others", author: "Steve Chandler & Scott Richardson", subtitle: "How Great Leaders Can Produce Insane Results Without Driving People Crazy", description: "Quick and practical leadership tips for motivating teams.", coverImage: "100_ways_motivate_others.png", category: "Business", niche: "Leadership", length: "Medium", status: "available", accolade_text: "BUSINESS BESTSELLER" },
+        { id: 36, title: "Managing Your Emotions", author: "Joyce Meyer", subtitle: "Instead of Your Emotions Managing You", description: "A Christian guide to understanding and managing emotions for a peaceful life.", coverImage: "managing_your_emotions.png", category: "Spirituality", niche: "Christian Life", length: "Medium", status: "available", accolade_text: "NYT BESTSELLER" },
+        { id: 37, title: "One Year to an Organized Life", author: "Regina Leeds", subtitle: "From Your Closets to Your Finances the Week-by-Week Guide to Getting Completely Organized For Good", description: "A week-by-week program for organizing every aspect of your life.", coverImage: "organized_life.png", category: "Self-Help", niche: "Organization", length: "Medium", status: "available", accolade_text: "NYT BESTSELLER" },
+        { id: 38, title: "Advantage Play", author: "David Ben", subtitle: "The Manager's Guide to Creative Problem Solving", description: "Using techniques from magic and creative thinking to solve business problems.", coverImage: "advantage_play.png", category: "Business", niche: "Problem Solving", length: "Medium", status: "available", accolade_text: "" },
+        { id: 39, title: "The Amazing Results of Positive Thinking", author: "Norman Vincent Peale", subtitle: "", description: "Classic advice on using positive thinking to achieve success and happiness.", coverImage: "positive_thinking.png", category: "Self-Help", niche: "Positive Thinking", length: "Medium", status: "available", accolade_text: "15 MILLION COPIES SOLD" },
+        { id: 41, title: "Angels & Demons", author: "Dan Brown", subtitle: "The First Robert Langdon Thriller", description: "An ancient secret brotherhood has resurfaced to carry out the final phase of its legendary vendetta against its most hated enemy—the Catholic Church.", coverImage: "angels_and_demons.png", category: "Thriller", niche: "Conspiracy", length: "Medium", status: "reserved", accolade_text: "INTERNATIONAL BESTSELLER" },
+        { id: 42, title: "The Da Vinci Code", author: "Dan Brown", subtitle: "The Second Robert Langdon Thriller", description: "The curator of the Louvre has been murdered and his body found inside the museum covered in symbols.", coverImage: "the_davinci_code.png", category: "Thriller", niche: "Conspiracy", length: "Medium", status: "reserved", accolade_text: "NYT #1 BESTSELLER" },
+        { id: 43, title: "The Lost Symbol", author: "Dan Brown", subtitle: "The Third Robert Langdon Thriller", description: "Robert Langdon is summoned to Washington D.C. to decode a symbol that might unlock the ancient mysteries of a lost world.", coverImage: "the_lost_symbol.png", category: "Thriller", niche: "Conspiracy", length: "Medium", status: "reserved", accolade_text: "INTERNATIONAL BESTSELLER" }
+      ];
+
+      booksData = rawData.map(obj => ({
+        id: obj.id,
+        title: obj.title,
+        author: obj.author,
+        subtitle: obj.subtitle,
+        description: obj.description,
+        coverImage: `assets/covers/${obj.coverImage}`,
+        genres: [obj.category, obj.niche].filter(Boolean),
+        status: obj.status,
+        length: obj.length,
+        bestsellers: getBestsellerCount(obj.author),
+        popularity: 0.5,
+        accolade: obj.accolade_text
+      }));
+      books = [...booksData].sort(() => Math.random() - .5);
+      initSlider();
+>>>>>>> Stashed changes
     }
 
     function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
@@ -1785,7 +1850,11 @@
 
       const ribbonHtml = book.isBestseller ? `<div style="margin-bottom:0.5rem;display:inline-block;background:linear-gradient(90deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);padding:0.2rem 0.6rem;font-size:0.55rem;text-transform:uppercase;font-weight:700;letter-spacing:0.1em;color:#4a3b18;border-radius:2px;box-shadow:0 2px 4px rgba(0,0,0,0.1)">★ International Bestseller</div>` : '';
 
+<<<<<<< Updated upstream
       return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div><div style="margin-top:1rem;text-align:center">${ribbonHtml}</div></div></div><div class="panel-content"><div class="content-w"><div class="title-row"><h1 class="book-title">${book.title}</h1></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}<div class="status-badge ${sc}"><span class="status-text">${st}</span></div></div><div class="author-sec"><div class="author-name">${book.author}</div></div></div></div></div>`;
+=======
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row">${book.accolade ? `<div class="bestseller-strip-hero">${book.accolade}</div>` : ''}<h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${li.label} &bull; ${cat}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
+>>>>>>> Stashed changes
     }
 
     function initSlider() {
