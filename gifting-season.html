@@ -1738,6 +1738,7 @@
     function loadBooksData() {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       if (window.PF && window.PF.booksData) {
         booksData = window.PF.booksData.map(b => ({
           id: b.id,
@@ -1756,6 +1757,8 @@
         initSlider();
       }
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
       const rawData = [
@@ -1820,6 +1823,9 @@
       books = [...booksData].sort(() => Math.random() - .5);
       initSlider();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -1858,7 +1864,11 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div><div style="margin-top:1rem;text-align:center">${ribbonHtml}</div></div></div><div class="panel-content"><div class="content-w"><div class="title-row"><h1 class="book-title">${book.title}</h1></div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${cat} &bull; ${li.label}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}<div class="status-badge ${sc}"><span class="status-text">${st}</span></div></div><div class="author-sec"><div class="author-name">${book.author}</div></div></div></div></div>`;
+=======
+      return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row">${book.accolade ? `<div class="bestseller-strip-hero">${book.accolade}</div>` : ''}<h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${li.label} &bull; ${cat}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
+>>>>>>> Stashed changes
 =======
       return `<div class="slide"><div class="panel-cover"><div class="cover-c"><div class="book-cover"><img src="${book.coverImage}" alt="${book.title}"></div></div></div><div class="panel-content"><div class="content-w"><div class="status-badge"><span class="status-dot ${sc}"></span><span class="status-text ${sc}">${st}</span></div><div class="title-row">${book.accolade ? `<div class="bestseller-strip-hero">${book.accolade}</div>` : ''}<h1 class="book-title">${book.title}</h1>${bs.shouldRender ? `<button class="add-btn ${bs.cls}" data-idx="${idx}"${bs.disabled ? ' disabled' : ''}>${bs.text}</button>` : ''}</div><p class="book-subtitle">${book.subtitle}</p><div class="book-desc"><p>${book.description}</p></div><div class="book-meta-row" style="display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;color:var(--stone);font-family:var(--fs);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500">${li.label} &bull; ${cat}</div><div class="genre-tags">${book.genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div><div class="author-sec"><div class="author-name">${book.author}</div>${bsText ? `<div class="author-acc">${bsText}</div>` : ''}</div></div></div></div>`;
 >>>>>>> Stashed changes
