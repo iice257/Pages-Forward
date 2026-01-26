@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Pages Forward - A forward-only book discovery experience. Once you move on, there's no going back.">
+  <title>Pages Forward</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/gifting-theme.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <style>
+    /* Onboarding-specific styles matching Gifting Season Intro */
+    .onboarding {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .onboarding-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      text-align: center;
+    }
+
+    .onboarding-huge {
+      font-family: var(--fs);
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 700;
+      line-height: .9;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-top: -0.5rem;
+    }
+
+    .onboarding-sub {
+        font-family: var(--fb);
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        font-style: normal;
+        color: var(--ink);
+        display: flex;
+        gap: .4em;
+        margin-top: .5rem;
+    }
+
+    .onboarding-gold {
+        background: linear-gradient(135deg, #DFBD69 0%, #F9ECA5 50%, #B88A44 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: var(--ff);
+        font-weight: 700;
+        font-style: normal;
+        filter: drop-shadow(0 0 1px rgba(184, 138, 68, 0.4));
+    }
+
+    .onboarding-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+        stroke: #DFBD69;
+        fill: none;
+    }
+
+    .onboarding-btn {
+      margin-top: 3rem;
+      padding: 0.8rem 2rem;
+      font-family: var(--fs);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      background: transparent;
+      border: 1px solid var(--sand);
+      color: var(--umber);
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .onboarding-btn:hover {
+      background: var(--char);
+      color: var(--bg2);
+      border-color: var(--char);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="onboardingContainer" class="onboarding">
+    <!-- Content injected by onboarding.js -->
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/state.js"></script>
+  <script src="js/onboarding.js"></script>
+  <script>
+    // Initialize onboarding
+    (async function () {
+      const needsOnboarding = await PF.Onboarding.check();
+      if (needsOnboarding) {
+        PF.Onboarding.show();
+      }
+    })();
+  </script>
+</body>
+
+</html>

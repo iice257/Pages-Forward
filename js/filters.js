@@ -48,12 +48,14 @@
     render() {
       this.container.innerHTML = `
         <div class="filter-rail" id="filterRail">
-          <button class="filter-main-btn" id="filterMainBtn" aria-label="Open filters">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
-            </svg>
-          </button>
-          <span class="filter-rail-text" id="filterRailText">Filter</span>
+          <div class="filter-pill-trigger" id="filterPillTrigger">
+            <div class="filter-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+              </svg>
+            </div>
+            <span class="filter-rail-text" id="filterRailText">Filter</span>
+          </div>
           <div class="filter-menu" id="filterMenu">
             <div class="filter-level filter-l1" id="filterL1"></div>
             <div class="filter-level filter-l2" id="filterL2"></div>
@@ -62,7 +64,7 @@
       `;
 
       this.rail = this.container.querySelector('#filterRail');
-      this.mainBtn = this.container.querySelector('#filterMainBtn');
+      this.trigger = this.container.querySelector('#filterPillTrigger');
       this.railText = this.container.querySelector('#filterRailText');
       this.menu = this.container.querySelector('#filterMenu');
       this.l1 = this.container.querySelector('#filterL1');
@@ -137,14 +139,10 @@
 
     // Bind event listeners
     bindEvents() {
-      // Main button toggle
-      this.mainBtn.addEventListener('click', () => this.toggleExpand());
-
-      // Rail text click (when has selection)
-      this.railText.addEventListener('click', () => {
-        if (this.hasActiveFilters()) {
-          this.toggleExpand();
-        }
+      // Main pill trigger (icon + text)
+      this.trigger.addEventListener('click', () => {
+        // If expanded, collapse. If collapsed, expand.
+        this.toggleExpand();
       });
 
       // Delegate clicks within menu
@@ -293,27 +291,30 @@
 
     // Update the rail label when collapsed
     updateRailLabel() {
-      const label = this.getActiveLabel();
-      this.railText.textContent = label;
-
       if (this.hasActiveFilters()) {
+        const labelText = this.getActiveLabel();
+        // Inner HTML to style the prefix differently
+        this.railText.innerHTML = `<span class="filter-prefix">FILTER</span><span class="filter-values">${labelText}</span>`;
         this.rail.classList.add('has-sel');
       } else {
+        this.railText.innerHTML = 'Filter';
         this.rail.classList.remove('has-sel');
       }
     },
 
-    // Get active filter label
+    // Get active filter label text
     getActiveLabel() {
       const parts = [];
       const f = this.state.activeFilters;
 
-      if (f.category.length) parts.push(`Category: ${f.category.join(', ')}`);
-      if (f.length) parts.push(`Length: ${f.length}`);
-      if (f.popularity) parts.push(`Popularity: ${f.popularity}`);
-      if (f.availability) parts.push('Available Books');
+      // Simplification: We might want just the values or "Category: Value"
+      // Based on screenshot: "POPULARITY: RENOWNED"
+      if (f.category.length) parts.push(`CATEGORY: ${f.category.join(', ').toUpperCase()}`);
+      if (f.length) parts.push(`LENGTH: ${f.length.toUpperCase()}`);
+      if (f.popularity) parts.push(`POPULARITY: ${f.popularity.toUpperCase()}`);
+      if (f.availability) parts.push('AVAILABLE BOOKS');
 
-      return parts.length > 0 ? parts.join(' • ') : 'Filter';
+      return parts.join(' • ');
     },
 
     // Check if any filters are active

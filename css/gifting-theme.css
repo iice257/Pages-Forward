@@ -207,7 +207,7 @@ body {
   inset: 0;
   z-index: 2;
   overflow: hidden;
-  /* padding-bottom: 150px */ 
+  /* padding-bottom: 150px */
 }
 
 .slider-track {
@@ -396,9 +396,17 @@ body {
   border-radius: 50%
 }
 
-.status-dot.avail { background: var(--avail) }
-.status-dot.reserved { background: var(--amber) }
-.status-dot.unavail { background: var(--red) }
+.status-dot.avail {
+  background: var(--avail)
+}
+
+.status-dot.reserved {
+  background: var(--amber)
+}
+
+.status-dot.unavail {
+  background: var(--red)
+}
 
 .status-text {
   font-family: var(--fs);
@@ -408,9 +416,17 @@ body {
   text-transform: uppercase
 }
 
-.status-text.avail { color: var(--avail) }
-.status-text.reserved { color: var(--amber) }
-.status-text.unavail { color: var(--red) }
+.status-text.avail {
+  color: var(--avail)
+}
+
+.status-text.reserved {
+  color: var(--amber)
+}
+
+.status-text.unavail {
+  color: var(--red)
+}
 
 /* Tags */
 .genre-tags {
@@ -435,53 +451,53 @@ body {
 
 /* Responsive Grid for non-slider pages */
 .page-container {
-    padding: 6rem 2.5rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+  padding: 6rem 2.5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
 }
 
 .card {
-    background: var(--bg3);
-    border: 1px solid var(--sand);
-    border-radius: 12px;
-    padding: 1rem;
-    transition: transform var(--dm) var(--ease);
-    display: flex;
-    flex-direction: column;
+  background: var(--bg3);
+  border: 1px solid var(--sand);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform var(--dm) var(--ease);
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(30, 25, 20, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(30, 25, 20, 0.1);
 }
 
 .card-img {
-    width: 100%;
-    aspect-ratio: 0.67;
-    object-fit: cover;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  aspect-ratio: 0.67;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card-title {
-    font-family: var(--ff);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
+  font-family: var(--ff);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
 }
 
 .card-author {
-    font-family: var(--fs);
-    font-size: 0.75rem;
-    color: var(--stone);
-    margin-bottom: 1rem;
+  font-family: var(--fs);
+  font-size: 0.75rem;
+  color: var(--stone);
+  margin-bottom: 1rem;
 }
 
 /* Media Queries */
@@ -525,25 +541,31 @@ body {
   padding: 2px;
   transition: all 0.3s ease;
   overflow: hidden;
-  width: 2.5rem;
+  width: max-content;
+  /* changed from 2.5rem or auto to depend on content */
+  min-width: 2.5rem;
 }
 
 .filter-rail.expanded {
-  width: auto;
   padding-right: 1rem;
 }
 
 .filter-rail.has-sel {
-  width: auto;
-  padding: 0 1rem;
+  padding: 0 2rem 0 2px;
+  /* padding-left small due to pill-trigger padding */
+  border-color: var(--umber);
+  background: var(--bg);
+}
+
+/* The click target that contains Icon + Text */
+.filter-pill-trigger {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  height: 100%;
 }
 
-.filter-rail.has-sel .filter-main-btn {
-  display: none;
-}
-
-.filter-main-btn {
+.filter-icon {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
@@ -552,27 +574,70 @@ body {
   justify-content: center;
   color: var(--umber);
   flex-shrink: 0;
-  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.filter-main-btn:hover {
+.filter-pill-trigger:hover .filter-icon {
   background: var(--char);
   color: var(--bg2);
 }
 
+.filter-rail.has-sel .filter-icon {
+  /* Keep icon visible but maybe distinct styling if needed */
+  background: transparent;
+  color: var(--sage);
+}
+
+.filter-rail.has-sel .filter-pill-trigger:hover .filter-icon {
+  background: transparent;
+  color: var(--umber);
+}
+
 .filter-rail-text {
   display: none;
+  /* Hidden by default (icon only), shown if has-sel OR if we want "Filter" text always? 
+                    The code says if !has-sel -> 'Filter'. Let's show it if we are collapsed or expanded? 
+                    Actually design says "Filter" pill. */
+}
+
+/* Show text when has selection OR (optional) always? 
+   Let's toggle display based on standard state or just let JS handle content and CSS handle visibility. 
+   If we want it to be a pill even when empty, remove display:none here. 
+   User said "filter when closed should be a pill". 
+*/
+.filter-rail-text {
+  display: flex;
+  /* Change to flex for inner spans */
+  align-items: center;
+  gap: 0.5ch;
   font-family: var(--fs);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.75rem;
   color: var(--ink);
   white-space: nowrap;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  margin-left: 0.25rem;
+  padding-right: 0.5rem;
+  opacity: 1;
+  /* If we want to hide "Filter" text when empty and only show icon, keep display:none default?
+     Current code sets InnerHTML 'Filter'. 
+     Let's make it show always if the width allows, or just show when has-sel or expanded? 
+     Original behavior was icon only when empty. 
+     Request: "filter when closed should be a pill containing the icon and text 'Filter'".
+     So it should ALWAYS show text.
+  */
 }
 
-.filter-rail.has-sel .filter-rail-text {
-  display: block;
+/* Prefix styling: "FILTER" part */
+.filter-prefix {
+  font-weight: 500;
+  color: var(--stone);
+}
+
+/* Values styling: "POPULARITY: RENOWNED" part */
+.filter-values {
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .filter-menu {

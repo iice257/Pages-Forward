@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pages Forward | Explore</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/gifting-theme.css">
+  
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
+
+  <style>
+      /* Explore specific overrides/layout */
+      .explore-controls {
+          position: sticky;
+          top: 80px; /* Below header */
+          z-index: 90;
+          display: flex;
+          gap: 1rem;
+          padding: 1rem 2.5rem;
+          background: var(--bg);
+          border-bottom: 1px solid var(--sand);
+          align-items: center;
+      }
+      
+      .explore-search {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--bg2);
+        border: 1px solid var(--sand);
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        width: 200px;
+        transition: all 0.3s;
+      }
+
+      .explore-search:focus-within {
+        border-color: var(--amber);
+        width: 280px;
+      }
+
+      .explore-search input {
+        border: none;
+        background: transparent;
+        font-family: var(--fs);
+        font-size: 0.8rem;
+        color: var(--ink);
+        outline: none;
+        width: 100%;
+      }
+      
+      .section-header {
+          display: flex;
+          align-items: baseline;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid var(--sand);
+          grid-column: 1 / -1;
+      }
+      
+      .section-letter {
+          font-family: var(--ff);
+          font-size: 2rem;
+          color: var(--ink);
+          font-weight: 700;
+      }
+      
+      .card-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.3);
+          opacity: 0;
+          transition: opacity 0.3s;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          padding: 0.5rem;
+      }
+      
+      .card-img:hover .card-overlay {
+          opacity: 1;
+      }
+      
+      .card-btn {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          background: var(--bg2);
+          border: none;
+          color: var(--umber);
+          font-weight: 600;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+      
+      .card-btn:hover {
+          background: var(--char);
+          color: #fff;
+      }
+  </style>
+</head>
+
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DFBD69;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#F9ECA5;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#B88A44;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Backgrounds -->
+  <div class="blur-c">
+    <div class="blur-bg active" id="bb1" style="background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=900&fit=crop');"></div>
+    <div class="blur-ov"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="header-logo">
+      Pages Forward
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#gold-grad)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      </svg>
+    </a>
+    <div class="header-actions">
+       <button class="btn-h btn-icon" id="themeToggle"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg></button>
+       <a href="forward.html" class="btn-h">Decide</a>
+       <a href="collection.html" class="btn-h">Collection</a>
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <div class="explore-controls">
+    <div id="filterContainer"></div>
+    <div class="explore-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--stone)">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="page-container">
+      <div id="exploreMain">
+          <!-- Injected -->
+      </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    (async function () {
+      'use strict';
+      
+      const themeToggle = document.getElementById('themeToggle');
+      if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+          localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
+
+      await PF.State.init();
+      if (!PF.State.isOnboardingComplete()) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const main = document.getElementById('exploreMain');
+
+      // Initialize filter system
+      PF.Filters.init('#filterContainer');
+      PF.Search.init('#searchInput');
+
+      function renderGallery() {
+        let books = PF.State.getAvailableBooks(PF.booksData);
+        if (PF.Search.isActive()) books = PF.Search.search(books);
+        books = PF.Filters.apply(books);
+
+        if (books.length === 0) {
+          main.innerHTML = `<div style="text-align:center; padding: 4rem; color:var(--stone)">No books found</div>`;
+          return;
+        }
+
+        const groups = {};
+        books.forEach(b => {
+          const l = b.title.charAt(0).toUpperCase();
+          if (!groups[l]) groups[l] = [];
+          groups[l].push(b);
+        });
+
+        main.innerHTML = Object.keys(groups).sort().map(l => `
+           <div style="margin-bottom: 3rem;">
+               <div class="section-header">
+                   <div class="section-letter">${l}</div>
+                   <div style="font-family:var(--fs); font-size:0.7rem; color:var(--stone);">${groups[l].length} books</div>
+               </div>
+               <div class="grid-view">
+                   ${groups[l].map(b => `
+                       <div class="card">
+                           <div style="position:relative" class="card-img-c">
+                               <img src="${b.coverImage}" class="card-img" alt="${b.title}">
+                               <div class="card-overlay">
+                                   <button class="card-btn" data-id="${b.id}">+</button>
+                               </div>
+                           </div>
+                           <div class="card-title">${b.title}</div>
+                           <div class="card-author">${b.author}</div>
+                           <div class="genre-tags" style="margin-bottom:0">
+                               <span class="genre-tag" style="font-size:0.45rem">${b.tags.category}</span>
+                           </div>
+                       </div>
+                   `).join('')}
+               </div>
+           </div>
+        `).join('');
+
+        main.querySelectorAll('.card-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const id = parseInt(btn.dataset.id);
+            await PF.State.acceptBook(id);
+            renderGallery();
+          });
+        });
+      }
+
+      PF.Filters.setOnChange(renderGallery);
+      PF.Search.setOnChange(renderGallery);
+      renderGallery();
+
+    })();
+  </script>
+</body>
+</html>

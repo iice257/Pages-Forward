@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Pages Forward</title>
+  <style>
+    :root {
+      --bg: #f4f4f5;
+      --card: #ffffff;
+      --text: #18181b;
+      --border: #e4e4e7;
+      --primary: #d97706;
+      /* Amber-600 */
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      padding: 2rem;
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+      color: #71717a;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: var(--text);
+    }
+
+    .tab.active {
+      border-bottom-color: var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    th {
+      background: #fafafa;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #71717a;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.1s;
+    }
+
+    .btn:hover {
+      background: #fafafa;
+      border-color: #d4d4d8;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #b45309;
+      border-color: #b45309;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-pending {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .status-purchased {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-reserved {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status-cancelled {
+      background: #f4f4f5;
+      color: #52525b;
+    }
+
+    .items-list {
+      font-size: 0.875rem;
+      color: #52525b;
+      line-height: 1.4;
+    }
+
+    .stock-input {
+      width: 60px;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .refresh-btn {
+      margin-left: auto;
+    }
+
+    /* Loading */
+    .loading {
+      padding: 2rem;
+      text-align: center;
+      color: #71717a;
+    }
+  </style>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Pages Forward Admin</h1>
+      <button class="btn refresh-btn" onclick="initAdmin()">Refresh Data</button>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('orders')">Orders</div>
+      <div class="tab" onclick="switchTab('inventory')">Inventory</div>
+    </div>
+
+    <div id="ordersView" class="view">
+      <table id="ordersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+      <div id="ordersLoading" class="loading">Loading orders...</div>
+    </div>
+
+    <div id="inventoryView" class="view" style="display:none">
+      <table id="inventoryTable">
+        <thead>
+          <tr>
+            <th style="width: 50px">Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody"></tbody>
+      </table>
+      <div id="inventoryLoading" class="loading">Loading inventory...</div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let orders = [];
+    let books = [];
+    let currentTab = 'orders';
+
+    // Init
+    async function initAdmin() {
+      if (!window.PF || !window.PF.supabase) {
+        console.error('Supabase not initialized');
+        return;
+      }
+      await Promise.all([fetchOrders(), fetchInventory()]);
+    }
+
+    async function fetchOrders() {
+      document.getElementById('ordersLoading').style.display = 'block';
+      document.getElementById('ordersBody').innerHTML = '';
+
+      const { data, error } = await window.PF.supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching orders:', error);
+        document.getElementById('ordersLoading').textContent = 'Error loading orders';
+        return;
+      }
+
+      orders = data;
+      renderOrders();
+      document.getElementById('ordersLoading').style.display = 'none';
+    }
+
+    async function fetchInventory() {
+      document.getElementById('inventoryLoading').style.display = 'block';
+      document.getElementById('inventoryBody').innerHTML = '';
+
+      const { data, error } = await window.PF.supabase
+        .from('books')
+        .select('*')
+        .order('title');
+
+      if (error) {
+        console.error('Error fetching inventory:', error);
+        document.getElementById('inventoryLoading').textContent = 'Error loading inventory';
+        return;
+      }
+
+      books = data;
+      renderInventory();
+      document.getElementById('inventoryLoading').style.display = 'none';
+    }
+
+    // Render Functions
+    function renderOrders() {
+      const tbody = document.getElementById('ordersBody');
+      tbody.innerHTML = orders.map(order => {
+        const date = new Date(order.created_at).toLocaleString();
+        const itemsList = order.items.map(i => `${i.title} (₦${(i.price || 0).toLocaleString()})`).join('<br>');
+
+        return `
+                    <tr>
+                        <td style="font-family:monospace;font-size:0.8em">${order.id.slice(0, 8)}...</td>
+                        <td>${date}</td>
+                        <td class="items-list">${itemsList}</td>
+                        <td style="font-weight:600">₦${order.total_amount.toLocaleString()}</td>
+                        <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                        <td>
+                            ${order.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="updateOrderStatus('${order.id}', 'purchased')">Confirm</button>` : ''}
+                            ${order.status !== 'cancelled' ? `<button class="btn btn-sm" onclick="updateOrderStatus('${order.id}', 'cancelled')">Cancel</button>` : ''}
+                        </td>
+                    </tr>
+                `;
+      }).join('');
+    }
+
+    function renderInventory() {
+      const tbody = document.getElementById('inventoryBody');
+      tbody.innerHTML = books.map(book => {
+        return `
+                    <tr>
+                        <td><img src="${book.cover_image}" style="width:30px;height:45px;object-fit:cover;border-radius:2px"></td>
+                        <td>
+                            <div style="font-weight:600">${book.title}</div>
+                            <div style="font-size:0.8em;color:#71717a">${book.author}</div>
+                        </td>
+                        <td>₦${book.price.toLocaleString()}</td>
+                        <td>
+                            <input type="number" class="stock-input" value="${book.stock}" id="stock-${book.id}" onchange="updateStock('${book.id}', this.value)">
+                        </td>
+                        <td>${book.status}</td>
+                        <td>
+                             <button class="btn btn-sm" onclick="saveStock('${book.id}')">Save</button>
+                        </td>
+                    </tr>
+                `;
+      }).join('');
+    }
+
+    // Actions
+    async function updateOrderStatus(id, status) {
+      const { error } = await window.PF.supabase
+        .from('orders')
+        .update({ status })
+        .eq('id', id);
+
+      if (error) alert('Error updating order');
+      else fetchOrders(); // Refresh
+    }
+
+    async function updateStock(id, newStock) {
+      // Just local update tracking? Or auto save?
+      // "Save" button triggers actual save.
+    }
+
+    async function saveStock(id) {
+      const input = document.getElementById(`stock-${id}`);
+      const newStock = parseInt(input.value);
+
+      // Logic: if stock reaches 0, status -> unavailable? 
+      // Or 'reserved' if we want manual reserve?
+      // Simple logic: stock > 0 ? available : unavailable (unless specialized)
+
+      // First fetch current status to preserve or update?
+      // Actually, we can just update stock.
+
+      const updates = { stock: newStock };
+      if (newStock === 0) updates.status = 'unavailable';
+      else if (newStock > 0) updates.status = 'available'; // Reset to available?
+
+      const { error } = await window.PF.supabase
+        .from('books')
+        .update(updates)
+        .eq('id', id);
+
+      if (error) alert('Error updating stock');
+      else {
+        alert('Stock updated');
+        fetchInventory();
+      }
+    }
+
+    // Tabs
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.textContent.toLowerCase().includes(tab)));
+      document.getElementById('ordersView').style.display = tab === 'orders' ? 'block' : 'none';
+      document.getElementById('inventoryView').style.display = tab === 'inventory' ? 'block' : 'none';
+    }
+
+    // Run
+    window.addEventListener('load', initAdmin);
+  </script>
+</body>
+
+</html>
