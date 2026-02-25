@@ -1,0 +1,152 @@
+/* ─── Ebook Reader (overlay) ─── */
+
+.reader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.reader-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.reader-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: #f0ede6;
+  flex-shrink: 0;
+}
+
+.reader-toolbar__title {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40%;
+}
+
+.reader-toolbar__info {
+  font-size: 0.75rem;
+  color: #a8a5a0;
+}
+
+.reader-toolbar__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0ede6;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.reader-toolbar__close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.reader-canvas-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.reader-canvas-wrap canvas {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.reader-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+.reader-nav__btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0ede6;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.reader-nav__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.reader-nav__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.reader-nav__info {
+  font-size: 0.8rem;
+  color: #a8a5a0;
+  min-width: 80px;
+  text-align: center;
+}
+
+.reader-progress {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.reader-progress__bar {
+  height: 100%;
+  background: var(--color-accent, #d4a574);
+  transition: width 0.3s ease;
+}
+
+.reader-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #a8a5a0;
+  font-size: 0.85rem;
+}
+
+.reader-loading__spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--color-accent, #d4a574);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

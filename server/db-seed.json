@@ -1,0 +1,2293 @@
+{
+  "books": [
+    {
+      "id": "midnight-library",
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "genre": "Fiction",
+      "description": "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.",
+      "rating": 4.5,
+      "pages": 304,
+      "year": 2020,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780525559474-L.jpg",
+      "coverColor": "#1a1a4e",
+      "coverAccent": "#6366f1",
+      "isbn": "9780525559474",
+      "ebookFile": "midnight-library.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "where-crawdads-sing",
+      "title": "Where the Crawdads Sing",
+      "author": "Delia Owens",
+      "genre": "Fiction",
+      "description": "For years, rumors of the 'Marsh Girl' haunted Barkley Cove. Kya Clark is barefoot and wild, but she's more intelligent and resourceful than anyone imagines.",
+      "rating": 4.5,
+      "pages": 384,
+      "year": 2018,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735219106-L.jpg",
+      "coverColor": "#064e3b",
+      "coverAccent": "#34d399",
+      "isbn": "9780735219106",
+      "ebookFile": "where-crawdads-sing.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "song-of-achilles",
+      "title": "The Song of Achilles",
+      "author": "Madeline Miller",
+      "genre": "Fiction",
+      "description": "A dazzling literary feat that brilliantly reimagines Homer's Iliad — a tale of gods, kings, immortal fame, and the human heart.",
+      "rating": 4.6,
+      "pages": 352,
+      "year": 2012,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062060624-L.jpg",
+      "coverColor": "#1e3a5f",
+      "coverAccent": "#fbbf24",
+      "isbn": "9780062060624",
+      "ebookFile": "song-of-achilles.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "normal-people",
+      "title": "Normal People",
+      "author": "Sally Rooney",
+      "genre": "Fiction",
+      "description": "Connell and Marianne grow up in the same small town in rural Ireland. A story of mutual fascination, friendship and love.",
+      "rating": 4.1,
+      "pages": 288,
+      "year": 2018,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781984822178-L.jpg",
+      "coverColor": "#e8e0d0",
+      "coverAccent": "#2d5016",
+      "isbn": "9781984822178",
+      "ebookFile": "normal-people.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "great-gatsby",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "description": "The story of the mysteriously wealthy Jay Gatsby and his love for Daisy Buchanan, amid the excess of the Jazz Age.",
+      "rating": 4.4,
+      "pages": 180,
+      "year": 1925,
+      "physicalPrice": 12.99,
+      "ebookPrice": 8.44,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
+      "coverColor": "#1a2744",
+      "coverAccent": "#f5c842",
+      "isbn": "9780743273565",
+      "ebookFile": "great-gatsby.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "little-fires",
+      "title": "Little Fires Everywhere",
+      "author": "Celeste Ng",
+      "genre": "Fiction",
+      "description": "In Shaker Heights, a placid progressive suburb of Cleveland, everything is planned — until a mysterious artist and her daughter arrive.",
+      "rating": 4.2,
+      "pages": 338,
+      "year": 2017,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735224315-L.jpg",
+      "coverColor": "#4a1c1c",
+      "coverAccent": "#ef4444",
+      "isbn": "9780735224315",
+      "ebookFile": "little-fires.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "invisible-life",
+      "title": "The Invisible Life of Addie LaRue",
+      "author": "V.E. Schwab",
+      "genre": "Fiction",
+      "description": "A life no one will remember. A story you will never forget. Addie LaRue makes a Faustian bargain to live forever but is cursed to be forgotten.",
+      "rating": 4.3,
+      "pages": 448,
+      "year": 2020,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780765387561-L.jpg",
+      "coverColor": "#1a0a2e",
+      "coverAccent": "#c084fc",
+      "isbn": "9780765387561",
+      "ebookFile": "invisible-life.pdf",
+      "tags": [
+        "bestseller",
+        "new-release"
+      ]
+    },
+    {
+      "id": "goldfinch",
+      "title": "The Goldfinch",
+      "author": "Donna Tartt",
+      "genre": "Fiction",
+      "description": "A boy in New York survives a disaster that kills his mother. Abandoned by his father, he clings to a small painting that draws him into the underworld of art.",
+      "rating": 4.1,
+      "pages": 771,
+      "year": 2013,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316055437-L.jpg",
+      "coverColor": "#3d2b1f",
+      "coverAccent": "#d4a574",
+      "isbn": "9780316055437",
+      "ebookFile": "goldfinch.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "alchemist",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Fiction",
+      "description": "A shepherd boy travels from Spain to the Egyptian desert in search of treasure. Along the way he learns the true treasure is the journey itself.",
+      "rating": 4.3,
+      "pages": 208,
+      "year": 1988,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg",
+      "coverColor": "#fef3c7",
+      "coverAccent": "#b45309",
+      "isbn": "9780062315007",
+      "ebookFile": "alchemist.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "kite-runner",
+      "title": "The Kite Runner",
+      "author": "Khaled Hosseini",
+      "genre": "Fiction",
+      "description": "The unforgettable story of two boys growing up in Afghanistan. A devastating tale of friendship, betrayal, and the power of redemption.",
+      "rating": 4.4,
+      "pages": 371,
+      "year": 2003,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781594631931-L.jpg",
+      "coverColor": "#7c3aed",
+      "coverAccent": "#e0d5c7",
+      "isbn": "9781594631931",
+      "ebookFile": "kite-runner.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "handmaids-tale",
+      "title": "The Handmaid's Tale",
+      "author": "Margaret Atwood",
+      "genre": "Fiction",
+      "description": "In the Republic of Gilead, fertile women are assigned to powerful men as Handmaids. Offred can remember the days before, when she was free.",
+      "rating": 4.4,
+      "pages": 311,
+      "year": 1985,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780385490818-L.jpg",
+      "coverColor": "#dc2626",
+      "coverAccent": "#f5f0e8",
+      "isbn": "9780385490818",
+      "ebookFile": "handmaids-tale.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "1984",
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Fiction",
+      "description": "A dystopian masterpiece about a totalitarian regime that controls every aspect of life. Winston Smith dares to think independently.",
+      "rating": 4.5,
+      "pages": 328,
+      "year": 1949,
+      "physicalPrice": 12.99,
+      "ebookPrice": 8.44,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#ef4444",
+      "isbn": "9780451524935",
+      "ebookFile": "1984.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "catch-22",
+      "title": "Catch-22",
+      "author": "Joseph Heller",
+      "genre": "Fiction",
+      "description": "Set in Italy during World War II, Yossarian is a bombardier who is convinced everyone is trying to kill him. The novel that invented its own literary genre.",
+      "rating": 4.2,
+      "pages": 453,
+      "year": 1961,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781451626650-L.jpg",
+      "coverColor": "#fef9c3",
+      "coverAccent": "#854d0e",
+      "isbn": "9781451626650",
+      "ebookFile": "catch-22.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "beloved",
+      "title": "Beloved",
+      "author": "Toni Morrison",
+      "genre": "Fiction",
+      "description": "Sethe, a formerly enslaved woman, is haunted by the ghost of her dead child. A powerful meditation on the legacy of slavery in America.",
+      "rating": 4.1,
+      "pages": 324,
+      "year": 1987,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400033416-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#d4a574",
+      "isbn": "9781400033416",
+      "ebookFile": "beloved.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "norwegian-wood",
+      "title": "Norwegian Wood",
+      "author": "Haruki Murakami",
+      "genre": "Fiction",
+      "description": "Toru Watanabe navigates love, loss, and sexuality in 1960s Tokyo. A nostalgic story of one college student's experiences.",
+      "rating": 4.2,
+      "pages": 296,
+      "year": 1987,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780375704024-L.jpg",
+      "coverColor": "#1a3520",
+      "coverAccent": "#4ade80",
+      "isbn": "9780375704024",
+      "ebookFile": "norwegian-wood.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "anxious-people",
+      "title": "Anxious People",
+      "author": "Fredrik Backman",
+      "genre": "Fiction",
+      "description": "A failed bank robber holds everyone in an apartment viewing hostage. This darkly comic novel is about the absurdity of the human condition.",
+      "rating": 4.2,
+      "pages": 352,
+      "year": 2020,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501160837-L.jpg",
+      "coverColor": "#fef3c7",
+      "coverAccent": "#b45309",
+      "isbn": "9781501160837",
+      "ebookFile": "anxious-people.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "project-hail-mary",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "genre": "Sci-Fi",
+      "description": "Ryland Grace is the sole survivor on a desperate, last-chance mission. If he fails, humanity and the earth itself will perish.",
+      "rating": 4.8,
+      "pages": 496,
+      "year": 2021,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780593135204-L.jpg",
+      "coverColor": "#0c1445",
+      "coverAccent": "#f59e0b",
+      "isbn": "9780593135204",
+      "ebookFile": "project-hail-mary.pdf",
+      "tags": [
+        "bestseller",
+        "new-release"
+      ]
+    },
+    {
+      "id": "dune",
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "genre": "Sci-Fi",
+      "description": "Set on the desert planet Arrakis, Dune is the story of Paul Atreides and his family's ambition to bring to fruition humankind's most ancient dream.",
+      "rating": 4.6,
+      "pages": 688,
+      "year": 1965,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg",
+      "coverColor": "#451a03",
+      "coverAccent": "#f59e0b",
+      "isbn": "9780441172719",
+      "ebookFile": "dune.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "neuromancer",
+      "title": "Neuromancer",
+      "author": "William Gibson",
+      "genre": "Sci-Fi",
+      "description": "Case was the sharpest data thief in the matrix — until he crossed the wrong people. Now a mysterious employer recruits him for one last run.",
+      "rating": 4.1,
+      "pages": 271,
+      "year": 1984,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780441569595-L.jpg",
+      "coverColor": "#000000",
+      "coverAccent": "#06b6d4",
+      "isbn": "9780441569595",
+      "ebookFile": "neuromancer.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "dark-matter",
+      "title": "Dark Matter",
+      "author": "Blake Crouch",
+      "genre": "Sci-Fi",
+      "description": "Jason Dessen is abducted and awakens in a reality that is not his own. In this world, his life is very different — and very terrifying.",
+      "rating": 4.4,
+      "pages": 342,
+      "year": 2016,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781101904220-L.jpg",
+      "coverColor": "#030712",
+      "coverAccent": "#22d3ee",
+      "isbn": "9781101904220",
+      "ebookFile": "dark-matter.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "klara-and-sun",
+      "title": "Klara and the Sun",
+      "author": "Kazuo Ishiguro",
+      "genre": "Sci-Fi",
+      "description": "Klara is an Artificial Friend with outstanding observational qualities who watches carefully the behavior of those who come in to browse.",
+      "rating": 4.2,
+      "pages": 303,
+      "year": 2021,
+      "physicalPrice": 17.99,
+      "ebookPrice": 11.69,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780593318171-L.jpg",
+      "coverColor": "#fffbeb",
+      "coverAccent": "#f59e0b",
+      "isbn": "9780593318171",
+      "ebookFile": "klara-and-sun.pdf",
+      "tags": [
+        "new-release",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "left-hand-darkness",
+      "title": "The Left Hand of Darkness",
+      "author": "Ursula K. Le Guin",
+      "genre": "Sci-Fi",
+      "description": "A lone human envoy is sent to the planet Gethen to convince its nations to join an interplanetary alliance.",
+      "rating": 4.3,
+      "pages": 304,
+      "year": 1969,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780441478125-L.jpg",
+      "coverColor": "#1a1a2e",
+      "coverAccent": "#818cf8",
+      "isbn": "9780441478125",
+      "ebookFile": "left-hand-darkness.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "enders-game",
+      "title": "Ender's Game",
+      "author": "Orson Scott Card",
+      "genre": "Sci-Fi",
+      "description": "In order to develop a secure defense against a hostile alien race, the government breeds child geniuses and trains them as soldiers.",
+      "rating": 4.5,
+      "pages": 324,
+      "year": 1985,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780812550702-L.jpg",
+      "coverColor": "#0a0a0a",
+      "coverAccent": "#22c55e",
+      "isbn": "9780812550702",
+      "ebookFile": "enders-game.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "three-body-problem",
+      "title": "The Three-Body Problem",
+      "author": "Liu Cixin",
+      "genre": "Sci-Fi",
+      "description": "Set against the backdrop of China's Cultural Revolution, a secret military project sends signals into space. An alien civilization captures the signal.",
+      "rating": 4.3,
+      "pages": 400,
+      "year": 2008,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780765382030-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#ef4444",
+      "isbn": "9780765382030",
+      "ebookFile": "three-body-problem.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "recursion",
+      "title": "Recursion",
+      "author": "Blake Crouch",
+      "genre": "Sci-Fi",
+      "description": "A mysterious affliction called False Memory Syndrome is sweeping the globe. A neuroscientist's research into memory has been hijacked.",
+      "rating": 4.2,
+      "pages": 320,
+      "year": 2019,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781524759780-L.jpg",
+      "coverColor": "#1e1b4b",
+      "coverAccent": "#a78bfa",
+      "isbn": "9781524759780",
+      "ebookFile": "recursion.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "martian",
+      "title": "The Martian",
+      "author": "Andy Weir",
+      "genre": "Sci-Fi",
+      "description": "Stranded on Mars after a dust storm, astronaut Mark Watney must rely on his ingenuity to survive and find a way to signal Earth.",
+      "rating": 4.7,
+      "pages": 369,
+      "year": 2011,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780553418026-L.jpg",
+      "coverColor": "#7c2d12",
+      "coverAccent": "#fb923c",
+      "isbn": "9780553418026",
+      "ebookFile": "martian.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "fahrenheit-451",
+      "title": "Fahrenheit 451",
+      "author": "Ray Bradbury",
+      "genre": "Sci-Fi",
+      "description": "In a future where books are banned, fireman Guy Montag's job is to burn any that are found. Then he begins to question everything.",
+      "rating": 4.3,
+      "pages": 194,
+      "year": 1953,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg",
+      "coverColor": "#7f1d1d",
+      "coverAccent": "#fca5a5",
+      "isbn": "9781451673319",
+      "ebookFile": "fahrenheit-451.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "slaughterhouse-five",
+      "title": "Slaughterhouse-Five",
+      "author": "Kurt Vonnegut",
+      "genre": "Sci-Fi",
+      "description": "Billy Pilgrim has come unstuck in time. He travels between his life as an American soldier in WWII and his abduction by aliens.",
+      "rating": 4.3,
+      "pages": 275,
+      "year": 1969,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780385333481-L.jpg",
+      "coverColor": "#1e3a5f",
+      "coverAccent": "#60a5fa",
+      "isbn": "9780385333481",
+      "ebookFile": "slaughterhouse-five.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "name-of-the-wind",
+      "title": "The Name of the Wind",
+      "author": "Patrick Rothfuss",
+      "genre": "Fantasy",
+      "description": "The tale of the magically gifted young man who grows to be the most notorious wizard his world has ever seen.",
+      "rating": 4.7,
+      "pages": 662,
+      "year": 2007,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780756404741-L.jpg",
+      "coverColor": "#1a0a00",
+      "coverAccent": "#dc2626",
+      "isbn": "9780756404741",
+      "ebookFile": "name-of-the-wind.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "circe",
+      "title": "Circe",
+      "author": "Madeline Miller",
+      "genre": "Fantasy",
+      "description": "In the house of Helios, a daughter is born. Circe discovers she possesses the power of witchcraft, which can transform rivals into monsters.",
+      "rating": 4.5,
+      "pages": 393,
+      "year": 2018,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316556347-L.jpg",
+      "coverColor": "#1e1b4b",
+      "coverAccent": "#a78bfa",
+      "isbn": "9780316556347",
+      "ebookFile": "circe.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "mistborn",
+      "title": "Mistborn: The Final Empire",
+      "author": "Brandon Sanderson",
+      "genre": "Fantasy",
+      "description": "For a thousand years the ash fell. In a world of darkness, an evil overlord reigns. A thief with extraordinary abilities leads a revolution.",
+      "rating": 4.7,
+      "pages": 541,
+      "year": 2006,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780765350381-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a3a3a3",
+      "isbn": "9780765350381",
+      "ebookFile": "mistborn.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "piranesi",
+      "title": "Piranesi",
+      "author": "Susanna Clarke",
+      "genre": "Fantasy",
+      "description": "Piranesi's house is no ordinary building: its rooms are infinite, its corridors endless, its walls lined with thousands of statues.",
+      "rating": 4.3,
+      "pages": 272,
+      "year": 2020,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635575996-L.jpg",
+      "coverColor": "#0e4d64",
+      "coverAccent": "#67e8f9",
+      "isbn": "9781635575996",
+      "ebookFile": "piranesi.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "fifth-season",
+      "title": "The Fifth Season",
+      "author": "N.K. Jemisin",
+      "genre": "Fantasy",
+      "description": "A season of endings has begun. Every few centuries, catastrophic climate change sweeps the land. This is the Stillness.",
+      "rating": 4.5,
+      "pages": 468,
+      "year": 2015,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316229296-L.jpg",
+      "coverColor": "#292524",
+      "coverAccent": "#f97316",
+      "isbn": "9780316229296",
+      "ebookFile": "fifth-season.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "way-of-kings",
+      "title": "The Way of Kings",
+      "author": "Brandon Sanderson",
+      "genre": "Fantasy",
+      "description": "Roshar is a world of stone and storms. Kaladin struggles to protect his men while leading them through endless battles.",
+      "rating": 4.7,
+      "pages": 1007,
+      "year": 2010,
+      "physicalPrice": 19.99,
+      "ebookPrice": 12.99,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780765326355-L.jpg",
+      "coverColor": "#1e3a5f",
+      "coverAccent": "#60a5fa",
+      "isbn": "9780765326355",
+      "ebookFile": "way-of-kings.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "hobbit",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "description": "Bilbo Baggins is a hobbit who enjoys a comfortable life. When Gandalf and thirteen dwarves arrive, his life is changed forever.",
+      "rating": 4.7,
+      "pages": 310,
+      "year": 1937,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
+      "coverColor": "#1a3520",
+      "coverAccent": "#4ade80",
+      "isbn": "9780547928227",
+      "ebookFile": "hobbit.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "priory-orange",
+      "title": "The Priory of the Orange Tree",
+      "author": "Samantha Shannon",
+      "genre": "Fantasy",
+      "description": "A world divided. A queendom without an heir. An ancient enemy awakens. A sweeping epic about a world on the brink of war with dragons.",
+      "rating": 4.2,
+      "pages": 848,
+      "year": 2019,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635570298-L.jpg",
+      "coverColor": "#4a1c0a",
+      "coverAccent": "#fb923c",
+      "isbn": "9781635570298",
+      "ebookFile": "priory-orange.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "fellowship-ring",
+      "title": "The Fellowship of the Ring",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "description": "One Ring to rule them all. In a sleepy village in the Shire, young Frodo Baggins must begin a perilous quest to destroy the One Ring.",
+      "rating": 4.7,
+      "pages": 423,
+      "year": 1954,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780547928210-L.jpg",
+      "coverColor": "#2d1b2e",
+      "coverAccent": "#d4a574",
+      "isbn": "9780547928210",
+      "ebookFile": "fellowship-ring.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "game-of-thrones",
+      "title": "A Game of Thrones",
+      "author": "George R.R. Martin",
+      "genre": "Fantasy",
+      "description": "In a land where seasons can last decades, winter is coming. Political intrigue, honor, and treachery await in the Seven Kingdoms.",
+      "rating": 4.5,
+      "pages": 694,
+      "year": 1996,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780553593716-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#ef4444",
+      "isbn": "9780553593716",
+      "ebookFile": "game-of-thrones.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "bear-and-nightingale",
+      "title": "The Bear and the Nightingale",
+      "author": "Katherine Arden",
+      "genre": "Fantasy",
+      "description": "At the edge of the Russian wilderness, winter lasts most of the year. Vasya's gifts draw the attention of forces both dark and magical.",
+      "rating": 4.3,
+      "pages": 322,
+      "year": 2017,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781101885956-L.jpg",
+      "coverColor": "#0f2d3d",
+      "coverAccent": "#67e8f9",
+      "isbn": "9781101885956",
+      "ebookFile": "bear-and-nightingale.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "gone-girl",
+      "title": "Gone Girl",
+      "author": "Gillian Flynn",
+      "genre": "Mystery",
+      "description": "On their fifth wedding anniversary, Nick Dunne's clever wife disappears. As the police and media descend, everyone is asking: what did Nick do?",
+      "rating": 4.3,
+      "pages": 432,
+      "year": 2012,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307588371-L.jpg",
+      "coverColor": "#2d1b2e",
+      "coverAccent": "#ec4899",
+      "isbn": "9780307588371",
+      "ebookFile": "gone-girl.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "silent-patient",
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "genre": "Mystery",
+      "description": "Alicia Berenson shoots her husband five times and then never speaks another word. A psychotherapist is determined to unravel the mystery.",
+      "rating": 4.2,
+      "pages": 325,
+      "year": 2019,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781250301697-L.jpg",
+      "coverColor": "#1f2937",
+      "coverAccent": "#ef4444",
+      "isbn": "9781250301697",
+      "ebookFile": "silent-patient.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "girl-on-train",
+      "title": "The Girl on the Train",
+      "author": "Paula Hawkins",
+      "genre": "Mystery",
+      "description": "Rachel takes the same commuter train every day, watching a couple from afar. When the woman disappears, Rachel becomes entangled.",
+      "rating": 4,
+      "pages": 323,
+      "year": 2015,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781594634024-L.jpg",
+      "coverColor": "#1f2937",
+      "coverAccent": "#ef4444",
+      "isbn": "9781594634024",
+      "ebookFile": "girl-on-train.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "da-vinci-code",
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "genre": "Mystery",
+      "description": "A murder inside the Louvre leads Harvard professor Robert Langdon on a trail of clues hidden in the works of Leonardo da Vinci.",
+      "rating": 3.9,
+      "pages": 454,
+      "year": 2003,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307474278-L.jpg",
+      "coverColor": "#2d1b2e",
+      "coverAccent": "#dc2626",
+      "isbn": "9780307474278",
+      "ebookFile": "da-vinci-code.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "in-the-woods",
+      "title": "In the Woods",
+      "author": "Tana French",
+      "genre": "Mystery",
+      "description": "When he was twelve, something terrible happened in the woods. Twenty years later, Detective Rob Ryan investigates a murder in the same area.",
+      "rating": 4.1,
+      "pages": 429,
+      "year": 2007,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780143113492-L.jpg",
+      "coverColor": "#1a2e1a",
+      "coverAccent": "#6ee7b7",
+      "isbn": "9780143113492",
+      "ebookFile": "in-the-woods.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "big-little-lies",
+      "title": "Big Little Lies",
+      "author": "Liane Moriarty",
+      "genre": "Mystery",
+      "description": "A murder, a school trivia night, and the dangerous lies that lurk beneath perfect-seeming suburban lives.",
+      "rating": 4.3,
+      "pages": 460,
+      "year": 2014,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780425274866-L.jpg",
+      "coverColor": "#fce7f3",
+      "coverAccent": "#be185d",
+      "isbn": "9780425274866",
+      "ebookFile": "big-little-lies.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "woman-in-window",
+      "title": "The Woman in the Window",
+      "author": "A.J. Finn",
+      "genre": "Mystery",
+      "description": "Anna Fox lives alone. She watches her neighbors. Then she sees something she shouldn't in the house across the way.",
+      "rating": 4,
+      "pages": 427,
+      "year": 2018,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062678416-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#94a3b8",
+      "isbn": "9780062678416",
+      "ebookFile": "woman-in-window.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "and-then-none",
+      "title": "And Then There Were None",
+      "author": "Agatha Christie",
+      "genre": "Mystery",
+      "description": "Ten strangers are lured to an isolated island mansion. One by one, the guests share a dark secret — and one by one, they die.",
+      "rating": 4.5,
+      "pages": 272,
+      "year": 1939,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062073488-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a8a29e",
+      "isbn": "9780062073488",
+      "ebookFile": "and-then-none.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "girl-dragon-tattoo",
+      "title": "The Girl with the Dragon Tattoo",
+      "author": "Stieg Larsson",
+      "genre": "Mystery",
+      "description": "A journalist and a computer hacker investigate a decades-old disappearance in an industrialist family.",
+      "rating": 4.2,
+      "pages": 672,
+      "year": 2005,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307454546-L.jpg",
+      "coverColor": "#030712",
+      "coverAccent": "#ef4444",
+      "isbn": "9780307454546",
+      "ebookFile": "girl-dragon-tattoo.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "beach-read",
+      "title": "Beach Read",
+      "author": "Emily Henry",
+      "genre": "Romance",
+      "description": "Two writers swap genres for the summer. Augustus writes literary fiction; January writes romance. Funnier and more tender than expected.",
+      "rating": 4.1,
+      "pages": 361,
+      "year": 2020,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781984806734-L.jpg",
+      "coverColor": "#fef3c7",
+      "coverAccent": "#f97316",
+      "isbn": "9781984806734",
+      "ebookFile": "beach-read.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "it-ends-with-us",
+      "title": "It Ends with Us",
+      "author": "Colleen Hoover",
+      "genre": "Romance",
+      "description": "Lily meets Ryle, a neurosurgeon who sweeps her off her feet. But as questions surface, everything she knew is upended.",
+      "rating": 4.4,
+      "pages": 385,
+      "year": 2016,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501110368-L.jpg",
+      "coverColor": "#fce7f3",
+      "coverAccent": "#db2777",
+      "isbn": "9781501110368",
+      "ebookFile": "it-ends-with-us.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "people-we-meet",
+      "title": "People We Meet on Vacation",
+      "author": "Emily Henry",
+      "genre": "Romance",
+      "description": "Alex and Poppy have nothing in common except a love of travel and each other. After a falling out, Poppy proposes one more trip.",
+      "rating": 4.2,
+      "pages": 364,
+      "year": 2021,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781984806758-L.jpg",
+      "coverColor": "#e0f2fe",
+      "coverAccent": "#0284c7",
+      "isbn": "9781984806758",
+      "ebookFile": "people-we-meet.pdf",
+      "tags": [
+        "bestseller",
+        "new-release"
+      ]
+    },
+    {
+      "id": "love-hypothesis",
+      "title": "The Love Hypothesis",
+      "author": "Ali Hazelwood",
+      "genre": "Romance",
+      "description": "Olive Smith fabricates a relationship with a brooding professor to convince her best friend to date the man she likes.",
+      "rating": 4.2,
+      "pages": 384,
+      "year": 2021,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780593336823-L.jpg",
+      "coverColor": "#fef9c3",
+      "coverAccent": "#ca8a04",
+      "isbn": "9780593336823",
+      "ebookFile": "love-hypothesis.pdf",
+      "tags": [
+        "bestseller",
+        "new-release"
+      ]
+    },
+    {
+      "id": "book-lovers",
+      "title": "Book Lovers",
+      "author": "Emily Henry",
+      "genre": "Romance",
+      "description": "Nora is a literary agent who agrees to a month-long trip to Sunshine Falls. She keeps running into Charlie, a brooding editor from back home.",
+      "rating": 4.1,
+      "pages": 377,
+      "year": 2022,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780593334836-L.jpg",
+      "coverColor": "#fae8ff",
+      "coverAccent": "#a855f7",
+      "isbn": "9780593334836",
+      "ebookFile": "book-lovers.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "pride-and-prejudice",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "description": "The story of Elizabeth Bennet and Mr. Darcy navigating societal expectations, family pressures, and their own stubborn pride.",
+      "rating": 4.7,
+      "pages": 279,
+      "year": 1813,
+      "physicalPrice": 11.99,
+      "ebookPrice": 7.79,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg",
+      "coverColor": "#f5f0e8",
+      "coverAccent": "#78350f",
+      "isbn": "9780141439518",
+      "ebookFile": "pride-and-prejudice.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "outlander",
+      "title": "Outlander",
+      "author": "Diana Gabaldon",
+      "genre": "Romance",
+      "description": "Claire Randall is transported from 1945 to 1743 Scotland, where she meets a dashing Highland warrior and becomes embroiled in the Jacobite risings.",
+      "rating": 4.4,
+      "pages": 850,
+      "year": 1991,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780440212560-L.jpg",
+      "coverColor": "#1a2e1a",
+      "coverAccent": "#22c55e",
+      "isbn": "9780440212560",
+      "ebookFile": "outlander.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "notebook",
+      "title": "The Notebook",
+      "author": "Nicholas Sparks",
+      "genre": "Romance",
+      "description": "The story of Noah Calhoun and Allie Nelson, two lovers separated by war and class, whose passion for each other endures for decades.",
+      "rating": 4.2,
+      "pages": 214,
+      "year": 1996,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781455582877-L.jpg",
+      "coverColor": "#e0f2fe",
+      "coverAccent": "#0284c7",
+      "isbn": "9781455582877",
+      "ebookFile": "notebook.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "sapiens",
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "genre": "Non-Fiction",
+      "description": "From the role of happenstance in human society to the ways biology and history define what it means to be human.",
+      "rating": 4.6,
+      "pages": 464,
+      "year": 2015,
+      "physicalPrice": 19.99,
+      "ebookPrice": 12.99,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg",
+      "coverColor": "#f5f0e8",
+      "coverAccent": "#78350f",
+      "isbn": "9780062316097",
+      "ebookFile": "sapiens.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "thinking-fast-slow",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "genre": "Non-Fiction",
+      "description": "Kahneman takes us on a tour of the mind explaining the two systems that drive the way we think.",
+      "rating": 4.4,
+      "pages": 499,
+      "year": 2011,
+      "physicalPrice": 17.99,
+      "ebookPrice": 11.69,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780374533557-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#f97316",
+      "isbn": "9780374533557",
+      "ebookFile": "thinking-fast-slow.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "brief-history-time",
+      "title": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "genre": "Non-Fiction",
+      "description": "Was there a beginning of time? Is the universe infinite? A great scientific thinker explores the mysteries of the cosmos.",
+      "rating": 4.5,
+      "pages": 212,
+      "year": 1988,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780553380163-L.jpg",
+      "coverColor": "#030712",
+      "coverAccent": "#60a5fa",
+      "isbn": "9780553380163",
+      "ebookFile": "brief-history-time.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "quiet",
+      "title": "Quiet: The Power of Introverts",
+      "author": "Susan Cain",
+      "genre": "Non-Fiction",
+      "description": "At least one-third of people are introverts. This book shows how dramatically we undervalue them, and how much we lose in doing so.",
+      "rating": 4.3,
+      "pages": 352,
+      "year": 2012,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307352156-L.jpg",
+      "coverColor": "#1e293b",
+      "coverAccent": "#38bdf8",
+      "isbn": "9780307352156",
+      "ebookFile": "quiet.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "freakonomics",
+      "title": "Freakonomics",
+      "author": "Steven D. Levitt",
+      "genre": "Non-Fiction",
+      "description": "A rogue economist explores the hidden side of everything — from cheating teachers to drug dealers who live with their moms.",
+      "rating": 4,
+      "pages": 320,
+      "year": 2005,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780060731335-L.jpg",
+      "coverColor": "#f97316",
+      "coverAccent": "#000000",
+      "isbn": "9780060731335",
+      "ebookFile": "freakonomics.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "outliers",
+      "title": "Outliers",
+      "author": "Malcolm Gladwell",
+      "genre": "Non-Fiction",
+      "description": "What makes high-achievers different? Gladwell argues we pay too much attention to what successful people are like, not where they're from.",
+      "rating": 4.2,
+      "pages": 309,
+      "year": 2008,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316017930-L.jpg",
+      "coverColor": "#f5f0e8",
+      "coverAccent": "#1e40af",
+      "isbn": "9780316017930",
+      "ebookFile": "outliers.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "born-a-crime",
+      "title": "Born a Crime",
+      "author": "Trevor Noah",
+      "genre": "Non-Fiction",
+      "description": "The compelling memoir of one man's coming-of-age, set during the twilight of apartheid and the tumultuous days of freedom that followed.",
+      "rating": 4.6,
+      "pages": 304,
+      "year": 2016,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780399588174-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#fbbf24",
+      "isbn": "9780399588174",
+      "ebookFile": "born-a-crime.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "immortal-life",
+      "title": "The Immortal Life of Henrietta Lacks",
+      "author": "Rebecca Skloot",
+      "genre": "Non-Fiction",
+      "description": "Henrietta Lacks's cells were taken without her knowledge and became one of the most important tools in medicine. Her story was ignored for decades.",
+      "rating": 4.4,
+      "pages": 381,
+      "year": 2010,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400052189-L.jpg",
+      "coverColor": "#1a2e1a",
+      "coverAccent": "#4ade80",
+      "isbn": "9781400052189",
+      "ebookFile": "immortal-life.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "guns-germs-steel",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "genre": "Non-Fiction",
+      "description": "Why did Eurasians conquer the Americas and not vice versa? Diamond argues that geography and environment shaped the modern world.",
+      "rating": 4.3,
+      "pages": 528,
+      "year": 1997,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780393354324-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a16207",
+      "isbn": "9780393354324",
+      "ebookFile": "guns-germs-steel.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "atomic-habits",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "genre": "Self-Help",
+      "description": "Practical strategies to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+      "rating": 4.8,
+      "pages": 320,
+      "year": 2018,
+      "physicalPrice": 17.99,
+      "ebookPrice": 11.69,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
+      "coverColor": "#fefce8",
+      "coverAccent": "#eab308",
+      "isbn": "9780735211292",
+      "ebookFile": "atomic-habits.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "power-of-now",
+      "title": "The Power of Now",
+      "author": "Eckhart Tolle",
+      "genre": "Self-Help",
+      "description": "Living in the now is the truest path to happiness and enlightenment. A profound guide to spiritual awakening.",
+      "rating": 4.3,
+      "pages": 236,
+      "year": 1997,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781577314806-L.jpg",
+      "coverColor": "#fdf4ff",
+      "coverAccent": "#a855f7",
+      "isbn": "9781577314806",
+      "ebookFile": "power-of-now.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "subtle-art",
+      "title": "The Subtle Art of Not Giving a F*ck",
+      "author": "Mark Manson",
+      "genre": "Self-Help",
+      "description": "A superstar blogger cuts through the crap to show us how to stop trying to be positive all the time.",
+      "rating": 4,
+      "pages": 224,
+      "year": 2016,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062457714-L.jpg",
+      "coverColor": "#f97316",
+      "coverAccent": "#000000",
+      "isbn": "9780062457714",
+      "ebookFile": "subtle-art.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "mans-search",
+      "title": "Man's Search for Meaning",
+      "author": "Viktor E. Frankl",
+      "genre": "Self-Help",
+      "description": "A psychiatrist's memoir of life in Nazi death camps, with lessons for spiritual survival. Devastating yet life-affirming.",
+      "rating": 4.7,
+      "pages": 184,
+      "year": 1946,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780807014295-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#d4d4d4",
+      "isbn": "9780807014295",
+      "ebookFile": "mans-search.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "four-agreements",
+      "title": "The Four Agreements",
+      "author": "Don Miguel Ruiz",
+      "genre": "Self-Help",
+      "description": "Based on ancient Toltec wisdom, The Four Agreements offer a powerful code of conduct that can transform our lives.",
+      "rating": 4.3,
+      "pages": 160,
+      "year": 1997,
+      "physicalPrice": 12.99,
+      "ebookPrice": 8.44,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781878424310-L.jpg",
+      "coverColor": "#fef3c7",
+      "coverAccent": "#92400e",
+      "isbn": "9781878424310",
+      "ebookFile": "four-agreements.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "mindset",
+      "title": "Mindset: The New Psychology of Success",
+      "author": "Carol S. Dweck",
+      "genre": "Self-Help",
+      "description": "World-renowned psychologist Carol Dweck reveals the power of our mindset — how fixed vs growth mindsets shape our lives.",
+      "rating": 4.4,
+      "pages": 320,
+      "year": 2006,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780345472328-L.jpg",
+      "coverColor": "#e0f2fe",
+      "coverAccent": "#1d4ed8",
+      "isbn": "9780345472328",
+      "ebookFile": "mindset.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "seven-habits",
+      "title": "The 7 Habits of Highly Effective People",
+      "author": "Stephen R. Covey",
+      "genre": "Self-Help",
+      "description": "A holistic, integrated, principle-centered approach for solving personal and professional problems.",
+      "rating": 4.3,
+      "pages": 432,
+      "year": 1989,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781982137274-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#22c55e",
+      "isbn": "9781982137274",
+      "ebookFile": "seven-habits.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "rich-dad",
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert T. Kiyosaki",
+      "genre": "Self-Help",
+      "description": "What the rich teach their kids about money that the poor and middle class do not. Financial literacy for everyone.",
+      "rating": 4.1,
+      "pages": 336,
+      "year": 1997,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612681139-L.jpg",
+      "coverColor": "#7c3aed",
+      "coverAccent": "#fbbf24",
+      "isbn": "9781612681139",
+      "ebookFile": "rich-dad.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "becoming",
+      "title": "Becoming",
+      "author": "Michelle Obama",
+      "genre": "Biography",
+      "description": "Former First Lady Michelle Obama chronicles the experiences that shaped her — from Chicago's South Side to the White House.",
+      "rating": 4.7,
+      "pages": 448,
+      "year": 2018,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781524763138-L.jpg",
+      "coverColor": "#e0d5c7",
+      "coverAccent": "#1e40af",
+      "isbn": "9781524763138",
+      "ebookFile": "becoming.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "educated",
+      "title": "Educated",
+      "author": "Tara Westover",
+      "genre": "Biography",
+      "description": "Born to survivalists in Idaho, Tara was 17 the first time she set foot in a classroom. Her quest for knowledge took her to Harvard and Cambridge.",
+      "rating": 4.6,
+      "pages": 334,
+      "year": 2018,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780399590504-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#3b82f6",
+      "isbn": "9780399590504",
+      "ebookFile": "educated.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "steve-jobs",
+      "title": "Steve Jobs",
+      "author": "Walter Isaacson",
+      "genre": "Biography",
+      "description": "The exclusive biography of Apple's co-founder, based on more than forty interviews with Jobs and conversations with family and colleagues.",
+      "rating": 4.3,
+      "pages": 656,
+      "year": 2011,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781451648539-L.jpg",
+      "coverColor": "#f5f0e8",
+      "coverAccent": "#1c1917",
+      "isbn": "9781451648539",
+      "ebookFile": "steve-jobs.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "long-walk",
+      "title": "Long Walk to Freedom",
+      "author": "Nelson Mandela",
+      "genre": "Biography",
+      "description": "The autobiography of the anti-apartheid leader, tracing his remarkable journey from childhood to the presidency of South Africa.",
+      "rating": 4.5,
+      "pages": 656,
+      "year": 1994,
+      "physicalPrice": 17.99,
+      "ebookPrice": 11.69,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316548182-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#f59e0b",
+      "isbn": "9780316548182",
+      "ebookFile": "long-walk.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "shoe-dog",
+      "title": "Shoe Dog",
+      "author": "Phil Knight",
+      "genre": "Biography",
+      "description": "The candid memoir of how Phil Knight founded Nike. Starting with a crazy idea, he tells the story of building one of the most iconic brands.",
+      "rating": 4.5,
+      "pages": 386,
+      "year": 2016,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501135910-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#ef4444",
+      "isbn": "9781501135910",
+      "ebookFile": "shoe-dog.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "glass-castle",
+      "title": "The Glass Castle",
+      "author": "Jeannette Walls",
+      "genre": "Biography",
+      "description": "The memoir of a woman who grew up with parents whose ideals and stubborn nonconformity were sometimes inspiring, sometimes devastating.",
+      "rating": 4.3,
+      "pages": 288,
+      "year": 2005,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780743247542-L.jpg",
+      "coverColor": "#e7e5e4",
+      "coverAccent": "#78716c",
+      "isbn": "9780743247542",
+      "ebookFile": "glass-castle.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "born-crime-2",
+      "title": "When Breath Becomes Air",
+      "author": "Paul Kalanithi",
+      "genre": "Biography",
+      "description": "At age thirty-six, on the verge of completing a decade's worth of training as a neurosurgeon, Paul Kalanithi was diagnosed with lung cancer.",
+      "rating": 4.6,
+      "pages": 228,
+      "year": 2016,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780812988406-L.jpg",
+      "coverColor": "#1e293b",
+      "coverAccent": "#a8a29e",
+      "isbn": "9780812988406",
+      "ebookFile": "born-crime-2.pdf",
+      "tags": [
+        "bestseller",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "diary-young-girl",
+      "title": "The Diary of a Young Girl",
+      "author": "Anne Frank",
+      "genre": "Biography",
+      "description": "The writings of a Jewish girl who hid from the Nazis in Amsterdam for two years. One of the most moving and widely read accounts of the Holocaust.",
+      "rating": 4.5,
+      "pages": 283,
+      "year": 1947,
+      "physicalPrice": 12.99,
+      "ebookPrice": 8.44,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780553296983-L.jpg",
+      "coverColor": "#f5f0e8",
+      "coverAccent": "#dc2626",
+      "isbn": "9780553296983",
+      "ebookFile": "diary-young-girl.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "1776",
+      "title": "1776",
+      "author": "David McCullough",
+      "genre": "History",
+      "description": "The intensely human story of those who marched with George Washington in the year of the Declaration of Independence.",
+      "rating": 4.2,
+      "pages": 386,
+      "year": 2005,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780743226721-L.jpg",
+      "coverColor": "#1e3a5f",
+      "coverAccent": "#dc2626",
+      "isbn": "9780743226721",
+      "ebookFile": "1776.pdf",
+      "tags": []
+    },
+    {
+      "id": "silk-roads",
+      "title": "The Silk Roads",
+      "author": "Peter Frankopan",
+      "genre": "History",
+      "description": "Far from being forgotten backwaters, Central Asia and the Middle East were the very crossroads of civilization.",
+      "rating": 4.3,
+      "pages": 636,
+      "year": 2015,
+      "physicalPrice": 17.99,
+      "ebookPrice": 11.69,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781101912379-L.jpg",
+      "coverColor": "#451a03",
+      "coverAccent": "#fbbf24",
+      "isbn": "9781101912379",
+      "ebookFile": "silk-roads.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "devil-white-city",
+      "title": "The Devil in the White City",
+      "author": "Erik Larson",
+      "genre": "History",
+      "description": "Two men at the 1893 Chicago World's Fair — one an architect, the other a serial killer. Their stories unfold in parallel.",
+      "rating": 4.2,
+      "pages": 447,
+      "year": 2003,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780375725609-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a8a29e",
+      "isbn": "9780375725609",
+      "ebookFile": "devil-white-city.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "team-of-rivals",
+      "title": "Team of Rivals",
+      "author": "Doris Kearns Goodwin",
+      "genre": "History",
+      "description": "The political genius of Abraham Lincoln, who brought his most formidable opponents together to create a remarkable cabinet.",
+      "rating": 4.5,
+      "pages": 916,
+      "year": 2005,
+      "physicalPrice": 19.99,
+      "ebookPrice": 12.99,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780743270755-L.jpg",
+      "coverColor": "#1e3a5f",
+      "coverAccent": "#f5f0e8",
+      "isbn": "9780743270755",
+      "ebookFile": "team-of-rivals.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "unbroken",
+      "title": "Unbroken",
+      "author": "Laura Hillenbrand",
+      "genre": "History",
+      "description": "The incredible story of Louis Zamperini — Olympic runner, WWII bombardier, and survivor of a harrowing odyssey of endurance.",
+      "rating": 4.5,
+      "pages": 473,
+      "year": 2010,
+      "physicalPrice": 16.99,
+      "ebookPrice": 11.04,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780812974492-L.jpg",
+      "coverColor": "#0f172a",
+      "coverAccent": "#ef4444",
+      "isbn": "9780812974492",
+      "ebookFile": "unbroken.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "emperors-new-mind",
+      "title": "Sapiens: A Graphic History",
+      "author": "Yuval Noah Harari",
+      "genre": "History",
+      "description": "The graphic adaptation of the international bestseller, turning the story of humankind into a vivid, illustrated narrative.",
+      "rating": 4.1,
+      "pages": 256,
+      "year": 2020,
+      "physicalPrice": 24.99,
+      "ebookPrice": 16.24,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780063051331-L.jpg",
+      "coverColor": "#fef9c3",
+      "coverAccent": "#854d0e",
+      "isbn": "9780063051331",
+      "ebookFile": "emperors-new-mind.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "mexican-gothic",
+      "title": "Mexican Gothic",
+      "author": "Silvia Moreno-Garcia",
+      "genre": "Horror",
+      "description": "Noemí heads to a remote mansion in the Mexican countryside after receiving a frantic letter from her cousin. The house holds dark secrets.",
+      "rating": 4,
+      "pages": 301,
+      "year": 2020,
+      "physicalPrice": 15.99,
+      "ebookPrice": 10.39,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780525620785-L.jpg",
+      "coverColor": "#1a2e1a",
+      "coverAccent": "#22c55e",
+      "isbn": "9780525620785",
+      "ebookFile": "mexican-gothic.pdf",
+      "tags": [
+        "new-release"
+      ]
+    },
+    {
+      "id": "shining",
+      "title": "The Shining",
+      "author": "Stephen King",
+      "genre": "Horror",
+      "description": "Jack Torrance's new job at the Overlook Hotel is the perfect chance for a fresh start. But a sinister presence begins to manifest.",
+      "rating": 4.5,
+      "pages": 447,
+      "year": 1977,
+      "physicalPrice": 14.99,
+      "ebookPrice": 9.74,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307743657-L.jpg",
+      "coverColor": "#450a0a",
+      "coverAccent": "#fca5a5",
+      "isbn": "9780307743657",
+      "ebookFile": "shining.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "house-of-leaves",
+      "title": "House of Leaves",
+      "author": "Mark Z. Danielewski",
+      "genre": "Horror",
+      "description": "A experimental novel that challenges readers with its structure. A house that is bigger on the inside than on the outside.",
+      "rating": 4.1,
+      "pages": 709,
+      "year": 2000,
+      "physicalPrice": 19.99,
+      "ebookPrice": 12.99,
+      "formats": [
+        "physical"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780375703768-L.jpg",
+      "coverColor": "#1a1a1a",
+      "coverAccent": "#3b82f6",
+      "isbn": "9780375703768",
+      "ebookFile": null,
+      "tags": []
+    },
+    {
+      "id": "haunting-hill",
+      "title": "The Haunting of Hill House",
+      "author": "Shirley Jackson",
+      "genre": "Horror",
+      "description": "Four seekers arrive at Hill House. The story of their decadent stay is the stuff of legendary horror.",
+      "rating": 4.2,
+      "pages": 246,
+      "year": 1959,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780143039983-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a8a29e",
+      "isbn": "9780143039983",
+      "ebookFile": "haunting-hill.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "bird-box",
+      "title": "Bird Box",
+      "author": "Josh Malerman",
+      "genre": "Horror",
+      "description": "Something terrifying lurks outside. If you see it, you go mad. Malorie and her children must journey blindfolded to safety.",
+      "rating": 3.9,
+      "pages": 262,
+      "year": 2014,
+      "physicalPrice": 13.99,
+      "ebookPrice": 9.09,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062259653-L.jpg",
+      "coverColor": "#030712",
+      "coverAccent": "#6b7280",
+      "isbn": "9780062259653",
+      "ebookFile": "bird-box.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "it",
+      "title": "It",
+      "author": "Stephen King",
+      "genre": "Horror",
+      "description": "The evil clown Pennywise terrorizes the children of Derry, Maine. A group of outcasts bands together to fight the ancient, shape-shifting evil.",
+      "rating": 4.3,
+      "pages": 1138,
+      "year": 1986,
+      "physicalPrice": 18.99,
+      "ebookPrice": 12.34,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501142970-L.jpg",
+      "coverColor": "#450a0a",
+      "coverAccent": "#ef4444",
+      "isbn": "9781501142970",
+      "ebookFile": "it.pdf",
+      "tags": [
+        "bestseller"
+      ]
+    },
+    {
+      "id": "frankenstein",
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "genre": "Horror",
+      "description": "Victor Frankenstein creates a creature from dead tissue. But the being, rejected by society and its creator, seeks revenge.",
+      "rating": 4,
+      "pages": 280,
+      "year": 1818,
+      "physicalPrice": 11.99,
+      "ebookPrice": 7.79,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780486282114-L.jpg",
+      "coverColor": "#1c1917",
+      "coverAccent": "#a3a3a3",
+      "isbn": "9780486282114",
+      "ebookFile": "frankenstein.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    },
+    {
+      "id": "dracula",
+      "title": "Dracula",
+      "author": "Bram Stoker",
+      "genre": "Horror",
+      "description": "The classic tale of Count Dracula's attempt to move from Transylvania to England so that he may find new blood and spread the undead curse.",
+      "rating": 4,
+      "pages": 418,
+      "year": 1897,
+      "physicalPrice": 12.99,
+      "ebookPrice": 8.44,
+      "formats": [
+        "physical",
+        "ebook"
+      ],
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780486411095-L.jpg",
+      "coverColor": "#450a0a",
+      "coverAccent": "#dc2626",
+      "isbn": "9780486411095",
+      "ebookFile": "dracula.pdf",
+      "tags": [
+        "award-winner"
+      ]
+    }
+  ],
+  "cart": [],
+  "purchases": []
+}
