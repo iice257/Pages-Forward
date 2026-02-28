@@ -1,4 +1,4 @@
-##Pages Forward
+Pages Forward
 
 Pages Forward is a clean, easy-to-use online bookstore. Buy physical books or ebooks, read them directly in your browser, and keep track of what you love—all in one place. Simple, fast, and ready to help you discover your next read.
 
