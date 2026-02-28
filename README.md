@@ -1,10 +1,13 @@
-Pages Forward
+Pages Forward - Original website version.
 
+(This was the original website for a much lighter and earlier version of the pages forward website)
 Pages Forward is a clean, easy-to-use online bookstore. Buy physical books or ebooks, read them directly in your browser, and keep track of what you love—all in one place. Simple, fast, and ready to help you discover your next read.
 
 --------------------
 
 Pages Forward is a lightweight platform for book lovers. It’s designed to let you browse, buy, and read books without the clutter or distraction of other sites.
+
+Link to page [deprecated]
 
 Core Features
 
