@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pages Forward | Curated Book Catalog</title>
+  <title>Pages Forward | Bookstore Catalog</title>
+  <meta name="description"
+    content="Browse the current Pages Forward bookstore inventory and send a request for available books.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -57,9 +59,16 @@
       </svg>
     </div>
     <div class="header-actions">
-      <button class="btn-h theme-toggle" id="themeToggle"><svg viewBox="0 0 24 24">
+      <button class="btn-h theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Theme"><svg
+          viewBox="0 0 24 24">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg></button>
+      <a class="request-history-link" href="requests.html" aria-label="View saved requests" title="My Requests">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 5h18v14H3z" />
+          <path d="M7 9h10M7 13h7" />
+        </svg>
+      </a>
       <button class="folder-btn" id="folderBtn">
         <svg class="folder-icon" viewBox="0 0 24 24">
           <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
@@ -130,6 +139,10 @@
       </div>
     </div>
   </div>
+  <script src="js/config.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/requests.js"></script>
   <script src="js/data.js"></script>
   <script>
     // Simplified module - search only
@@ -203,6 +216,18 @@
       }[char]));
     }
 
+    function safeCoverUrl(value) {
+      const raw = String(value || '').trim();
+      if (/^assets\/covers\/[a-zA-Z0-9._/-]+$/.test(raw)) return raw;
+
+      try {
+        const url = new URL(raw);
+        return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
+
     function canRequestBook(book) {
       return book && book.status === 'available' && (book.stock ?? 1) > 0;
     }
@@ -234,10 +259,22 @@
     }
 
     function renderCover(book, className = '') {
-      if (!book.coverImage) {
-        return `<div class="cover-fallback ${className}"><span>${escapeHtml(book.title)}</span></div>`;
+      const coverUrl = safeCoverUrl(book.coverImage);
+      if (!coverUrl) {
+        return `<div class="cover-fallback ${className}" role="img" aria-label="Cover unavailable for ${escapeHtml(book.title)}"><span>${escapeHtml(book.title)}</span></div>`;
       }
-      return `<img loading="lazy" class="${className}" src="${book.coverImage}" alt="${escapeHtml(book.title)}" onerror="this.replaceWith(Object.assign(document.createElement('div'), { className: 'cover-fallback', innerHTML: '<span>' + this.alt + '</span>' }))">`;
+      return `<img loading="lazy" class="${className}" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(book.title)}" onerror="handleCoverError(this)">`;
+    }
+
+    function handleCoverError(image) {
+      const fallback = document.createElement('div');
+      const label = document.createElement('span');
+      fallback.className = 'cover-fallback';
+      fallback.setAttribute('role', 'img');
+      fallback.setAttribute('aria-label', `Cover unavailable for ${image.alt}`);
+      label.textContent = image.alt;
+      fallback.appendChild(label);
+      image.replaceWith(fallback);
     }
 
     function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
@@ -288,7 +325,8 @@
 
     function updateBg(imm = false) {
       const book = books[currentIndex], inc = activeBg === 1 ? bb2 : bb1, out = activeBg === 1 ? bb1 : bb2;
-      inc.style.backgroundImage = book.coverImage ? `url(${book.coverImage})` : 'none';
+      const coverUrl = safeCoverUrl(book.coverImage);
+      inc.style.backgroundImage = coverUrl ? `url("${coverUrl.replace(/"/g, '%22')}")` : 'none';
       if (imm) { inc.classList.add('active') }
       else { setTimeout(() => { inc.classList.add('active'); out.classList.remove('active') }, 50) }
       activeBg = activeBg === 1 ? 2 : 1;
@@ -319,10 +357,11 @@
         const imgInc = arcToggle ? slot.querySelector('.l2') : slot.querySelector('.l1');
         const imgOut = arcToggle ? slot.querySelector('.l1') : slot.querySelector('.l2');
         const txt = slot.querySelector('.arc-label');
+        const coverUrl = safeCoverUrl(book.coverImage);
 
-        slot.classList.toggle('missing-cover', !book.coverImage);
-        if (book.coverImage) {
-          imgInc.src = book.coverImage;
+        slot.classList.toggle('missing-cover', !coverUrl);
+        if (coverUrl) {
+          imgInc.src = coverUrl;
         } else {
           imgInc.removeAttribute('src');
         }
@@ -585,23 +624,31 @@
     // Bindings
     document.getElementById('prevBtn').addEventListener('click', () => navigate(-1));
     document.getElementById('nextBtn').addEventListener('click', () => navigate(1));
-    document.getElementById('themeToggle').addEventListener('click', () => document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    window.PF.Theme.init(document.getElementById('themeToggle'));
     document.getElementById('fullListBtn').addEventListener('click', openGallery);
     document.getElementById('galleryClose').addEventListener('click', () => galleryOv.classList.remove('active'));
     document.getElementById('folderBtn').addEventListener('click', () => collPreview.classList.toggle('open'));
     document.getElementById('viewAllBtn').addEventListener('click', openCollModal);
     document.getElementById('collClose').addEventListener('click', () => collOv.classList.remove('active'));
     document.getElementById('collOv').addEventListener('click', e => { if (e.target === collOv) collOv.classList.remove('active') });
-    document.addEventListener('keydown', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active')) { if (e.key === 'Escape') { galleryOv.classList.remove('active'); collOv.classList.remove('active') } return } if (e.key === 'ArrowLeft') navigate(-1); if (e.key === 'ArrowRight') navigate(1) });
-    let wt; document.addEventListener('wheel', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active')) return; e.preventDefault(); clearTimeout(wt); wt = setTimeout(() => { if (Math.abs(e.deltaY) > 30) navigate(e.deltaY > 0 ? 1 : -1) }, 50) }, { passive: false });
+    document.addEventListener('keydown', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active') || requestOv.classList.contains('active')) { if (e.key === 'Escape') { galleryOv.classList.remove('active'); collOv.classList.remove('active'); requestOv.classList.remove('active') } return } if (e.key === 'ArrowLeft') navigate(-1); if (e.key === 'ArrowRight') navigate(1) });
+    let wt; document.addEventListener('wheel', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active') || requestOv.classList.contains('active')) return; e.preventDefault(); clearTimeout(wt); wt = setTimeout(() => { if (Math.abs(e.deltaY) > 30) navigate(e.deltaY > 0 ? 1 : -1) }, 50) }, { passive: false });
     let tsx = 0; document.addEventListener('touchstart', e => { tsx = e.touches[0].clientX }, { passive: true }); document.addEventListener('touchend', e => { const d = tsx - e.changedTouches[0].clientX; if (Math.abs(d) > 60) navigate(d > 0 ? 1 : -1) }, { passive: true });
     document.addEventListener('click', e => { if (!e.target.closest('.folder-btn') && !e.target.closest('.coll-preview')) collPreview.classList.remove('open') });
 
     // Init
     async function initApp() {
       books = sortCatalog(booksData);
-      if (window.PF && window.PF.supabase) {
-        const { data, error } = await window.PF.supabase.from('books').select('*');
+      const supabase = window.PF && window.PF.supabaseReady
+        ? await window.PF.supabaseReady
+        : null;
+      const useRemoteCatalog = Boolean(
+        window.PF_CONFIG &&
+        window.PF_CONFIG.supabase &&
+        window.PF_CONFIG.supabase.useRemoteCatalog
+      );
+      if (supabase && useRemoteCatalog) {
+        const { data, error } = await supabase.from('books').select('*');
         if (error) console.error('Supabase error:', error);
         else if (data) {
           books = sortCatalog(data.map(b => ({
@@ -640,6 +687,9 @@
     const requestClose = document.getElementById('requestClose');
 
     requestClose.onclick = () => requestOv.classList.remove('active');
+    requestOv.addEventListener('click', event => {
+      if (event.target === requestOv) requestOv.classList.remove('active');
+    });
 
     function startRequest() {
       if (!collection.length) {
@@ -654,58 +704,135 @@
     function renderRequestStep1() {
       const itemsHtml = collection.map(b => `<li>${escapeHtml(b.title)} <span>${escapeHtml(b.author)}</span></li>`).join('');
       requestBody.innerHTML = `
-            <div class="chk-step">
-                <h4 style="font-family:var(--fb);margin-bottom:1rem;color:var(--char)">Confirm your request</h4>
-                <p style="color:var(--stone);margin-bottom:1.5rem;line-height:1.6">Send this request to the bookstore. We will confirm price, availability, and pickup or delivery details before payment.</p>
-                <ul class="request-summary">${itemsHtml}</ul>
-                <div style="display:flex;justify-content:flex-end;margin-top:1.5rem">
-                    <button onclick="completeRequest()" style="padding:0.8rem 2rem;background:var(--gold);color:#fff;border:none;border-radius:2rem;font-family:var(--fb);text-transform:uppercase;letter-spacing:0.1em;cursor:pointer">Submit Request</button>
-                </div>
-            </div>
+        <form class="request-form" id="requestForm" novalidate>
+          <div>
+            <h4>Confirm your request</h4>
+            <p class="request-intro">We will use these details to confirm price, availability, and fulfillment before payment.</p>
+          </div>
+          <ul class="request-summary">${itemsHtml}</ul>
+          <div class="request-fields">
+            <label class="request-field">
+              <span>Full name</span>
+              <input name="name" type="text" autocomplete="name" maxlength="80" required>
+              <small data-error-for="name"></small>
+            </label>
+            <label class="request-field">
+              <span>Phone or email</span>
+              <input name="contact" type="text" autocomplete="email" maxlength="120" required>
+              <small data-error-for="contact"></small>
+            </label>
+            <label class="request-field">
+              <span>Fulfillment</span>
+              <select name="fulfillment" required>
+                <option value="pickup">Pickup</option>
+                <option value="delivery">Delivery</option>
+              </select>
+              <small data-error-for="fulfillment"></small>
+            </label>
+            <label class="request-field">
+              <span>Notes <em>Optional</em></span>
+              <textarea name="notes" rows="3" maxlength="500" placeholder="Preferred timing or delivery area"></textarea>
+            </label>
+          </div>
+          <div class="request-form-footer">
+            <p class="request-form-status" id="requestFormStatus" role="status"></p>
+            <button class="request-primary-btn" type="submit">Save Request</button>
+          </div>
+        </form>
         `;
+      document.getElementById('requestForm').addEventListener('submit', completeRequest);
     }
 
-    async function completeRequest() {
+    function showRequestErrors(errors) {
+      requestBody.querySelectorAll('[data-error-for]').forEach(element => {
+        element.textContent = errors[element.dataset.errorFor] || '';
+      });
+    }
+
+    async function completeRequest(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const status = document.getElementById('requestFormStatus');
       const orderItems = collection.map(b => ({ id: bookKey(b.id), title: b.title, author: b.author, price: b.price }));
-      const order = {
-        id: `PF-${Date.now().toString(36).toUpperCase()}`,
-        createdAt: new Date().toISOString(),
+      const draft = {
         items: orderItems,
-        status: 'pending',
-        totalAmount: null
+        customer: {
+          name: form.elements.name.value,
+          contact: form.elements.contact.value
+        },
+        fulfillment: form.elements.fulfillment.value,
+        notes: form.elements.notes.value
       };
-      const orders = JSON.parse(localStorage.getItem('pf_orders') || '[]');
-      orders.unshift(order);
-      localStorage.setItem('pf_orders', JSON.stringify(orders.slice(0, 25)));
 
-      window.PF.lastOrderRequestText = `Pages Forward book request ${order.id}\n\n${order.items.map(item => `- ${item.title} by ${item.author}`).join('\n')}\n\nPlease confirm price, availability, and pickup or delivery details.`;
-
-      requestBody.innerHTML = `<div style="text-align:center;padding:2rem"><h3 style="color:var(--gold);margin-bottom:0.75rem">Request Saved</h3><p>Your request ID is <strong>${order.id}</strong>.</p><p style="color:var(--stone);font-size:0.9rem;margin:0.75rem 0 1.5rem">Send the copied request to the bookstore to confirm price and fulfillment.</p><button onclick="copyRequestText()" style="padding:0.75rem 1.6rem;background:var(--char);color:#fff;border:none;border-radius:2rem;font-family:var(--fb);text-transform:uppercase;letter-spacing:0.08em;cursor:pointer">Copy Request</button><div id="copyStatus" style="font-family:var(--fs);font-size:0.7rem;color:var(--stone);margin-top:0.75rem"></div></div>`;
-
-      if (window.PF && window.PF.supabase) {
-        try {
-          const { error } = await window.PF.supabase.from('orders').insert([{
-            items: orderItems,
-            total_amount: null,
-            status: 'pending',
-            receipt_sent: false
-          }]);
-          if (error) console.error('Order error:', error);
-        } catch (e) { console.error(e); }
+      const validation = window.PF.Requests.validate(draft);
+      showRequestErrors(validation.errors);
+      if (!validation.valid) {
+        status.textContent = 'Review the highlighted details.';
+        return;
       }
 
+      submitButton.disabled = true;
+      submitButton.textContent = 'Saving...';
+      status.textContent = '';
+
+      let order;
+      try {
+        order = window.PF.Requests.create(draft);
+        order = await window.PF.Requests.sync(order);
+      } catch (error) {
+        status.textContent = error.message || 'The request could not be saved.';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Save Request';
+        return;
+      }
+
+      window.PF.lastRequest = order;
+      const syncMessage = order.syncStatus === 'synced'
+        ? 'The request was sent to the bookstore.'
+        : 'The request is saved on this device. Share or copy it to send it to the bookstore.';
+
+      requestBody.innerHTML = `
+        <div class="request-success">
+          <div class="request-success-mark" aria-hidden="true">OK</div>
+          <h3>Request Saved</h3>
+          <p>Your request ID is <strong>${escapeHtml(order.id)}</strong>.</p>
+          <p>${syncMessage}</p>
+          <div class="request-success-actions">
+            <button class="request-primary-btn" id="shareRequestBtn" type="button">Share Request</button>
+            <button class="request-secondary-btn" id="copyRequestBtn" type="button">Copy</button>
+            <a class="request-secondary-btn" href="requests.html">My Requests</a>
+          </div>
+          <div class="request-action-status" id="requestActionStatus" role="status"></div>
+        </div>`;
+
+      document.getElementById('shareRequestBtn').addEventListener('click', shareRequest);
+      document.getElementById('copyRequestBtn').addEventListener('click', copyRequestText);
       collection = [];
       updateCollUI();
       initSlider();
     }
 
     async function copyRequestText() {
-      const status = document.getElementById('copyStatus');
+      const status = document.getElementById('requestActionStatus');
       try {
-        await navigator.clipboard.writeText(window.PF.lastOrderRequestText || '');
+        await window.PF.Requests.copy(window.PF.lastRequest);
         if (status) status.textContent = 'Request copied.';
       } catch (error) {
-        if (status) status.textContent = window.PF.lastOrderRequestText || 'Copy failed.';
+        if (status) status.textContent = 'Copy is unavailable. Open My Requests to view the details.';
+      }
+    }
+
+    async function shareRequest() {
+      const status = document.getElementById('requestActionStatus');
+      try {
+        const result = await window.PF.Requests.share(window.PF.lastRequest);
+        if (status) status.textContent = result === 'copied'
+          ? 'Sharing is unavailable, so the request was copied.'
+          : 'Request shared.';
+      } catch (error) {
+        if (error && error.name === 'AbortError') return;
+        if (status) status.textContent = 'Sharing was not completed.';
       }
     }
 

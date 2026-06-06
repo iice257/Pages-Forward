@@ -1,0 +1,283 @@
+body.requests-page {
+  min-height: 100vh;
+  overflow: auto;
+  opacity: 1;
+  filter: none;
+  background: var(--bg);
+}
+
+.requests-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 68px;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--div);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.requests-brand {
+  color: var(--umber);
+  font-family: var(--fs);
+  font-size: .92rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.requests-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+.requests-link,
+.requests-icon-btn {
+  min-height: 2.25rem;
+  border: 1px solid var(--sand);
+  border-radius: 4px;
+  background: var(--bg2);
+  color: var(--umber);
+  padding: 0 .85rem;
+  font-family: var(--fs);
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.requests-icon-btn {
+  width: 2.25rem;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.requests-icon-btn svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.requests-link:hover,
+.requests-icon-btn:hover {
+  background: var(--char);
+  border-color: var(--char);
+  color: var(--bg2);
+}
+
+.requests-main {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3.5rem 0 5rem;
+}
+
+.requests-title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--div);
+}
+
+.requests-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--ff);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.requests-subtitle {
+  margin: .7rem 0 0;
+  color: var(--stone);
+  font-size: .92rem;
+}
+
+.requests-count {
+  color: var(--stone);
+  font-family: var(--fs);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.request-record {
+  border-top: 1px solid var(--sand);
+  padding: 1.4rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+}
+
+.request-record:first-child {
+  border-top: 0;
+}
+
+.request-record-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem 1rem;
+  margin-bottom: .65rem;
+}
+
+.request-record-id {
+  color: var(--ink);
+  font-family: var(--fs);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.request-record-date,
+.request-record-meta {
+  color: var(--stone);
+  font-family: var(--fs);
+  font-size: .68rem;
+}
+
+.request-record-status {
+  border: 1px solid var(--sand);
+  border-radius: 99px;
+  padding: .18rem .55rem;
+  color: var(--olive);
+  font-family: var(--fs);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.request-record h2 {
+  margin: 0 0 .4rem;
+  color: var(--ink);
+  font-family: var(--ff);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.request-record-items {
+  margin: .75rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--umber);
+  font-size: .86rem;
+}
+
+.request-record-items li+li {
+  margin-top: .25rem;
+}
+
+.request-record-actions {
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+
+.request-record-actions button {
+  min-height: 2.2rem;
+  border: 1px solid var(--sand);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--umber);
+  padding: .5rem .75rem;
+  font-family: var(--fs);
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.request-record-actions button:hover {
+  border-color: var(--char);
+  color: var(--ink);
+}
+
+.request-record-actions button.danger {
+  color: var(--red);
+}
+
+.request-record-message {
+  min-height: 1rem;
+  color: var(--stone);
+  font-family: var(--fs);
+  font-size: .62rem;
+  text-align: right;
+}
+
+.requests-empty {
+  padding: 5rem 1rem;
+  border-top: 1px solid var(--sand);
+  text-align: center;
+}
+
+.requests-empty h2 {
+  margin: 0 0 .6rem;
+  color: var(--ink);
+  font-family: var(--ff);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.requests-empty p {
+  margin: 0 0 1.5rem;
+  color: var(--stone);
+}
+
+@media (max-width: 640px) {
+  .requests-header {
+    padding: .8rem 1rem;
+  }
+
+  .requests-brand {
+    max-width: 42vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: .72rem;
+  }
+
+  .requests-main {
+    padding-top: 2.2rem;
+  }
+
+  .requests-title-row {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .request-record {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .request-record-actions {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .request-record-message {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}

@@ -4,391 +4,739 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Pages Forward</title>
+  <title>Store Admin | Pages Forward</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B6A2F' stroke-width='2'><path d='M4 5h16v14H4z'/><path d='M8 9h8M8 13h5'/></svg>">
   <style>
     :root {
-      --bg: #f4f4f5;
-      --card: #ffffff;
-      --text: #18181b;
-      --border: #e4e4e7;
-      --primary: #d97706;
-      /* Amber-600 */
+      --bg: #f6f6f4;
+      --surface: #fff;
+      --text: #20201d;
+      --muted: #6f706b;
+      --border: #deded9;
+      --accent: #8b6a2f;
+      --danger: #a13f3f;
+      --success: #3f704a;
+      --warning: #98620f;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      min-width: 320px;
       background: var(--bg);
-      padding: 2rem;
       color: var(--text);
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
-    header {
+    button {
+      cursor: pointer;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .admin-topbar {
+      min-height: 64px;
+      padding: 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    h1 {
+    .admin-brand {
+      color: var(--text);
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .admin-topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .admin-shell {
+      width: min(1240px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .state-panel {
+      width: min(560px, 100%);
+      margin: 8vh auto 0;
+      padding: 2rem 0;
+      border-top: 2px solid var(--text);
+    }
+
+    .state-panel h1 {
+      margin: 0 0 .75rem;
+      font-size: 1.7rem;
+    }
+
+    .state-panel p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .state-panel code {
+      color: var(--text);
+      font-size: .85em;
+    }
+
+    .auth-form {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1.4rem;
+    }
+
+    .auth-form input {
+      min-width: 0;
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      padding: .7rem .8rem;
+    }
+
+    .status-message {
+      min-height: 1.2rem;
+      margin-top: .75rem;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .admin-button {
+      min-height: 2.3rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--text);
+      padding: .55rem .85rem;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    .admin-button:hover {
+      border-color: var(--text);
+    }
+
+    .admin-button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .admin-button.danger {
+      color: var(--danger);
+    }
+
+    .admin-button.small {
+      min-height: 1.9rem;
+      padding: .35rem .55rem;
+      font-size: .7rem;
+    }
+
+    .admin-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-heading h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.65rem;
+    }
+
+    .admin-heading p {
+      margin: .35rem 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .admin-tab {
+      border: 0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      padding: .75rem .1rem;
+      font-size: .8rem;
       font-weight: 700;
     }
 
-    .tabs {
-      display: flex;
-      gap: 1rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2rem;
-    }
-
-    .tab {
-      padding: 0.75rem 1.5rem;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      font-weight: 500;
-      color: #71717a;
-      transition: all 0.2s;
-    }
-
-    .tab:hover {
+    .admin-tab.active {
+      border-bottom-color: var(--accent);
       color: var(--text);
     }
 
-    .tab.active {
-      border-bottom-color: var(--primary);
-      color: var(--primary);
-      font-weight: 600;
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-top: 1px solid var(--border);
     }
 
     table {
       width: 100%;
+      min-width: 840px;
       border-collapse: collapse;
+      background: var(--surface);
     }
 
     th,
     td {
-      text-align: left;
-      padding: 1rem;
+      padding: .8rem .75rem;
       border-bottom: 1px solid var(--border);
-      vertical-align: middle;
+      text-align: left;
+      vertical-align: top;
     }
 
     th {
-      background: #fafafa;
-      font-weight: 600;
-      font-size: 0.875rem;
+      color: var(--muted);
+      font-size: .66rem;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #71717a;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    td {
+      font-size: .8rem;
     }
 
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.1s;
+    .cell-title {
+      color: var(--text);
+      font-weight: 700;
     }
 
-    .btn:hover {
-      background: #fafafa;
-      border-color: #d4d4d8;
+    .cell-muted {
+      margin-top: .2rem;
+      color: var(--muted);
+      font-size: .72rem;
     }
 
-    .btn-primary {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
+    .items-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
     }
 
-    .btn-primary:hover {
-      background: #b45309;
-      border-color: #b45309;
-    }
-
-    .btn-sm {
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
+    .items-list li+li {
+      margin-top: .25rem;
     }
 
     .status-badge {
       display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: .18rem .5rem;
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: capitalize;
     }
 
     .status-pending {
-      background: #ffedd5;
-      color: #9a3412;
+      color: var(--warning);
     }
 
-    .status-purchased {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .status-reserved {
-      background: #dbeafe;
-      color: #1e40af;
+    .status-confirmed,
+    .status-purchased,
+    .status-fulfilled {
+      color: var(--success);
     }
 
     .status-cancelled {
-      background: #f4f4f5;
-      color: #52525b;
+      color: var(--danger);
     }
 
-    .items-list {
-      font-size: 0.875rem;
-      color: #52525b;
-      line-height: 1.4;
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
     }
 
-    .stock-input {
-      width: 60px;
-      padding: 0.25rem 0.5rem;
+    .inventory-control {
+      width: 88px;
       border: 1px solid var(--border);
       border-radius: 4px;
+      background: var(--surface);
+      padding: .4rem .45rem;
+      color: var(--text);
     }
 
-    .refresh-btn {
-      margin-left: auto;
+    .inventory-control.status {
+      width: 120px;
     }
 
-    /* Loading */
-    .loading {
-      padding: 2rem;
+    .cover-thumb {
+      width: 34px;
+      height: 48px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      object-fit: cover;
+    }
+
+    .loading-row {
+      padding: 2.5rem 1rem;
+      color: var(--muted);
       text-align: center;
-      color: #71717a;
+    }
+
+    @media (max-width: 680px) {
+      .admin-topbar {
+        padding: 0 .85rem;
+      }
+
+      .admin-shell {
+        width: min(100% - 1rem, 1240px);
+        padding-top: 1.25rem;
+      }
+
+      .admin-heading,
+      .auth-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
     }
   </style>
-
-  <!-- Supabase SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
   <script src="js/supabase-client.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>Pages Forward Admin</h1>
-      <button class="btn refresh-btn" onclick="initAdmin()">Refresh Data</button>
-    </header>
-
-    <div class="tabs">
-      <div class="tab active" onclick="switchTab('orders')">Orders</div>
-      <div class="tab" onclick="switchTab('inventory')">Inventory</div>
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index.html">Pages Forward Admin</a>
+    <div class="admin-topbar-actions">
+      <button class="admin-button" id="refreshButton" type="button" hidden>Refresh</button>
+      <button class="admin-button" id="signOutButton" type="button" hidden>Sign Out</button>
     </div>
+  </header>
 
-    <div id="ordersView" class="view">
-      <table id="ordersTable">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Date</th>
-            <th>Items</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="ordersBody"></tbody>
-      </table>
-      <div id="ordersLoading" class="loading">Loading orders...</div>
-    </div>
+  <main class="admin-shell">
+    <section class="state-panel" id="loadingState">
+      <h1>Checking access</h1>
+      <p>Verifying the bookstore backend and administrator session.</p>
+    </section>
 
-    <div id="inventoryView" class="view" style="display:none">
-      <table id="inventoryTable">
-        <thead>
-          <tr>
-            <th style="width: 50px">Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="inventoryBody"></tbody>
-      </table>
-      <div id="inventoryLoading" class="loading">Loading inventory...</div>
-    </div>
-  </div>
+    <section class="state-panel" id="setupState" hidden>
+      <h1>Backend setup required</h1>
+      <p>This admin page is locked until a Supabase URL and publishable key are configured in
+        <code>js/config.js</code>.</p>
+      <p>Apply the Phase 2 security migration before enabling the client. The admin UI does not provide an
+        insecure local bypass.</p>
+    </section>
+
+    <section class="state-panel" id="authState" hidden>
+      <h1>Administrator sign in</h1>
+      <p>Enter an approved administrator email. Supabase will send a secure sign-in link.</p>
+      <form class="auth-form" id="authForm">
+        <input id="adminEmail" type="email" autocomplete="email" placeholder="admin@example.com" required>
+        <button class="admin-button primary" type="submit">Send Sign-in Link</button>
+      </form>
+      <div class="status-message" id="authStatus" role="status"></div>
+    </section>
+
+    <section class="state-panel" id="deniedState" hidden>
+      <h1>Access denied</h1>
+      <p id="deniedMessage">This account is signed in but is not an approved Pages Forward administrator.</p>
+      <button class="admin-button" id="deniedSignOutButton" type="button">Sign Out</button>
+    </section>
+
+    <section id="adminApp" hidden>
+      <div class="admin-heading">
+        <div>
+          <h1>Store Operations</h1>
+          <p id="sessionLabel"></p>
+        </div>
+      </div>
+
+      <div class="admin-tabs" role="tablist" aria-label="Admin views">
+        <button class="admin-tab active" type="button" data-tab="orders" role="tab">Requests</button>
+        <button class="admin-tab" type="button" data-tab="inventory" role="tab">Inventory</button>
+      </div>
+
+      <section id="ordersView">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Request</th>
+                <th>Customer</th>
+                <th>Books</th>
+                <th>Fulfillment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody">
+              <tr>
+                <td class="loading-row" colspan="6">Loading requests...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="inventoryView" hidden>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cover</th>
+                <th>Book</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryBody">
+              <tr>
+                <td class="loading-row" colspan="6">Loading inventory...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
 
   <script>
-    // State
-    let orders = [];
-    let books = [];
-    let currentTab = 'orders';
+    (function () {
+      'use strict';
 
-    // Init
-    async function initAdmin() {
-      if (!window.PF || !window.PF.supabase) {
-        console.error('Supabase not initialized');
-        return;
-      }
-      await Promise.all([fetchOrders(), fetchInventory()]);
-    }
+      let client = null;
+      let orders = [];
+      let books = [];
 
-    async function fetchOrders() {
-      document.getElementById('ordersLoading').style.display = 'block';
-      document.getElementById('ordersBody').innerHTML = '';
+      const stateIds = ['loadingState', 'setupState', 'authState', 'deniedState', 'adminApp'];
+      const refreshButton = document.getElementById('refreshButton');
+      const signOutButton = document.getElementById('signOutButton');
+      const ordersBody = document.getElementById('ordersBody');
+      const inventoryBody = document.getElementById('inventoryBody');
 
-      const { data, error } = await window.PF.supabase
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching orders:', error);
-        document.getElementById('ordersLoading').textContent = 'Error loading orders';
-        return;
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
       }
 
-      orders = data;
-      renderOrders();
-      document.getElementById('ordersLoading').style.display = 'none';
-    }
+      function safeImageUrl(value) {
+        const raw = String(value || '').trim();
+        if (/^assets\/covers\/[a-zA-Z0-9._/-]+$/.test(raw)) return raw;
 
-    async function fetchInventory() {
-      document.getElementById('inventoryLoading').style.display = 'block';
-      document.getElementById('inventoryBody').innerHTML = '';
-
-      const { data, error } = await window.PF.supabase
-        .from('books')
-        .select('*')
-        .order('title');
-
-      if (error) {
-        console.error('Error fetching inventory:', error);
-        document.getElementById('inventoryLoading').textContent = 'Error loading inventory';
-        return;
+        try {
+          const url = new URL(raw);
+          return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+        } catch {
+          return '';
+        }
       }
 
-      books = data;
-      renderInventory();
-      document.getElementById('inventoryLoading').style.display = 'none';
-    }
-
-    // Render Functions
-    function renderOrders() {
-      const tbody = document.getElementById('ordersBody');
-      tbody.innerHTML = orders.map(order => {
-        const date = new Date(order.created_at).toLocaleString();
-        const itemsList = order.items.map(i => `${i.title} (₦${(i.price || 0).toLocaleString()})`).join('<br>');
-
-        return `
-                    <tr>
-                        <td style="font-family:monospace;font-size:0.8em">${order.id.slice(0, 8)}...</td>
-                        <td>${date}</td>
-                        <td class="items-list">${itemsList}</td>
-                        <td style="font-weight:600">₦${order.total_amount.toLocaleString()}</td>
-                        <td><span class="status-badge status-${order.status}">${order.status}</span></td>
-                        <td>
-                            ${order.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="updateOrderStatus('${order.id}', 'purchased')">Confirm</button>` : ''}
-                            ${order.status !== 'cancelled' ? `<button class="btn btn-sm" onclick="updateOrderStatus('${order.id}', 'cancelled')">Cancel</button>` : ''}
-                        </td>
-                    </tr>
-                `;
-      }).join('');
-    }
-
-    function renderInventory() {
-      const tbody = document.getElementById('inventoryBody');
-      tbody.innerHTML = books.map(book => {
-        return `
-                    <tr>
-                        <td><img src="${book.cover_image}" style="width:30px;height:45px;object-fit:cover;border-radius:2px"></td>
-                        <td>
-                            <div style="font-weight:600">${book.title}</div>
-                            <div style="font-size:0.8em;color:#71717a">${book.author}</div>
-                        </td>
-                        <td>₦${book.price.toLocaleString()}</td>
-                        <td>
-                            <input type="number" class="stock-input" value="${book.stock}" id="stock-${book.id}" onchange="updateStock('${book.id}', this.value)">
-                        </td>
-                        <td>${book.status}</td>
-                        <td>
-                             <button class="btn btn-sm" onclick="saveStock('${book.id}')">Save</button>
-                        </td>
-                    </tr>
-                `;
-      }).join('');
-    }
-
-    // Actions
-    async function updateOrderStatus(id, status) {
-      const { error } = await window.PF.supabase
-        .from('orders')
-        .update({ status })
-        .eq('id', id);
-
-      if (error) alert('Error updating order');
-      else fetchOrders(); // Refresh
-    }
-
-    async function updateStock(id, newStock) {
-      // Just local update tracking? Or auto save?
-      // "Save" button triggers actual save.
-    }
-
-    async function saveStock(id) {
-      const input = document.getElementById(`stock-${id}`);
-      const newStock = parseInt(input.value);
-
-      // Logic: if stock reaches 0, status -> unavailable? 
-      // Or 'reserved' if we want manual reserve?
-      // Simple logic: stock > 0 ? available : unavailable (unless specialized)
-
-      // First fetch current status to preserve or update?
-      // Actually, we can just update stock.
-
-      const updates = { stock: newStock };
-      if (newStock === 0) updates.status = 'unavailable';
-      else if (newStock > 0) updates.status = 'available'; // Reset to available?
-
-      const { error } = await window.PF.supabase
-        .from('books')
-        .update(updates)
-        .eq('id', id);
-
-      if (error) alert('Error updating stock');
-      else {
-        alert('Stock updated');
-        fetchInventory();
+      function showState(id) {
+        stateIds.forEach(stateId => {
+          document.getElementById(stateId).hidden = stateId !== id;
+        });
+        const showAdminActions = id === 'adminApp';
+        refreshButton.hidden = !showAdminActions;
+        signOutButton.hidden = !showAdminActions;
       }
-    }
 
-    // Tabs
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.textContent.toLowerCase().includes(tab)));
-      document.getElementById('ordersView').style.display = tab === 'orders' ? 'block' : 'none';
-      document.getElementById('inventoryView').style.display = tab === 'inventory' ? 'block' : 'none';
-    }
+      function formatDate(value) {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? 'Unknown date' : date.toLocaleString();
+      }
 
-    // Run
-    window.addEventListener('load', initAdmin);
+      function formatPrice(value) {
+        return value === null || value === undefined || value === ''
+          ? 'Not set'
+          : `NGN ${Number(value).toLocaleString()}`;
+      }
+
+      async function sendMagicLink(event) {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim();
+        const status = document.getElementById('authStatus');
+        status.textContent = 'Sending sign-in link...';
+
+        const redirectTo = new URL('admin.html', window.location.href).href;
+        const { error } = await client.auth.signInWithOtp({
+          email,
+          options: {
+            shouldCreateUser: false,
+            emailRedirectTo: redirectTo
+          }
+        });
+
+        status.textContent = error
+          ? `Sign-in failed: ${error.message}`
+          : 'Check your email for the sign-in link.';
+      }
+
+      async function signOut() {
+        if (client) await client.auth.signOut();
+        showState('authState');
+      }
+
+      async function verifyAdmin(session) {
+        const { data, error } = await client
+          .from('admin_users')
+          .select('user_id')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+        if (error) {
+          document.getElementById('deniedMessage').textContent =
+            'Admin authorization could not be verified. Confirm that the Phase 2 security migration is applied.';
+          return false;
+        }
+        return Boolean(data);
+      }
+
+      async function initialize() {
+        showState('loadingState');
+        client = window.PF && window.PF.supabaseReady
+          ? await window.PF.supabaseReady
+          : null;
+
+        if (!client) {
+          showState('setupState');
+          return;
+        }
+
+        const { data, error } = await client.auth.getSession();
+        if (error || !data.session) {
+          showState('authState');
+          return;
+        }
+
+        const allowed = await verifyAdmin(data.session);
+        if (!allowed) {
+          showState('deniedState');
+          return;
+        }
+
+        document.getElementById('sessionLabel').textContent =
+          `Signed in as ${data.session.user.email || 'administrator'}`;
+        showState('adminApp');
+        await refreshData();
+      }
+
+      async function fetchOrders() {
+        ordersBody.innerHTML = '<tr><td class="loading-row" colspan="6">Loading requests...</td></tr>';
+        const { data, error } = await client
+          .from('orders')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(100);
+
+        if (error) {
+          ordersBody.innerHTML = `<tr><td class="loading-row" colspan="6">${escapeHtml(error.message)}</td></tr>`;
+          return;
+        }
+
+        orders = Array.isArray(data) ? data : [];
+        renderOrders();
+      }
+
+      async function fetchInventory() {
+        inventoryBody.innerHTML = '<tr><td class="loading-row" colspan="6">Loading inventory...</td></tr>';
+        const { data, error } = await client
+          .from('books')
+          .select('*')
+          .order('title');
+
+        if (error) {
+          inventoryBody.innerHTML = `<tr><td class="loading-row" colspan="6">${escapeHtml(error.message)}</td></tr>`;
+          return;
+        }
+
+        books = Array.isArray(data) ? data : [];
+        renderInventory();
+      }
+
+      async function refreshData() {
+        refreshButton.disabled = true;
+        refreshButton.textContent = 'Refreshing...';
+        await Promise.all([fetchOrders(), fetchInventory()]);
+        refreshButton.disabled = false;
+        refreshButton.textContent = 'Refresh';
+      }
+
+      function renderOrders() {
+        if (!orders.length) {
+          ordersBody.innerHTML = '<tr><td class="loading-row" colspan="6">No requests yet.</td></tr>';
+          return;
+        }
+
+        ordersBody.innerHTML = orders.map(order => {
+          const customer = order.user_details || {};
+          const items = Array.isArray(order.items) ? order.items : [];
+          const itemList = items.map(item =>
+            `<li>${escapeHtml(item.title)} <span class="cell-muted">${escapeHtml(item.author)}</span></li>`
+          ).join('');
+          const id = order.client_request_id || order.id;
+          const fulfillment = order.fulfillment_method || 'Not specified';
+          const actions = [];
+
+          if (order.status === 'pending') {
+            actions.push('<button class="admin-button primary small" type="button" data-status="confirmed">Confirm</button>');
+          }
+          if (['confirmed', 'purchased'].includes(order.status)) {
+            actions.push('<button class="admin-button primary small" type="button" data-status="fulfilled">Fulfilled</button>');
+          }
+          if (!['cancelled', 'fulfilled'].includes(order.status)) {
+            actions.push('<button class="admin-button danger small" type="button" data-status="cancelled">Cancel</button>');
+          }
+
+          return `
+            <tr data-order-id="${escapeHtml(order.id)}">
+              <td>
+                <div class="cell-title">${escapeHtml(id)}</div>
+                <div class="cell-muted">${escapeHtml(formatDate(order.created_at))}</div>
+              </td>
+              <td>
+                <div class="cell-title">${escapeHtml(customer.name || 'Not provided')}</div>
+                <div class="cell-muted">${escapeHtml(customer.contact || 'No contact')}</div>
+              </td>
+              <td><ul class="items-list">${itemList}</ul></td>
+              <td>
+                <div class="cell-title">${escapeHtml(fulfillment)}</div>
+                <div class="cell-muted">${escapeHtml(order.notes || '')}</div>
+              </td>
+              <td><span class="status-badge status-${escapeHtml(order.status)}">${escapeHtml(order.status)}</span></td>
+              <td><div class="row-actions">${actions.join('')}</div></td>
+            </tr>`;
+        }).join('');
+      }
+
+      function renderInventory() {
+        if (!books.length) {
+          inventoryBody.innerHTML = '<tr><td class="loading-row" colspan="6">No inventory rows found.</td></tr>';
+          return;
+        }
+
+        inventoryBody.innerHTML = books.map(book => {
+          const coverUrl = safeImageUrl(book.cover_image);
+          return `
+            <tr data-book-id="${escapeHtml(book.id)}">
+              <td>${coverUrl
+                ? `<img class="cover-thumb" src="${escapeHtml(coverUrl)}" alt="">`
+                : '<div class="cover-thumb"></div>'}</td>
+              <td>
+                <div class="cell-title">${escapeHtml(book.title)}</div>
+                <div class="cell-muted">${escapeHtml(book.author)}</div>
+              </td>
+              <td><input class="inventory-control" data-field="price" type="number" min="0" step="50" value="${book.price == null ? '' : escapeHtml(book.price)}" aria-label="Price for ${escapeHtml(book.title)}"></td>
+              <td><input class="inventory-control" data-field="stock" type="number" min="0" step="1" value="${escapeHtml(book.stock == null ? 0 : book.stock)}" aria-label="Stock for ${escapeHtml(book.title)}"></td>
+              <td>
+                <select class="inventory-control status" data-field="status" aria-label="Status for ${escapeHtml(book.title)}">
+                  ${['available', 'reserved', 'unavailable'].map(status =>
+                    `<option value="${status}"${book.status === status ? ' selected' : ''}>${status}</option>`
+                  ).join('')}
+                </select>
+              </td>
+              <td><button class="admin-button small" type="button" data-action="save-book">Save</button></td>
+            </tr>`;
+        }).join('');
+      }
+
+      async function handleOrderAction(event) {
+        const button = event.target.closest('button[data-status]');
+        if (!button) return;
+        const row = button.closest('tr[data-order-id]');
+        button.disabled = true;
+        const { error } = await client
+          .from('orders')
+          .update({ status: button.dataset.status })
+          .eq('id', row.dataset.orderId);
+        if (error) {
+          button.disabled = false;
+          window.alert(`Request update failed: ${error.message}`);
+          return;
+        }
+        await fetchOrders();
+      }
+
+      async function handleInventoryAction(event) {
+        const button = event.target.closest('button[data-action="save-book"]');
+        if (!button) return;
+        const row = button.closest('tr[data-book-id]');
+        const priceValue = row.querySelector('[data-field="price"]').value;
+        const stock = Number.parseInt(row.querySelector('[data-field="stock"]').value, 10);
+        const status = row.querySelector('[data-field="status"]').value;
+        const updates = {
+          price: priceValue === '' ? null : Number(priceValue),
+          stock: Number.isFinite(stock) && stock >= 0 ? stock : 0,
+          status
+        };
+
+        button.disabled = true;
+        button.textContent = 'Saving...';
+        const { error } = await client
+          .from('books')
+          .update(updates)
+          .eq('id', row.dataset.bookId);
+        if (error) {
+          button.disabled = false;
+          button.textContent = 'Save';
+          window.alert(`Inventory update failed: ${error.message}`);
+          return;
+        }
+        await fetchInventory();
+      }
+
+      function switchTab(event) {
+        const button = event.target.closest('button[data-tab]');
+        if (!button) return;
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+          tab.classList.toggle('active', tab === button);
+        });
+        document.getElementById('ordersView').hidden = button.dataset.tab !== 'orders';
+        document.getElementById('inventoryView').hidden = button.dataset.tab !== 'inventory';
+      }
+
+      document.getElementById('authForm').addEventListener('submit', sendMagicLink);
+      document.getElementById('deniedSignOutButton').addEventListener('click', signOut);
+      signOutButton.addEventListener('click', signOut);
+      refreshButton.addEventListener('click', refreshData);
+      document.querySelector('.admin-tabs').addEventListener('click', switchTab);
+      ordersBody.addEventListener('click', handleOrderAction);
+      inventoryBody.addEventListener('click', handleInventoryAction);
+      initialize().catch(error => {
+        console.error('[PF Admin] Initialization failed:', error);
+        showState('setupState');
+      });
+    })();
   </script>
 </body>
 

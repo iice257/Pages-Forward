@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Requests | Pages Forward</title>
+  <meta name="description" content="Review and share book requests saved on this device.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B88A44' stroke-width='2'><path d='M4 5h16v14H4z'/><path d='M8 9h8M8 13h5'/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/requests.css">
+</head>
+
+<body class="requests-page loaded">
+  <header class="requests-header">
+    <a class="requests-brand" href="index.html">Pages Forward</a>
+    <div class="requests-header-actions">
+      <button class="requests-icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme" title="Theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <a class="requests-link" href="index.html">Catalog</a>
+    </div>
+  </header>
+
+  <main class="requests-main">
+    <div class="requests-title-row">
+      <div>
+        <h1 class="requests-title">My Requests</h1>
+        <p class="requests-subtitle">Requests saved in this browser, ready to share with the bookstore.</p>
+      </div>
+      <div class="requests-count" id="requestsCount"></div>
+    </div>
+    <div class="requests-list" id="requestsList"></div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/requests.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const list = document.getElementById('requestsList');
+      const count = document.getElementById('requestsCount');
+
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function normalize(request) {
+        return {
+          ...request,
+          items: Array.isArray(request.items) ? request.items : [],
+          customer: request.customer || request.user_details || {},
+          fulfillment: request.fulfillment || request.fulfillment_method || 'pickup',
+          syncStatus: request.syncStatus || 'local'
+        };
+      }
+
+      function formatDate(value) {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime())
+          ? 'Date unavailable'
+          : date.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+      }
+
+      function render() {
+        const requests = window.PF.Requests.load().map(normalize);
+        count.textContent = `${requests.length} request${requests.length === 1 ? '' : 's'}`;
+
+        if (!requests.length) {
+          list.innerHTML = `
+            <div class="requests-empty">
+              <h2>No saved requests</h2>
+              <p>Add an available book from the catalog to start one.</p>
+              <a class="requests-link" href="index.html">Browse Catalog</a>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = requests.map(request => {
+          const itemList = request.items.map(item =>
+            `<li>${escapeHtml(item.title)} <span>by ${escapeHtml(item.author)}</span></li>`
+          ).join('');
+          const customerName = request.customer.name || 'Customer details not recorded';
+          const fulfillment = request.fulfillment === 'delivery' ? 'Delivery' : 'Pickup';
+          const syncLabel = request.syncStatus === 'synced' ? 'Sent' : 'Saved locally';
+
+          return `
+            <article class="request-record" data-id="${escapeHtml(request.id)}">
+              <div>
+                <div class="request-record-head">
+                  <span class="request-record-id">${escapeHtml(request.id)}</span>
+                  <span class="request-record-status">${syncLabel}</span>
+                  <span class="request-record-date">${escapeHtml(formatDate(request.createdAt))}</span>
+                </div>
+                <h2>${request.items.length} book${request.items.length === 1 ? '' : 's'}</h2>
+                <div class="request-record-meta">${escapeHtml(customerName)} &bull; ${fulfillment}</div>
+                <ul class="request-record-items">${itemList}</ul>
+              </div>
+              <div class="request-record-actions">
+                <button type="button" data-action="share">Share</button>
+                <button type="button" data-action="copy">Copy</button>
+                <button class="danger" type="button" data-action="remove">Remove</button>
+                <div class="request-record-message" role="status"></div>
+              </div>
+            </article>`;
+        }).join('');
+      }
+
+      async function handleAction(event) {
+        const button = event.target.closest('button[data-action]');
+        if (!button) return;
+        const record = button.closest('.request-record');
+        const message = record.querySelector('.request-record-message');
+        const request = window.PF.Requests.load()
+          .map(normalize)
+          .find(item => item.id === record.dataset.id);
+        if (!request) return;
+
+        if (button.dataset.action === 'remove') {
+          if (button.dataset.confirm !== 'true') {
+            button.dataset.confirm = 'true';
+            button.textContent = 'Confirm';
+            message.textContent = 'Select Confirm to remove this local record.';
+            return;
+          }
+          window.PF.Requests.remove(request.id);
+          render();
+          return;
+        }
+
+        try {
+          if (button.dataset.action === 'share') {
+            const result = await window.PF.Requests.share(request);
+            message.textContent = result === 'copied'
+              ? 'Sharing is unavailable, so the request was copied.'
+              : 'Request shared.';
+          } else {
+            await window.PF.Requests.copy(request);
+            message.textContent = 'Request copied.';
+          }
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+          message.textContent = 'That action is unavailable in this browser.';
+        }
+      }
+
+      window.PF.Theme.init(document.getElementById('themeToggle'));
+      list.addEventListener('click', handleAction);
+      render();
+    })();
+  </script>
+</body>
+
+</html>

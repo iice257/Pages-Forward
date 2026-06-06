@@ -1,17 +1,49 @@
-
 (function () {
   'use strict';
 
-  // Supabase Configuration
-  const SUPABASE_URL = 'https://wzxfyikhamojmsykbyqj.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6eGZ5aWtoYW1vam1zeWtieXFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NDI4OTcsImV4cCI6MjA4NDIxODg5N30.8h2ltzqQN4Dvx1S-68K2rsK0xX7WvDI840Jz0MuIdYo';
+  const config = window.PF_CONFIG && window.PF_CONFIG.supabase
+    ? window.PF_CONFIG.supabase
+    : {};
 
-  // Initialize Supabase
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  function loadSdk() {
+    if (window.supabase && window.supabase.createClient) {
+      return Promise.resolve();
+    }
 
-  // Export globally
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-pf-supabase-sdk]');
+      if (existing) {
+        existing.addEventListener('load', resolve, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      script.async = true;
+      script.dataset.pfSupabaseSdk = 'true';
+      script.addEventListener('load', resolve, { once: true });
+      script.addEventListener(
+        'error',
+        () => reject(new Error('Supabase SDK failed to load.')),
+        { once: true }
+      );
+      document.head.appendChild(script);
+    });
+  }
+
+  async function initialize() {
+    if (!config.url || !config.publishableKey) return null;
+    await loadSdk();
+    const client = window.supabase.createClient(config.url, config.publishableKey);
+    window.PF.supabase = client;
+    return client;
+  }
+
   window.PF = window.PF || {};
-  window.PF.supabase = supabase;
-
-  console.log('[PF Supabase] Initialized');
+  window.PF.supabase = null;
+  window.PF.supabaseReady = initialize().catch(error => {
+    console.error('[PF Supabase] Initialization failed:', error);
+    return null;
+  });
 })();

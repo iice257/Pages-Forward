@@ -202,6 +202,35 @@
       fill: currentColor;
     }
 
+    .request-history-link {
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid var(--sand);
+      border-radius: 50%;
+      background: var(--bg2);
+      color: var(--umber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dm) var(--ease);
+    }
+
+    .request-history-link:hover {
+      background: var(--char);
+      border-color: var(--char);
+      color: var(--bg2);
+    }
+
+    .request-history-link svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .btn-control {
       padding: 0 1.25rem;
       font-family: var(--fs);
@@ -945,7 +974,7 @@
       background: var(--bg);
       opacity: 0;
       visibility: hidden;
-      transition: opacity var(--dp) var(--ease), visibility var(--dp);
+      transition: opacity 240ms var(--ease), visibility 240ms;
       overflow-y: auto
     }
 
@@ -1147,7 +1176,7 @@
       background: rgba(0, 0, 0, .5);
       opacity: 0;
       visibility: hidden;
-      transition: all var(--dp);
+      transition: opacity 240ms var(--ease), visibility 240ms;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1161,7 +1190,7 @@
 
     .coll-modal {
       background: var(--bg2);
-      border-radius: 16px;
+      border-radius: 8px;
       width: 100%;
       max-width: 800px;
       max-height: 80vh;
@@ -1169,7 +1198,7 @@
       display: flex;
       flex-direction: column;
       transform: scale(.95) translateY(20px);
-      transition: transform var(--dp) var(--ep);
+      transition: transform 260ms var(--ep);
       box-shadow: 0 24px 80px rgba(0, 0, 0, .25)
     }
 
@@ -1249,6 +1278,199 @@
       letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--stone);
+    }
+
+    .request-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .request-form h4 {
+      margin: 0 0 .35rem;
+      font-family: var(--ff);
+      font-size: 1.25rem;
+      color: var(--ink);
+    }
+
+    .request-intro {
+      margin: 0;
+      color: var(--stone);
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .request-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .request-field {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      min-width: 0;
+    }
+
+    .request-field:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .request-field>span {
+      display: flex;
+      justify-content: space-between;
+      gap: .5rem;
+      font-family: var(--fs);
+      font-size: .63rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--umber);
+    }
+
+    .request-field em {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--stone);
+    }
+
+    .request-field input,
+    .request-field select,
+    .request-field textarea {
+      width: 100%;
+      border: 1px solid var(--sand);
+      border-radius: 6px;
+      background: var(--bg2);
+      color: var(--ink);
+      font: inherit;
+      font-size: .88rem;
+      padding: .7rem .75rem;
+      outline: none;
+      transition: border-color var(--dm), box-shadow var(--dm);
+    }
+
+    .request-field textarea {
+      resize: vertical;
+      min-height: 5.5rem;
+    }
+
+    .request-field input:focus,
+    .request-field select:focus,
+    .request-field textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 18%, transparent);
+    }
+
+    .request-field small {
+      min-height: 1rem;
+      font-family: var(--fs);
+      font-size: .62rem;
+      color: var(--red);
+    }
+
+    .request-form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .request-form-status,
+    .request-action-status {
+      margin: 0;
+      min-height: 1.1rem;
+      font-family: var(--fs);
+      font-size: .68rem;
+      color: var(--red);
+    }
+
+    .request-primary-btn,
+    .request-secondary-btn {
+      min-height: 2.55rem;
+      border: 1px solid var(--char);
+      border-radius: 4px;
+      padding: .7rem 1.1rem;
+      font-family: var(--fs);
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: background var(--dm), color var(--dm), border-color var(--dm);
+    }
+
+    .request-primary-btn {
+      background: var(--char);
+      color: var(--bg2);
+    }
+
+    .request-primary-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .request-primary-btn:disabled {
+      cursor: wait;
+      opacity: .65;
+    }
+
+    .request-secondary-btn {
+      background: transparent;
+      color: var(--char);
+      border-color: var(--sand);
+    }
+
+    .request-secondary-btn:hover {
+      border-color: var(--char);
+    }
+
+    .request-success {
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .request-success-mark {
+      width: 3rem;
+      height: 3rem;
+      margin: 0 auto 1rem;
+      border: 1px solid var(--avail);
+      border-radius: 50%;
+      color: var(--avail);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fs);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .request-success h3 {
+      margin: 0 0 .65rem;
+      color: var(--ink);
+      font-family: var(--ff);
+      font-size: 1.5rem;
+    }
+
+    .request-success p {
+      margin: .45rem auto;
+      max-width: 34rem;
+      color: var(--stone);
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .request-success-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1.4rem 0 .75rem;
     }
 
     .coll-add-books-btn {
@@ -1449,7 +1671,7 @@
         letter-spacing: .16em;
         white-space: nowrap;
         gap: .35rem;
-        max-width: calc(100vw - 9.5rem);
+        max-width: calc(100vw - 11.75rem);
         overflow: hidden
       }
 
@@ -1472,7 +1694,8 @@
       }
 
       .theme-toggle,
-      .btn-icon {
+      .btn-icon,
+      .request-history-link {
         width: 2rem
       }
 
@@ -1492,6 +1715,24 @@
         content: 'All';
         font-size: .56rem;
         letter-spacing: .08em
+      }
+
+      .request-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .request-field:last-child {
+        grid-column: auto;
+      }
+
+      .request-form-footer {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .request-primary-btn,
+      .request-secondary-btn {
+        width: 100%;
       }
 
       .slider-vp {
