@@ -1,76 +1,74 @@
 # Pages Forward
 
-Pages Forward is an offline-first catalog for a real bookstore inventory. Visitors can browse available and reserved books, build a request list, provide contact and fulfillment details, save the request, and share it with the bookstore.
+Pages Forward is an offline-first storefront for a real bookstore inventory. Visitors browse available and reserved books, add available books to cart, view bank-transfer details, enter delivery details, upload a transaction receipt, and reach the store on WhatsApp.
 
-## MVP Scope
+## Active Pages
 
-- Public entry point: `index.html`
-- Saved request history: `requests.html`
-- Protected operations scaffold: `admin.html`
-- Catalog data: `js/data.js`, generated from the real inventory metadata in `assets/gifts_metadata.csv`
-- Covers: local files in `assets/covers`
-- Request persistence: browser `localStorage`
-- Optional backend: Supabase, disabled until `js/config.js` is configured
-- Fulfillment: offline follow-up after a request is shared, or server-side capture after Supabase is secured
+- Storefront and cart checkout: `index.html`
+- Purchase history: `purchases.html`
+- Store admin: `admin.html`
 
-The MVP intentionally does not fake prices, checkout, payments, delivery, or entitlement. Prices and fulfillment details are confirmed by the bookstore after request submission.
+## Stack
 
-See `docs/APP_MAP.md` for the current page, action, and feature inventory.
+- Static HTML, CSS, and JavaScript
+- Browser `localStorage` for offline purchase history
+- Optional Supabase backend for catalog, purchases, receipt storage, and admin access
+- Optional Vercel static deployment via `vercel.json`
 
-## Run Locally
+## MVP Flow
 
-Open `index.html` directly in a browser, or serve the folder with any static file server.
+1. Visitor opens the catalog.
+2. Available books appear before reserved or unavailable books.
+3. Visitor adds available books to cart.
+4. Cart count and selected books update immediately.
+5. Visitor checks out and sees the configured bank-transfer account.
+6. Visitor enters delivery address and phone number.
+7. Visitor uploads a PDF/image transaction receipt.
+8. Purchase is saved to `localStorage.pf_purchases`.
+9. If Supabase is configured, the receipt uploads to private Storage and the purchase row is inserted.
+10. Visitor can open WhatsApp with the purchase details.
+11. Admin signs in with Supabase magic link, verifies `admin_users`, reviews purchases, opens receipts, updates purchase status, and manages inventory.
 
-Example:
+## Configuration
 
-```powershell
-python -m http.server 4173
-```
+Edit `js/config.js` before using this outside local testing:
 
-Then visit `http://127.0.0.1:4173/index.html`.
+- `store.bankName`
+- `store.accountName`
+- `store.accountNumber`
+- `store.whatsappNumber`
+- `supabase.url`
+- `supabase.publishableKey`
+- `supabase.receiptBucket`
 
-## Verified Flow
+Do not put Supabase secret or service-role keys in browser files.
 
-1. Visitor lands on the bookstore catalog.
-2. Available books appear first; reserved books remain visible but cannot be requested.
-3. Visitor adds an available book to the request list.
-4. Request list count updates and the selected book is visible.
-5. Visitor provides a name, contact, and pickup or delivery preference.
-6. The validated pending request is saved to `localStorage.pf_orders`.
-7. The request list clears and the generated request can be shared or copied.
-8. The saved request remains visible on `requests.html`.
+## Supabase
 
-## Current Inventory Notes
+Apply migrations in order:
 
-- 39 real books are in the current catalog.
-- 18 are marked available.
-- 21 are marked reserved.
-- Two books currently use fallback cover art because matching cover files were not found:
-  - `Advantage Play`
-  - `The Amazing Results of Positive Thinking`
+1. `supabase/migrations/01_update_schema.sql`
+2. `supabase/migrations/03_phase2_security.sql`
+3. `supabase/migrations/04_purchases_and_receipts.sql`
 
-## Not Production-Ready Yet
+The old generated fake seed was removed. Import only the real bookstore catalog when enabling remote catalog reads.
 
-Phase 2 now includes:
+## Vercel
 
-- Validated request details and fulfillment preference
-- Saved request history with share, copy, and remove actions
-- Optional Supabase request sync
-- Fail-closed administrator authentication scaffold
-- RLS and least-privilege migration scaffolding
-- Persistent light/dark theme
+`vercel.json` enables clean URLs, cache headers for static assets, and basic security headers for the static deployment.
 
-Before deploying this as a real operational storefront, complete and verify:
+## Cleanup Notes
 
-- Real pricing and stock source of truth
-- Connect the intended Supabase project
-- Apply and verify the Phase 2 security migration
-- Import the real catalog and activate only those rows
-- Seed at least one approved administrator
-- Server-side rate limiting or abuse prevention for public requests
-- Error logging and monitoring
-- Deployment configuration
-- Backup and recovery plan for inventory/orders
-- Automated browser coverage for the request and admin flows
+- `origin/main` metadata was merged into the active app.
+- `origin/alts` was not merged because it is old gifting/catalogue work.
+- `origin/next-js-port` was not merged because it is an older framework migration with gifting/request concepts and would slow the current purchase MVP.
+- Obsolete prototype pages, old modules, generated fake seed data, and unused catalog preview assets were pruned.
 
-The configured legacy Supabase hostname no longer resolves and has been removed from client code. Do not enable remote catalog loading until the replacement project is connected and its real inventory matches `js/data.js`.
+## Production Gaps
+
+- Configure the real bank account and WhatsApp number.
+- Apply migrations to the correct active Supabase project.
+- Import the real catalog into Supabase if remote catalog mode is enabled.
+- Add abuse protection/rate limiting for public purchase creation and receipt uploads.
+- Add backups, monitoring, and admin runbooks.
+- Add automated browser regression coverage for checkout and admin.

@@ -1,4 +1,4 @@
-﻿    *,
+    *,
     *::before,
     *::after {
       margin: 0;
@@ -202,7 +202,7 @@
       fill: currentColor;
     }
 
-    .request-history-link {
+    .purchase-history-link {
       width: 2.25rem;
       height: 2.25rem;
       border: 1px solid var(--sand);
@@ -215,13 +215,13 @@
       transition: all var(--dm) var(--ease);
     }
 
-    .request-history-link:hover {
+    .purchase-history-link:hover {
       background: var(--char);
       border-color: var(--char);
       color: var(--bg2);
     }
 
-    .request-history-link svg {
+    .purchase-history-link svg {
       width: 1rem;
       height: 1rem;
       fill: none;
@@ -588,13 +588,13 @@
       border-color: var(--char)
     }
 
-    .add-btn.in-coll {
+    .add-btn.in-cart {
       background: var(--sage);
       color: #fff;
       border-color: var(--sage)
     }
 
-    .add-btn.in-coll:hover {
+    .add-btn.in-cart:hover {
       background: var(--amber);
       border-color: var(--amber)
     }
@@ -670,7 +670,11 @@
       color: var(--esp);
       margin-bottom: 1.5rem;
       padding-left: .9rem;
-      border-left: 2px solid var(--sand)
+      border-left: 2px solid var(--sand);
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      white-space: normal
     }
 
     .book-desc {
@@ -1300,6 +1304,46 @@
       line-height: 1.55;
     }
 
+    .payment-panel {
+      display: grid;
+      gap: .65rem;
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      background: rgba(223, 189, 105, .08);
+      padding: 1rem;
+    }
+
+    .payment-panel div {
+      display: grid;
+      gap: .18rem;
+    }
+
+    .payment-panel span {
+      color: var(--stone);
+      font-family: var(--fs);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .payment-panel strong,
+    .account-copy {
+      color: var(--char);
+      font-family: var(--fb);
+      font-size: 1.05rem;
+      text-align: left;
+    }
+
+    .account-copy {
+      width: max-content;
+      max-width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: copy;
+    }
+
     .request-fields {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1401,6 +1445,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      text-decoration: none;
       transition: background var(--dm), color var(--dm), border-color var(--dm);
     }
 
@@ -1629,6 +1674,7 @@
     @media(max-width:1024px) {
       .slide {
         grid-template-columns: 1fr;
+        min-width: 0;
         overflow-y: auto
       }
 
@@ -1695,7 +1741,7 @@
 
       .theme-toggle,
       .btn-icon,
-      .request-history-link {
+      .purchase-history-link {
         width: 2rem
       }
 
@@ -1744,6 +1790,9 @@
       }
 
       .panel-content {
+        width: 100%;
+        max-width: 100vw;
+        min-width: 0;
         padding: .8rem 1.5rem 1.25rem;
         overflow: visible
       }
@@ -1753,6 +1802,7 @@
       }
 
       .content-w {
+        width: 100%;
         max-width: 100%;
         min-width: 0
       }
@@ -1778,14 +1828,22 @@
       }
 
       .book-subtitle {
-        font-size: .9rem;
-        margin-bottom: 1rem
+        display: none
+      }
+
+      .book-desc {
+        display: none
       }
 
       .book-desc p {
+        display: block;
+        width: 100%;
         font-size: .88rem;
         line-height: 1.62;
-        max-width: 100%
+        max-width: min(19rem, calc(100vw - 4rem));
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        white-space: normal
       }
 
       .nav-arrow {

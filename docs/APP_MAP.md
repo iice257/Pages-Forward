@@ -2,9 +2,9 @@
 
 ## Active MVP Pages
 
-### `index.html` - Bookstore Catalog
+### `index.html` - Storefront
 
-Purpose: browse the real inventory and create a bookstore request.
+Purpose: browse real inventory, add available books to cart, and complete a bank-transfer purchase.
 
 Actions:
 
@@ -12,26 +12,29 @@ Actions:
 - Open the full catalog
 - Search by title, author, description, category, or niche
 - View available, reserved, and unavailable status
-- Add or remove available books from the request list
-- Review the request list
-- Enter customer name and phone or email
-- Choose pickup or delivery
-- Add optional fulfillment notes
-- Save a validated request
-- Share or copy the generated request
-- Open saved request history
+- Add or remove available books from cart
+- Review cart
+- View configured bank-transfer account
+- Enter delivery address
+- Enter phone number with contact-use disclosure
+- Upload transaction receipt
+- Save a validated purchase
+- Copy/share purchase details
+- Reach out on WhatsApp
+- Open saved purchase history
 - Toggle light and dark themes
 
-### `requests.html` - My Requests
+### `purchases.html` - My Purchases
 
-Purpose: show requests saved in the current browser.
+Purpose: show purchases saved in the current browser.
 
 Actions:
 
-- Review request ID, date, customer, fulfillment method, and selected books
-- Share a request through the Web Share API when supported
-- Copy a request to the clipboard
-- Remove a local request record after confirmation
+- Review purchase ID, date, phone, receipt name, and selected books
+- Reach out on WhatsApp
+- Share a purchase through the Web Share API when supported
+- Copy a purchase to the clipboard
+- Remove a local purchase record after confirmation
 - Return to the catalog
 - Toggle light and dark themes
 
@@ -39,7 +42,7 @@ Limit: local history is device- and browser-specific until Supabase is connected
 
 ### `admin.html` - Store Operations
 
-Purpose: manage requests and inventory after the backend is configured.
+Purpose: manage purchases and inventory after the backend is configured.
 
 States:
 
@@ -51,46 +54,24 @@ States:
 Authorized actions:
 
 - Send a Supabase magic-link sign-in email
-- Refresh requests and inventory
-- Confirm, fulfill, or cancel requests
+- Refresh purchases and inventory
+- Open transaction receipts through short-lived signed URLs
+- Confirm payment, mark processing, fulfill, or cancel purchases
 - Update book price, stock, and availability
 - Sign out
 
 Security behavior: the page performs no database reads or writes until a Supabase session exists and the user is present in `public.admin_users`.
 
-## Deprecated Pages
-
-### `explore.html`
-
-Status: obsolete prototype.
-
-Issues:
-
-- Uses the old state/filter architecture
-- Contains gifting-theme references
-- Links to nonexistent `forward.html` and `collection.html`
-- Does not represent the current request workflow
-
-### `legacy.html`
-
-Status: archived catalog prototype.
-
-Issues:
-
-- Uses old collection terminology and filtering logic
-- Contains gifting-season compatibility behavior
-- Is not part of the active MVP journey
-
 ## Shared Modules
 
 - `js/data.js`: real 39-book inventory
-- `js/requests.js`: request validation, persistence, formatting, sharing, and optional backend sync
+- `js/purchases.js`: purchase validation, persistence, receipt upload, formatting, sharing, WhatsApp URL generation, and optional backend sync
 - `js/theme.js`: persistent light/dark theme
 - `js/config.js`: public runtime configuration
 - `js/supabase-client.js`: optional, guarded Supabase initialization
-- `css/style.css`: catalog and request-flow styles
-- `css/requests.css`: saved-request page styles
+- `css/style.css`: storefront, cart, and checkout styles
+- `css/purchases.css`: saved-purchase page styles
 
 ## Current Product Boundary
 
-The product is a bookstore request workflow, not an ecommerce checkout. It does not calculate a payable total, collect payment, promise delivery, or mark a request as a completed sale. The bookstore confirms pricing and fulfillment separately.
+The product is now a bookstore purchase workflow using bank transfer and receipt upload. It is not an online card checkout and does not independently verify payment; the admin confirms receipt/payment before fulfillment.

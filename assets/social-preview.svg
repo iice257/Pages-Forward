@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Pages Forward</title>
+  <desc id="desc">Curated book catalog social preview.</desc>
+  <rect width="1200" height="630" fill="#f8f5f0"/>
+  <rect x="80" y="78" width="1040" height="474" rx="30" fill="#fdfcf9" stroke="#d8cfc2" stroke-width="2"/>
+  <text x="138" y="178" fill="#1a1815" font-family="Georgia, serif" font-size="72" font-weight="700">Pages Forward</text>
+  <text x="142" y="236" fill="#5c5650" font-family="Arial, sans-serif" font-size="30">Curated reads for gifting, growth, and quiet discovery.</text>
+  <g transform="translate(150 310)">
+    <rect x="0" y="0" width="96" height="156" rx="8" fill="#5a6650"/>
+    <rect x="118" y="-24" width="96" height="180" rx="8" fill="#c4884a"/>
+    <rect x="236" y="10" width="96" height="146" rx="8" fill="#a85454"/>
+    <rect x="354" y="-12" width="96" height="168" rx="8" fill="#2d2926"/>
+    <path d="M34 32h28M34 58h40M152 20h28M152 48h42M270 42h28M270 68h40M388 26h28M388 54h42" stroke="#f8f5f0" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(710 286)">
+    <rect x="0" y="0" width="310" height="58" rx="12" fill="#f3ede4"/>
+    <rect x="0" y="82" width="244" height="58" rx="12" fill="#f3ede4"/>
+    <rect x="0" y="164" width="284" height="58" rx="12" fill="#f3ede4"/>
+    <path d="M30 29h210M30 111h150M30 193h184" stroke="#c4884a" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <path d="M138 504h924" stroke="#dfbd69" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -266,6 +266,9 @@
     }
 
     .status-confirmed,
+    .status-confirmed_paid,
+    .status-processing,
+    .status-paid_pending_confirmation,
     .status-purchased,
     .status-fulfilled {
       color: var(--success);
@@ -348,7 +351,7 @@
       <h1>Backend setup required</h1>
       <p>This admin page is locked until a Supabase URL and publishable key are configured in
         <code>js/config.js</code>.</p>
-      <p>Apply the Phase 2 security migration before enabling the client. The admin UI does not provide an
+      <p>Apply the latest Supabase purchases migration before enabling the client. The admin UI does not provide an
         insecure local bypass.</p>
     </section>
 
@@ -377,7 +380,7 @@
       </div>
 
       <div class="admin-tabs" role="tablist" aria-label="Admin views">
-        <button class="admin-tab active" type="button" data-tab="orders" role="tab">Requests</button>
+        <button class="admin-tab active" type="button" data-tab="orders" role="tab">Purchases</button>
         <button class="admin-tab" type="button" data-tab="inventory" role="tab">Inventory</button>
       </div>
 
@@ -386,17 +389,18 @@
           <table>
             <thead>
               <tr>
-                <th>Request</th>
+                <th>Purchase</th>
                 <th>Customer</th>
                 <th>Books</th>
-                <th>Fulfillment</th>
+                <th>Delivery</th>
+                <th>Receipt</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="ordersBody">
               <tr>
-                <td class="loading-row" colspan="6">Loading requests...</td>
+                <td class="loading-row" colspan="7">Loading purchases...</td>
               </tr>
             </tbody>
           </table>
@@ -516,7 +520,7 @@
 
         if (error) {
           document.getElementById('deniedMessage').textContent =
-            'Admin authorization could not be verified. Confirm that the Phase 2 security migration is applied.';
+            'Admin authorization could not be verified. Confirm that the purchases security migration is applied.';
           return false;
         }
         return Boolean(data);
@@ -552,7 +556,7 @@
       }
 
       async function fetchOrders() {
-        ordersBody.innerHTML = '<tr><td class="loading-row" colspan="6">Loading requests...</td></tr>';
+        ordersBody.innerHTML = '<tr><td class="loading-row" colspan="7">Loading purchases...</td></tr>';
         const { data, error } = await client
           .from('orders')
           .select('*')
@@ -560,7 +564,7 @@
           .limit(100);
 
         if (error) {
-          ordersBody.innerHTML = `<tr><td class="loading-row" colspan="6">${escapeHtml(error.message)}</td></tr>`;
+          ordersBody.innerHTML = `<tr><td class="loading-row" colspan="7">${escapeHtml(error.message)}</td></tr>`;
           return;
         }
 
@@ -594,7 +598,7 @@
 
       function renderOrders() {
         if (!orders.length) {
-          ordersBody.innerHTML = '<tr><td class="loading-row" colspan="6">No requests yet.</td></tr>';
+          ordersBody.innerHTML = '<tr><td class="loading-row" colspan="7">No purchases yet.</td></tr>';
           return;
         }
 
@@ -605,33 +609,46 @@
             `<li>${escapeHtml(item.title)} <span class="cell-muted">${escapeHtml(item.author)}</span></li>`
           ).join('');
           const id = order.client_request_id || order.id;
-          const fulfillment = order.fulfillment_method || 'Not specified';
+          const phone = order.contact_phone || customer.phone || customer.contact || 'No phone';
+          const address = order.delivery_address || customer.address || 'No address';
+          const receiptPath = order.receipt_path || '';
+          const receiptName = order.receipt_name || (receiptPath ? 'Receipt attached' : 'No receipt');
           const actions = [];
 
-          if (order.status === 'pending') {
-            actions.push('<button class="admin-button primary small" type="button" data-status="confirmed">Confirm</button>');
+          if (order.status === 'paid_pending_confirmation') {
+            actions.push('<button class="admin-button primary small" type="button" data-status="confirmed_paid">Confirm Paid</button>');
           }
-          if (['confirmed', 'purchased'].includes(order.status)) {
+          if (['confirmed_paid', 'processing'].includes(order.status)) {
             actions.push('<button class="admin-button primary small" type="button" data-status="fulfilled">Fulfilled</button>');
+          }
+          if (order.status === 'confirmed_paid') {
+            actions.push('<button class="admin-button small" type="button" data-status="processing">Processing</button>');
           }
           if (!['cancelled', 'fulfilled'].includes(order.status)) {
             actions.push('<button class="admin-button danger small" type="button" data-status="cancelled">Cancel</button>');
           }
+          if (receiptPath) {
+            actions.unshift('<button class="admin-button small" type="button" data-action="receipt">Receipt</button>');
+          }
 
           return `
-            <tr data-order-id="${escapeHtml(order.id)}">
+            <tr data-order-id="${escapeHtml(order.id)}" data-receipt-path="${escapeHtml(receiptPath)}">
               <td>
                 <div class="cell-title">${escapeHtml(id)}</div>
                 <div class="cell-muted">${escapeHtml(formatDate(order.created_at))}</div>
               </td>
               <td>
-                <div class="cell-title">${escapeHtml(customer.name || 'Not provided')}</div>
-                <div class="cell-muted">${escapeHtml(customer.contact || 'No contact')}</div>
+                <div class="cell-title">${escapeHtml(phone)}</div>
+                <div class="cell-muted">${escapeHtml(address)}</div>
               </td>
               <td><ul class="items-list">${itemList}</ul></td>
               <td>
-                <div class="cell-title">${escapeHtml(fulfillment)}</div>
-                <div class="cell-muted">${escapeHtml(order.notes || '')}</div>
+                <div class="cell-title">Delivery</div>
+                <div class="cell-muted">${escapeHtml(address)}</div>
+              </td>
+              <td>
+                <div class="cell-title">${escapeHtml(receiptName)}</div>
+                <div class="cell-muted">${escapeHtml(receiptPath)}</div>
               </td>
               <td><span class="status-badge status-${escapeHtml(order.status)}">${escapeHtml(order.status)}</span></td>
               <td><div class="row-actions">${actions.join('')}</div></td>
@@ -671,6 +688,12 @@
       }
 
       async function handleOrderAction(event) {
+        const receiptButton = event.target.closest('button[data-action="receipt"]');
+        if (receiptButton) {
+          await openReceipt(receiptButton);
+          return;
+        }
+
         const button = event.target.closest('button[data-status]');
         if (!button) return;
         const row = button.closest('tr[data-order-id]');
@@ -681,10 +704,31 @@
           .eq('id', row.dataset.orderId);
         if (error) {
           button.disabled = false;
-          window.alert(`Request update failed: ${error.message}`);
+          window.alert(`Purchase update failed: ${error.message}`);
           return;
         }
         await fetchOrders();
+      }
+
+      async function openReceipt(button) {
+        const row = button.closest('tr[data-receipt-path]');
+        const receiptPath = row.dataset.receiptPath;
+        const slashIndex = receiptPath.indexOf('/');
+        if (slashIndex <= 0) {
+          window.alert('Receipt path is not available.');
+          return;
+        }
+
+        const bucket = receiptPath.slice(0, slashIndex);
+        const path = receiptPath.slice(slashIndex + 1);
+        button.disabled = true;
+        const { data, error } = await client.storage.from(bucket).createSignedUrl(path, 60 * 10);
+        button.disabled = false;
+        if (error || !data || !data.signedUrl) {
+          window.alert(`Receipt could not be opened: ${error ? error.message : 'missing URL'}`);
+          return;
+        }
+        window.open(data.signedUrl, '_blank', 'noopener');
       }
 
       async function handleInventoryAction(event) {

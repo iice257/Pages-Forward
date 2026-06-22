@@ -1,19 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pages Forward | Bookstore Catalog</title>
+  <title>Pages Forward | Bookstore Purchases</title>
   <meta name="description"
-    content="Browse the current Pages Forward bookstore inventory and send a request for available books.">
+    content="Browse the current Pages Forward bookstore inventory, add available books to cart, upload payment receipt, and complete a purchase.">
+  <meta name="theme-color" content="#f8f5f0">
+  <meta property="og:title" content="Pages Forward | Bookstore Purchases">
+  <meta property="og:description"
+    content="A real bookstore catalog for selecting available books, paying by transfer, and sharing purchase details.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pages-forward.vercel.app/">
+  <meta property="og:image" content="https://pages-forward.vercel.app/assets/social-preview.svg">
+  <meta property="og:image:alt" content="Pages Forward bookstore purchase catalog preview">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pages Forward | Bookstore Purchases">
+  <meta name="twitter:description"
+    content="Select available books, pay by transfer, upload a receipt, and contact the bookstore.">
+  <meta name="twitter:image" content="https://pages-forward.vercel.app/assets/social-preview.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Jost:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DFBD69' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -27,11 +39,11 @@
       </linearGradient>
     </defs>
   </svg>
-  <script>if (localStorage.getItem('pfIntroSeen') || localStorage.getItem('giftingIntroSeen')) { document.body.classList.add('skip-intro') }</script>
+  <script>if (localStorage.getItem('pfIntroSeen') || new URLSearchParams(location.search).has('skipIntro')) { document.body.classList.add('skip-intro') }</script>
   <div id="introOverlay">
     <div class="intro-content">
       <div class="intro-huge">Pages Forward</div>
-      <div class="intro-sub"><span class="intro-gold">Bookstore</span> Catalog</div>
+      <div class="intro-sub"><span class="intro-gold">Bookstore</span> Purchases</div>
       <svg class="intro-icon gold" viewBox="0 0 24 24" style="margin-top: 1rem" fill="none" stroke="url(#gold-grad)"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="8" width="18" height="4" rx="1" />
@@ -63,7 +75,7 @@
           viewBox="0 0 24 24">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg></button>
-      <a class="request-history-link" href="requests.html" aria-label="View saved requests" title="My Requests">
+      <a class="purchase-history-link" href="purchases.html" aria-label="View saved purchases" title="My Purchases">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 5h18v14H3z" />
           <path d="M7 9h10M7 13h7" />
@@ -78,12 +90,12 @@
 
       <button class="btn-h btn-control" id="fullListBtn">Catalog</button>
       <div class="coll-preview" id="collPreview">
-        <div class="coll-label">Request List</div>
+        <div class="coll-label">Cart</div>
         <div class="coll-items" id="collItems"></div>
         <div class="coll-preview-total" id="collPreviewTotal"
           style="padding:0.5rem 1rem;color:var(--gold);font-family:var(--fb);text-align:right;font-size:0.9rem;border-top:1px solid var(--sand);margin-top:0.5rem;padding-top:0.5rem">
-          Price confirmed after request</div>
-        <button class="view-all-btn" id="viewAllBtn" style="margin-top:0.5rem">Request Books</button>
+          Transfer after checkout</div>
+        <button class="view-all-btn" id="viewAllBtn" style="margin-top:0.5rem">Checkout</button>
       </div>
     </div>
   </header>
@@ -125,7 +137,7 @@
   <div class="coll-ov" id="collOv">
     <div class="coll-modal">
       <div class="coll-modal-hdr">
-        <h3 class="coll-modal-title">Request List</h3><button class="gallery-close" id="collClose">&times;</button>
+        <h3 class="coll-modal-title">Cart</h3><button class="gallery-close" id="collClose">&times;</button>
       </div>
       <div class="coll-modal-grid" id="collGrid"></div>
     </div>
@@ -133,7 +145,7 @@
   <div class="coll-ov" id="requestOv" style="z-index: 2000;">
     <div class="coll-modal" style="max-width: 500px; height: auto; max-height: 90vh;">
       <div class="coll-modal-hdr">
-        <h3 class="coll-modal-title">Book Request</h3><button class="gallery-close" id="requestClose">&times;</button>
+        <h3 class="coll-modal-title">Purchase</h3><button class="gallery-close" id="requestClose">&times;</button>
       </div>
       <div class="request-body" id="requestBody" style="padding: 2rem; overflow-y: auto;">
       </div>
@@ -142,7 +154,7 @@
   <script src="js/config.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/supabase-client.js"></script>
-  <script src="js/requests.js"></script>
+  <script src="js/purchases.js"></script>
   <script src="js/data.js"></script>
   <script>
     // Simplified module - search only
@@ -178,7 +190,7 @@
     // State
     let books = [...booksData];
     let currentIndex = 0, isTransitioning = false, activeBg = 1, arcToggle = false;
-    let collection = JSON.parse(localStorage.getItem('pf_collection')) || [];
+    let cart = JSON.parse(localStorage.getItem('pf_cart')) || [];
 
     // Elements
     const bb1 = document.getElementById('bb1'), bb2 = document.getElementById('bb2'), sliderTrack = document.getElementById('sliderTrack'), arcTrack = document.getElementById('arcTrack'), galleryOv = document.getElementById('galleryOv'), galleryGrid = document.getElementById('galleryGrid'), collOv = document.getElementById('collOv'), collGrid = document.getElementById('collGrid'), collPreview = document.getElementById('collPreview'), collItems = document.getElementById('collItems'), folderBadge = document.getElementById('folderBadge');
@@ -228,7 +240,7 @@
       }
     }
 
-    function canRequestBook(book) {
+    function canPurchaseBook(book) {
       return book && book.status === 'available' && (book.stock ?? 1) > 0;
     }
 
@@ -237,25 +249,25 @@
     }
 
     function getPriceText(book) {
-      return hasPrice(book) ? `NGN ${Number(book.price).toLocaleString()}` : 'Price on request';
+      return hasPrice(book) ? `NGN ${Number(book.price).toLocaleString()}` : 'Price confirmed by store';
     }
 
-    function collectionIndex(id) {
+    function cartIndex(id) {
       const key = bookKey(id);
-      return collection.findIndex(item => bookKey(item.id) === key);
+      return cart.findIndex(item => bookKey(item.id) === key);
     }
 
-    function addToCollection(book) {
-      if (!canRequestBook(book) || collectionIndex(book.id) !== -1) return false;
-      collection.push({ ...book, id: bookKey(book.id), addedAt: Date.now() });
+    function addToCart(book) {
+      if (!canPurchaseBook(book) || cartIndex(book.id) !== -1) return false;
+      cart.push({ ...book, id: bookKey(book.id), addedAt: Date.now() });
       return true;
     }
 
-    function removeFromCollection(id) {
+    function removeFromCart(id) {
       const key = bookKey(id);
-      const before = collection.length;
-      collection = collection.filter(item => bookKey(item.id) !== key);
-      return collection.length !== before;
+      const before = cart.length;
+      cart = cart.filter(item => bookKey(item.id) !== key);
+      return cart.length !== before;
     }
 
     function renderCover(book, className = '') {
@@ -279,12 +291,12 @@
 
     function getStatusClass(s) { return s === 'available' ? 'avail' : s === 'reserved' ? 'reserved' : 'unavail' }
     function getStatusText(s) { return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Unavailable' }
-    function isInColl(id) { return collectionIndex(id) !== -1 }
+    function isInCart(id) { return cartIndex(id) !== -1 }
     function getButtonState(book) {
       if (book.status === 'reserved') return { text: 'Reserved', cls: 'reserved', disabled: true };
-      if (!canRequestBook(book)) return { text: 'Unavailable', cls: '', disabled: true };
-      if (isInColl(book.id)) return { text: 'Remove', cls: 'in-coll', disabled: false };
-      return { text: 'Request', cls: '', disabled: false };
+      if (!canPurchaseBook(book)) return { text: 'Unavailable', cls: '', disabled: true };
+      if (isInCart(book.id)) return { text: 'Remove', cls: 'in-cart', disabled: false };
+      return { text: 'Add', cls: '', disabled: false };
     }
 
     function getLengthInfo(len) {
@@ -405,64 +417,64 @@
         btn.onclick = () => {
           const idx = parseInt(btn.dataset.idx), book = books[idx];
           if (!book) return;
-          if (isInColl(book.id)) {
-            removeFromCollection(book.id);
-            btn.classList.remove('in-coll');
-            btn.textContent = 'Request';
+          if (isInCart(book.id)) {
+            removeFromCart(book.id);
+            btn.classList.remove('in-cart');
+            btn.textContent = 'Add';
           } else {
-            addToCollection(book);
-            btn.classList.add('in-coll');
+            addToCart(book);
+            btn.classList.add('in-cart');
             btn.textContent = 'Remove';
           }
-          updateCollUI();
+          updateCartUI();
           renderGallery();
         };
       });
     }
 
-    function saveCollection() { localStorage.setItem('pf_collection', JSON.stringify(collection)); }
+    function saveCart() { localStorage.setItem('pf_cart', JSON.stringify(cart)); }
 
-    function updateCollUI() {
-      saveCollection();
-      const cnt = collection.length;
+    function updateCartUI() {
+      saveCart();
+      const cnt = cart.length;
       folderBadge.textContent = cnt;
       folderBadge.classList.toggle('visible', cnt > 0);
 
       const totalEl = document.getElementById('collPreviewTotal');
-      if (totalEl) totalEl.textContent = collection.length ? 'Price confirmed after request' : 'No books selected';
+      if (totalEl) totalEl.textContent = cart.length ? 'Transfer after checkout' : 'No books selected';
 
-      const recent = [...collection].sort((a, b) => b.addedAt - a.addedAt).slice(0, 3);
+      const recent = [...cart].sort((a, b) => b.addedAt - a.addedAt).slice(0, 3);
       if (recent.length) {
         collItems.innerHTML = recent.map(b => `<div class="coll-item"><div class="coll-thumb">${renderCover(b)}</div><div class="coll-info" style="display:flex;flex-direction:column"><div class="coll-title">${escapeHtml(b.title)}</div><div class="coll-price" style="font-size:0.7rem;color:var(--gold)">${getPriceText(b)}</div></div></div>`).join('');
       } else {
-        collItems.innerHTML = '<div class="coll-empty">Your request list is empty</div>';
+        collItems.innerHTML = '<div class="coll-empty">Your cart is empty</div>';
       }
     }
 
-    function openCollModal() {
+    function openCartModal() {
       collPreview.classList.remove('open');
-      if (!collection.length) {
-        collGrid.innerHTML = '<div class="coll-empty-state"><div class="coll-empty-text">Your request list is empty</div><button class="coll-add-books-btn" id="collAddBooksBtn">Browse books</button></div>';
+      if (!cart.length) {
+        collGrid.innerHTML = '<div class="coll-empty-state"><div class="coll-empty-text">Your cart is empty</div><button class="coll-add-books-btn" id="collAddBooksBtn">Browse books</button></div>';
         document.getElementById('collAddBooksBtn').addEventListener('click', () => {
           collOv.classList.remove('active');
         });
       } else {
-        const listHtml = collection.map(b => {
+        const listHtml = cart.map(b => {
           const sc = getStatusClass(b.status);
           return `<div class="coll-card" data-id="${b.id}"><div class="coll-card-status ${sc}"></div><button class="coll-remove" data-id="${b.id}">-</button><div class="coll-card-img">${renderCover(b)}</div><div class="coll-card-title">${escapeHtml(b.title)}</div><div class="coll-card-price" style="color:var(--gold);font-family:var(--fb);margin-bottom:0.5rem">${getPriceText(b)}</div><div class="coll-card-desc">${escapeHtml(b.description)}</div><div class="coll-card-tags">${[b.tags.category, b.tags.niche].filter(Boolean).map(g => `<span class="coll-card-tag">${escapeHtml(g)}</span>`).join('')}</div></div>`;
         }).join('');
 
         const footerHtml = `
           <div class="coll-footer" style="grid-column:1/-1;border-top:1px solid var(--sand);padding-top:1rem;margin-top:1rem;display:flex;justify-content:space-between;align-items:center">
-            <div class="coll-total" style="font-family:var(--fb);font-size:1.2rem;color:var(--char)">${collection.length} book${collection.length === 1 ? '' : 's'} selected</div>
-            <button class="request-submit-btn" id="requestSubmitBtn" style="padding:0.8rem 2rem;background:var(--gold);color:#fff;border:none;border-radius:2rem;font-family:var(--fb);text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;font-weight:600">Request Books</button>
+            <div class="coll-total" style="font-family:var(--fb);font-size:1.2rem;color:var(--char)">${cart.length} book${cart.length === 1 ? '' : 's'} selected</div>
+            <button class="request-submit-btn" id="requestSubmitBtn" style="padding:0.8rem 2rem;background:var(--gold);color:#fff;border:none;border-radius:2rem;font-family:var(--fb);text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;font-weight:600">Checkout</button>
           </div>
         `;
 
         collGrid.innerHTML = listHtml + footerHtml;
 
         document.getElementById('requestSubmitBtn').onclick = () => {
-          startRequest();
+          startPurchase();
         };
 
         collGrid.querySelectorAll('.coll-remove').forEach(btn => {
@@ -470,9 +482,9 @@
             e.stopPropagation();
             if (btn.classList.contains('confirm')) {
               const id = btn.dataset.id;
-              removeFromCollection(id);
-              updateCollUI();
-              openCollModal();
+              removeFromCart(id);
+              updateCartUI();
+              openCartModal();
               sliderTrack.innerHTML = books.map((b, i) => createSlide(b, i)).join('');
               updateSliderPosition();
               bindAddBtns();
@@ -526,11 +538,11 @@
         const list = groups[l];
         const items = list.map(b => {
           const origIdx = books.findIndex(x => bookKey(x.id) === bookKey(b.id));
-          const inC = isInColl(b.id);
-          const canAdd = canRequestBook(b);
+          const inC = isInCart(b.id);
+          const canAdd = canPurchaseBook(b);
           const btnText = inC ? '-' : '+';
-          const btnCls = inC ? ' in-coll' : '';
-          return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}${renderCover(b)}${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}" aria-label="${inC ? 'Remove from request list' : 'Add to request list'}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${escapeHtml(b.title)}</div><div class="gallery-author">${escapeHtml(b.author)}</div></div></div>`;
+          const btnCls = inC ? ' in-cart' : '';
+          return `<div class="gallery-item" data-index="${origIdx}" data-id="${b.id}"><div class="gallery-cover">${getStatusTagHTML(b, inC)}${renderCover(b)}${canAdd ? `<button class="gallery-add-btn${btnCls}" data-id="${b.id}" aria-label="${inC ? 'Remove from cart' : 'Add to cart'}">${btnText}</button>` : ''}</div><div class="gallery-info"><div class="gallery-book-title">${escapeHtml(b.title)}</div><div class="gallery-author">${escapeHtml(b.author)}</div></div></div>`;
         }).join('');
         return `<div class="gallery-section"><div class="gallery-letter">${l}</div><div class="gallery-group">${items}</div></div>`;
       }).join('');
@@ -567,9 +579,9 @@
           const galleryCover = galleryItem.querySelector('.gallery-cover');
           let statusTag = galleryCover.querySelector('.gallery-status-tag');
 
-          if (isInColl(id)) {
-            removeFromCollection(id);
-            btn.classList.remove('in-coll');
+          if (isInCart(id)) {
+            removeFromCart(id);
+            btn.classList.remove('in-cart');
             btn.textContent = '+';
             if (statusTag) {
               const sc = getStatusClass(book.status);
@@ -577,15 +589,15 @@
               statusTag.textContent = getStatusText(book.status);
             }
           } else {
-            addToCollection(book);
-            btn.classList.add('in-coll');
+            addToCart(book);
+            btn.classList.add('in-cart');
             btn.textContent = '-';
             if (statusTag && book.status === 'available') {
               statusTag.className = 'gallery-status-tag added';
               statusTag.textContent = 'Added';
             }
           }
-          updateCollUI();
+          updateCartUI();
           sliderTrack.innerHTML = books.map((b, i) => createSlide(b, i)).join('');
           updateSliderPosition();
           bindAddBtns();
@@ -600,18 +612,18 @@
 
     function sortCatalog(items) {
       return [...items].sort((a, b) => {
-        const aRank = canRequestBook(a) ? 0 : 1;
-        const bRank = canRequestBook(b) ? 0 : 1;
+        const aRank = canPurchaseBook(a) ? 0 : 1;
+        const bRank = canPurchaseBook(b) ? 0 : 1;
         if (aRank !== bRank) return aRank - bRank;
         return a.title.localeCompare(b.title);
       });
     }
 
-    function reconcileCollection() {
+    function reconcileCart() {
       const seen = new Set();
-      collection = collection
+      cart = cart
         .map(item => books.find(book => bookKey(book.id) === bookKey(item.id)))
-        .filter(book => book && canRequestBook(book))
+        .filter(book => book && canPurchaseBook(book))
         .filter(book => {
           const key = bookKey(book.id);
           if (seen.has(key)) return false;
@@ -628,7 +640,7 @@
     document.getElementById('fullListBtn').addEventListener('click', openGallery);
     document.getElementById('galleryClose').addEventListener('click', () => galleryOv.classList.remove('active'));
     document.getElementById('folderBtn').addEventListener('click', () => collPreview.classList.toggle('open'));
-    document.getElementById('viewAllBtn').addEventListener('click', openCollModal);
+    document.getElementById('viewAllBtn').addEventListener('click', openCartModal);
     document.getElementById('collClose').addEventListener('click', () => collOv.classList.remove('active'));
     document.getElementById('collOv').addEventListener('click', e => { if (e.target === collOv) collOv.classList.remove('active') });
     document.addEventListener('keydown', e => { if (galleryOv.classList.contains('active') || collOv.classList.contains('active') || requestOv.classList.contains('active')) { if (e.key === 'Escape') { galleryOv.classList.remove('active'); collOv.classList.remove('active'); requestOv.classList.remove('active') } return } if (e.key === 'ArrowLeft') navigate(-1); if (e.key === 'ArrowRight') navigate(1) });
@@ -673,15 +685,15 @@
           })));
         }
       }
-      reconcileCollection();
-      initSlider(); updateCollUI(); initSearchUI();
+      reconcileCart();
+      initSlider(); updateCartUI(); initSearchUI();
     }
     initApp().catch(e => console.error('[PF Index] Init error:', e)).finally(() => {
       // Ensure page is always visible even if init fails
       setTimeout(() => document.body.classList.add('loaded'), 100);
     });
 
-    // --- Request Logic ---
+    // --- Purchase Logic ---
     const requestOv = document.getElementById('requestOv');
     const requestBody = document.getElementById('requestBody');
     const requestClose = document.getElementById('requestClose');
@@ -691,56 +703,8 @@
       if (event.target === requestOv) requestOv.classList.remove('active');
     });
 
-    function startRequest() {
-      if (!collection.length) {
-        openCollModal();
-        return;
-      }
-      collOv.classList.remove('active');
-      renderRequestStep1();
-      requestOv.classList.add('active');
-    }
-
-    function renderRequestStep1() {
-      const itemsHtml = collection.map(b => `<li>${escapeHtml(b.title)} <span>${escapeHtml(b.author)}</span></li>`).join('');
-      requestBody.innerHTML = `
-        <form class="request-form" id="requestForm" novalidate>
-          <div>
-            <h4>Confirm your request</h4>
-            <p class="request-intro">We will use these details to confirm price, availability, and fulfillment before payment.</p>
-          </div>
-          <ul class="request-summary">${itemsHtml}</ul>
-          <div class="request-fields">
-            <label class="request-field">
-              <span>Full name</span>
-              <input name="name" type="text" autocomplete="name" maxlength="80" required>
-              <small data-error-for="name"></small>
-            </label>
-            <label class="request-field">
-              <span>Phone or email</span>
-              <input name="contact" type="text" autocomplete="email" maxlength="120" required>
-              <small data-error-for="contact"></small>
-            </label>
-            <label class="request-field">
-              <span>Fulfillment</span>
-              <select name="fulfillment" required>
-                <option value="pickup">Pickup</option>
-                <option value="delivery">Delivery</option>
-              </select>
-              <small data-error-for="fulfillment"></small>
-            </label>
-            <label class="request-field">
-              <span>Notes <em>Optional</em></span>
-              <textarea name="notes" rows="3" maxlength="500" placeholder="Preferred timing or delivery area"></textarea>
-            </label>
-          </div>
-          <div class="request-form-footer">
-            <p class="request-form-status" id="requestFormStatus" role="status"></p>
-            <button class="request-primary-btn" type="submit">Save Request</button>
-          </div>
-        </form>
-        `;
-      document.getElementById('requestForm').addEventListener('submit', completeRequest);
+    function getStoreConfig() {
+      return (window.PF_CONFIG && window.PF_CONFIG.store) || {};
     }
 
     function showRequestErrors(errors) {
@@ -749,23 +713,108 @@
       });
     }
 
-    async function completeRequest(event) {
+    function startPurchase() {
+      if (!cart.length) {
+        openCartModal();
+        return;
+      }
+      collOv.classList.remove('active');
+      renderPaymentStep();
+      requestOv.classList.add('active');
+    }
+
+    function renderPaymentStep() {
+      const config = getStoreConfig();
+      const itemsHtml = cart.map(b => `<li>${escapeHtml(b.title)} <span>${escapeHtml(b.author)}</span></li>`).join('');
+      requestBody.innerHTML = `
+        <div class="request-form">
+          <div>
+            <h4>Complete purchase</h4>
+            <p class="request-intro">Transfer payment to the account below, then continue to add delivery and receipt details.</p>
+          </div>
+          <ul class="request-summary">${itemsHtml}</ul>
+          <div class="payment-panel" aria-label="Bank transfer details">
+            <div>
+              <span>Bank</span>
+              <strong>${escapeHtml(config.bankName || 'Set bank name in js/config.js')}</strong>
+            </div>
+            <div>
+              <span>Account number</span>
+              <button class="account-copy" id="copyAccountBtn" type="button">${escapeHtml(config.accountNumber || 'Set account number')}</button>
+            </div>
+            <div>
+              <span>Account name</span>
+              <strong>${escapeHtml(config.accountName || 'Pages Forward')}</strong>
+            </div>
+          </div>
+          <div class="request-form-footer">
+            <p class="request-form-status" id="requestFormStatus" role="status"></p>
+            <button class="request-primary-btn" id="continuePurchaseBtn" type="button">I have paid</button>
+          </div>
+        </div>`;
+
+      document.getElementById('continuePurchaseBtn').addEventListener('click', renderPurchaseForm);
+      document.getElementById('copyAccountBtn').addEventListener('click', async () => {
+        const status = document.getElementById('requestFormStatus');
+        try {
+          await navigator.clipboard.writeText(config.accountNumber || '');
+          status.textContent = 'Account number copied.';
+        } catch {
+          status.textContent = 'Copy unavailable. Select the account number manually.';
+        }
+      });
+    }
+
+    function renderPurchaseForm() {
+      requestBody.innerHTML = `
+        <form class="request-form" id="purchaseForm" novalidate>
+          <div>
+            <h4>Delivery and receipt</h4>
+            <p class="request-intro">Your phone number lets us contact you to confirm payment, delivery timing, and any book availability issue.</p>
+          </div>
+          <div class="request-fields">
+            <label class="request-field">
+              <span>Delivery address</span>
+              <textarea name="address" rows="3" autocomplete="street-address" maxlength="300" required></textarea>
+              <small data-error-for="address"></small>
+            </label>
+            <label class="request-field">
+              <span>Phone number</span>
+              <input name="phone" type="tel" autocomplete="tel" maxlength="40" required>
+              <small data-error-for="phone"></small>
+            </label>
+            <label class="request-field">
+              <span>Transaction receipt</span>
+              <input name="receipt" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" required>
+              <em>PDF, JPG, PNG, or WebP. Max 5 MB.</em>
+              <small data-error-for="receipt"></small>
+            </label>
+          </div>
+          <div class="request-form-footer">
+            <p class="request-form-status" id="requestFormStatus" role="status"></p>
+            <button class="request-primary-btn" type="submit">Save Purchase</button>
+          </div>
+        </form>`;
+      document.getElementById('purchaseForm').addEventListener('submit', completePurchase);
+    }
+
+    async function completePurchase(event) {
       event.preventDefault();
       const form = event.currentTarget;
       const submitButton = form.querySelector('button[type="submit"]');
       const status = document.getElementById('requestFormStatus');
-      const orderItems = collection.map(b => ({ id: bookKey(b.id), title: b.title, author: b.author, price: b.price }));
+      const purchaseItems = cart.map(b => ({ id: bookKey(b.id), title: b.title, author: b.author, price: b.price }));
+      const receiptFile = form.elements.receipt.files && form.elements.receipt.files[0];
       const draft = {
-        items: orderItems,
+        items: purchaseItems,
         customer: {
-          name: form.elements.name.value,
-          contact: form.elements.contact.value
+          address: form.elements.address.value,
+          phone: form.elements.phone.value
         },
-        fulfillment: form.elements.fulfillment.value,
-        notes: form.elements.notes.value
+        receiptFile
       };
 
-      const validation = window.PF.Requests.validate(draft);
+      const validation = window.PF.Purchases.validate(draft);
       showRequestErrors(validation.errors);
       if (!validation.valid) {
         status.textContent = 'Review the highlighted details.';
@@ -776,60 +825,61 @@
       submitButton.textContent = 'Saving...';
       status.textContent = '';
 
-      let order;
+      let purchase;
       try {
-        order = window.PF.Requests.create(draft);
-        order = await window.PF.Requests.sync(order);
+        purchase = window.PF.Purchases.create(draft);
+        purchase = await window.PF.Purchases.sync(purchase, receiptFile);
       } catch (error) {
-        status.textContent = error.message || 'The request could not be saved.';
+        status.textContent = error.message || 'The purchase could not be saved.';
         submitButton.disabled = false;
-        submitButton.textContent = 'Save Request';
+        submitButton.textContent = 'Save Purchase';
         return;
       }
 
-      window.PF.lastRequest = order;
-      const syncMessage = order.syncStatus === 'synced'
-        ? 'The request was sent to the bookstore.'
-        : 'The request is saved on this device. Share or copy it to send it to the bookstore.';
+      window.PF.lastPurchase = purchase;
+      const syncMessage = purchase.syncStatus === 'synced'
+        ? 'The purchase was sent to the bookstore.'
+        : 'The purchase is saved on this device. Use WhatsApp to send it to the bookstore.';
 
       requestBody.innerHTML = `
         <div class="request-success">
           <div class="request-success-mark" aria-hidden="true">OK</div>
-          <h3>Request Saved</h3>
-          <p>Your request ID is <strong>${escapeHtml(order.id)}</strong>.</p>
+          <h3>Purchase Saved</h3>
+          <p>Your purchase ID is <strong>${escapeHtml(purchase.id)}</strong>.</p>
           <p>${syncMessage}</p>
           <div class="request-success-actions">
-            <button class="request-primary-btn" id="shareRequestBtn" type="button">Share Request</button>
+            <a class="request-primary-btn" id="whatsAppPurchaseBtn" href="${escapeHtml(window.PF.Purchases.getWhatsAppUrl(purchase))}" target="_blank" rel="noopener">Reach out on WhatsApp</a>
+            <button class="request-secondary-btn" id="sharePurchaseBtn" type="button">Share</button>
             <button class="request-secondary-btn" id="copyRequestBtn" type="button">Copy</button>
-            <a class="request-secondary-btn" href="requests.html">My Requests</a>
+            <a class="request-secondary-btn" href="purchases.html">Purchases</a>
           </div>
           <div class="request-action-status" id="requestActionStatus" role="status"></div>
         </div>`;
 
-      document.getElementById('shareRequestBtn').addEventListener('click', shareRequest);
-      document.getElementById('copyRequestBtn').addEventListener('click', copyRequestText);
-      collection = [];
-      updateCollUI();
+      document.getElementById('sharePurchaseBtn').addEventListener('click', sharePurchase);
+      document.getElementById('copyRequestBtn').addEventListener('click', copyPurchaseText);
+      cart = [];
+      updateCartUI();
       initSlider();
     }
 
-    async function copyRequestText() {
+    async function copyPurchaseText() {
       const status = document.getElementById('requestActionStatus');
       try {
-        await window.PF.Requests.copy(window.PF.lastRequest);
-        if (status) status.textContent = 'Request copied.';
+        await window.PF.Purchases.copy(window.PF.lastPurchase);
+        if (status) status.textContent = 'Purchase copied.';
       } catch (error) {
-        if (status) status.textContent = 'Copy is unavailable. Open My Requests to view the details.';
+        if (status) status.textContent = 'Copy is unavailable. Open Purchases to view the details.';
       }
     }
 
-    async function shareRequest() {
+    async function sharePurchase() {
       const status = document.getElementById('requestActionStatus');
       try {
-        const result = await window.PF.Requests.share(window.PF.lastRequest);
+        const result = await window.PF.Purchases.share(window.PF.lastPurchase);
         if (status) status.textContent = result === 'copied'
-          ? 'Sharing is unavailable, so the request was copied.'
-          : 'Request shared.';
+          ? 'Sharing is unavailable, so the purchase was copied.'
+          : 'Purchase shared.';
       } catch (error) {
         if (error && error.name === 'AbortError') return;
         if (status) status.textContent = 'Sharing was not completed.';

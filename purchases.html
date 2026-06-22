@@ -4,17 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Requests | Pages Forward</title>
-  <meta name="description" content="Review and share book requests saved on this device.">
+  <title>My Purchases | Pages Forward</title>
+  <meta name="description" content="Review and share Pages Forward purchases saved on this device.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Jost:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B88A44' stroke-width='2'><path d='M4 5h16v14H4z'/><path d='M8 9h8M8 13h5'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/requests.css">
+  <link rel="stylesheet" href="css/purchases.css">
 </head>
 
 <body class="requests-page loaded">
@@ -33,22 +32,23 @@
   <main class="requests-main">
     <div class="requests-title-row">
       <div>
-        <h1 class="requests-title">My Requests</h1>
-        <p class="requests-subtitle">Requests saved in this browser, ready to share with the bookstore.</p>
+        <h1 class="requests-title">My Purchases</h1>
+        <p class="requests-subtitle">Purchases saved in this browser with receipt and delivery details.</p>
       </div>
-      <div class="requests-count" id="requestsCount"></div>
+      <div class="requests-count" id="purchasesCount"></div>
     </div>
-    <div class="requests-list" id="requestsList"></div>
+    <div class="requests-list" id="purchasesList"></div>
   </main>
 
+  <script src="js/config.js"></script>
   <script src="js/theme.js"></script>
-  <script src="js/requests.js"></script>
+  <script src="js/purchases.js"></script>
   <script>
     (function () {
       'use strict';
 
-      const list = document.getElementById('requestsList');
-      const count = document.getElementById('requestsCount');
+      const list = document.getElementById('purchasesList');
+      const count = document.getElementById('purchasesCount');
 
       function escapeHtml(value) {
         return String(value == null ? '' : value)
@@ -59,16 +59,6 @@
           .replace(/'/g, '&#039;');
       }
 
-      function normalize(request) {
-        return {
-          ...request,
-          items: Array.isArray(request.items) ? request.items : [],
-          customer: request.customer || request.user_details || {},
-          fulfillment: request.fulfillment || request.fulfillment_method || 'pickup',
-          syncStatus: request.syncStatus || 'local'
-        };
-      }
-
       function formatDate(value) {
         const date = new Date(value);
         return Number.isNaN(date.getTime())
@@ -77,40 +67,43 @@
       }
 
       function render() {
-        const requests = window.PF.Requests.load().map(normalize);
-        count.textContent = `${requests.length} request${requests.length === 1 ? '' : 's'}`;
+        const purchases = window.PF.Purchases.load();
+        count.textContent = `${purchases.length} purchase${purchases.length === 1 ? '' : 's'}`;
 
-        if (!requests.length) {
+        if (!purchases.length) {
           list.innerHTML = `
             <div class="requests-empty">
-              <h2>No saved requests</h2>
-              <p>Add an available book from the catalog to start one.</p>
+              <h2>No saved purchases</h2>
+              <p>Add an available book to cart and upload a receipt to complete a purchase.</p>
               <a class="requests-link" href="index.html">Browse Catalog</a>
             </div>`;
           return;
         }
 
-        list.innerHTML = requests.map(request => {
-          const itemList = request.items.map(item =>
+        list.innerHTML = purchases.map(purchase => {
+          const itemList = purchase.items.map(item =>
             `<li>${escapeHtml(item.title)} <span>by ${escapeHtml(item.author)}</span></li>`
           ).join('');
-          const customerName = request.customer.name || 'Customer details not recorded';
-          const fulfillment = request.fulfillment === 'delivery' ? 'Delivery' : 'Pickup';
-          const syncLabel = request.syncStatus === 'synced' ? 'Sent' : 'Saved locally';
+          const phone = purchase.customer.phone || 'Phone not recorded';
+          const receipt = purchase.receipt && purchase.receipt.name
+            ? purchase.receipt.name
+            : 'Receipt uploaded';
+          const syncLabel = purchase.syncStatus === 'synced' ? 'Sent to store' : 'Saved locally';
 
           return `
-            <article class="request-record" data-id="${escapeHtml(request.id)}">
+            <article class="request-record" data-id="${escapeHtml(purchase.id)}">
               <div>
                 <div class="request-record-head">
-                  <span class="request-record-id">${escapeHtml(request.id)}</span>
+                  <span class="request-record-id">${escapeHtml(purchase.id)}</span>
                   <span class="request-record-status">${syncLabel}</span>
-                  <span class="request-record-date">${escapeHtml(formatDate(request.createdAt))}</span>
+                  <span class="request-record-date">${escapeHtml(formatDate(purchase.createdAt))}</span>
                 </div>
-                <h2>${request.items.length} book${request.items.length === 1 ? '' : 's'}</h2>
-                <div class="request-record-meta">${escapeHtml(customerName)} &bull; ${fulfillment}</div>
+                <h2>${purchase.items.length} book${purchase.items.length === 1 ? '' : 's'}</h2>
+                <div class="request-record-meta">${escapeHtml(phone)} &bull; ${escapeHtml(receipt)}</div>
                 <ul class="request-record-items">${itemList}</ul>
               </div>
               <div class="request-record-actions">
+                <a href="${escapeHtml(window.PF.Purchases.getWhatsAppUrl(purchase))}" target="_blank" rel="noopener">WhatsApp</a>
                 <button type="button" data-action="share">Share</button>
                 <button type="button" data-action="copy">Copy</button>
                 <button class="danger" type="button" data-action="remove">Remove</button>
@@ -125,10 +118,9 @@
         if (!button) return;
         const record = button.closest('.request-record');
         const message = record.querySelector('.request-record-message');
-        const request = window.PF.Requests.load()
-          .map(normalize)
+        const purchase = window.PF.Purchases.load()
           .find(item => item.id === record.dataset.id);
-        if (!request) return;
+        if (!purchase) return;
 
         if (button.dataset.action === 'remove') {
           if (button.dataset.confirm !== 'true') {
@@ -137,20 +129,20 @@
             message.textContent = 'Select Confirm to remove this local record.';
             return;
           }
-          window.PF.Requests.remove(request.id);
+          window.PF.Purchases.remove(purchase.id);
           render();
           return;
         }
 
         try {
           if (button.dataset.action === 'share') {
-            const result = await window.PF.Requests.share(request);
+            const result = await window.PF.Purchases.share(purchase);
             message.textContent = result === 'copied'
-              ? 'Sharing is unavailable, so the request was copied.'
-              : 'Request shared.';
+              ? 'Sharing is unavailable, so the purchase was copied.'
+              : 'Purchase shared.';
           } else {
-            await window.PF.Requests.copy(request);
-            message.textContent = 'Request copied.';
+            await window.PF.Purchases.copy(purchase);
+            message.textContent = 'Purchase copied.';
           }
         } catch (error) {
           if (error && error.name === 'AbortError') return;

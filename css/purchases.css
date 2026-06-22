@@ -193,7 +193,8 @@ body.requests-page {
   gap: .45rem;
 }
 
-.request-record-actions button {
+.request-record-actions button,
+.request-record-actions a {
   min-height: 2.2rem;
   border: 1px solid var(--sand);
   border-radius: 4px;
@@ -206,9 +207,12 @@ body.requests-page {
   letter-spacing: .06em;
   text-transform: uppercase;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 }
 
-.request-record-actions button:hover {
+.request-record-actions button:hover,
+.request-record-actions a:hover {
   border-color: var(--char);
   color: var(--ink);
 }
