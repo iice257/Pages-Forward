@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primordial Cosmic | Pages Forward v3</title>
+  <meta name="description" content="Primordial Cosmic: a premium bookstore for physical books and ebooks. Concept stage, with the design references collected so far.">
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #08070d; --ink: #f1ede6; --muted: #9a94a8; --line: #2a2736; --accent: #c9a6ff; --pad: clamp(20px, 5vw, 64px); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(120% 70% at 50% -10%, #1c1530 0%, var(--bg) 60%) fixed; color: var(--ink); font: 400 15px/1.6 Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .hero { display: grid; place-content: center; gap: 18px; min-height: 62vh; padding: var(--pad); text-align: center; }
+    .tag { justify-self: center; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+    h1 { margin: 0; font: 500 clamp(2.6rem, 9vw, 6.5rem)/0.95 "Playfair Display", Georgia, serif; letter-spacing: -0.02em; }
+    h1 em { color: var(--accent); }
+    .hero p { max-width: 34rem; margin: 0 auto; color: var(--muted); font-size: 1rem; }
+    section { padding: 0 var(--pad) var(--pad); }
+    h2 { margin: 0 0 6px; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .note { margin: 0 0 24px; max-width: 40rem; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+    .grid a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: #100e18; }
+    .grid img { display: block; width: 100%; height: 180px; object-fit: cover; object-position: top; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .grid a:hover img { transform: scale(1.03); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .grid img { transition: none; } }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <span class="tag">Concept &middot; not built yet</span>
+    <h1>Primordial <em>Cosmic</em></h1>
+    <p>A premium bookstore for physical books and ebooks. Browse, purchase, and read your favourite books.</p>
+  </div>
+  <section>
+    <h2>Design references</h2>
+    <p class="note">Screenshots collected while shaping the Pages Forward look, January 2026. The original starter page for this version is kept in the repo as <code>v3/stub-original.html</code>.</p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <script>
+    var files = [
+      '20260113-204642.png',
+      '20260114-004129.png',
+      '20260114-061844.png',
+      '20260117-155418.png',
+      '20260117-155850.png',
+      '20260117-155911.png',
+      '20260117-160203.png',
+      '20260117-215806.png',
+      '20260124-193546.png',
+      '20260124-193619.png',
+      '20260124-194836.png',
+      '20260124-194849.png',
+      '20260124-194857.png',
+      '20260125-005737.png',
+      '20260125-014100.png',
+      '20260125-154833.png',
+      '20260125-154941.png',
+      '20260125-155307.png',
+      '20260125-160503.png',
+      '20260125-164938.png',
+      '20260125-181209.png',
+      '20260125-181329.png',
+      '20260125-181412.png',
+      '20260125-181430.png',
+    ];
+    var grid = document.getElementById('grid');
+    files.forEach(function (f, i) {
+      var a = document.createElement('a');
+      a.href = 'reference/' + f; a.target = '_blank'; a.rel = 'noopener';
+      var img = document.createElement('img');
+      img.src = 'reference/' + f; img.loading = 'lazy'; img.alt = 'Design reference ' + (i + 1) + ' of ' + files.length;
+      a.appendChild(img); grid.appendChild(a);
+    });
+  </script>
+</body>
+
+</html>

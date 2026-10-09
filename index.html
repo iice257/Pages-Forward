@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pages Forward | Three versions</title>
+  <meta name="description"
+    content="Pages Forward, a real bookstore, in three versions: the live static storefront, the Vite rebuild, and the Primordial Cosmic concept.">
+  <meta name="theme-color" content="#f8f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/svg+xml" href="v1/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5f0;
+      --surface: #fffdf9;
+      --line: #d8cfc2;
+      --ink: #1a1815;
+      --muted: #7a736a;
+      --gold: #b88a44;
+      --live: #4a8c5a;
+      --pad: clamp(16px, 4vw, 40px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1816;
+        --surface: #221f1c;
+        --line: #4a4640;
+        --ink: #f5f2ed;
+        --muted: #b5ada2;
+        --gold: #d2a45c;
+        --live: #6fb27f;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 15px/1.5 Inter, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      flex: none;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 18px var(--pad) 0;
+      padding-top: max(18px, env(safe-area-inset-top));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      padding-bottom: 14px;
+      font: 600 15px/1 "Playfair Display", Georgia, serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: clamp(16px, 3vw, 36px);
+    }
+
+    nav button {
+      position: relative;
+      padding: 0 0 14px;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font: 500 14px/1 Inter, system-ui, sans-serif;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    nav button small {
+      margin-right: 8px;
+      color: var(--gold);
+      font: 500 11px/1 Inter, sans-serif;
+      letter-spacing: 0.12em;
+    }
+
+    nav button:hover,
+    nav button[aria-selected="true"] { color: var(--ink); }
+
+    nav button::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav button[aria-selected="true"]::after { transform: scaleX(1); }
+
+    button:focus-visible,
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+    .open {
+      justify-self: end;
+      padding-bottom: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .open:hover { color: var(--ink); }
+
+    .caption {
+      flex: none;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px var(--pad);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--ink);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--dot, var(--muted));
+    }
+
+    main {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      margin: 0 var(--pad) var(--pad);
+      margin-bottom: max(var(--pad), env(safe-area-inset-bottom));
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: var(--surface);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s;
+    }
+
+    iframe[data-active] { opacity: 1; visibility: visible; }
+
+    @media (max-width: 760px) {
+      header { grid-template-columns: 1fr auto; }
+      nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        margin: 0 calc(var(--pad) * -1);
+        padding: 0 var(--pad);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      nav button { padding-top: 4px; }
+      .open { padding-bottom: 14px; }
+      .caption { flex-direction: column; gap: 2px; }
+      main { margin-right: 0; margin-left: 0; border-width: 1px 0 0; border-radius: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">Pages Forward</div>
+    <nav role="tablist" aria-label="Versions">
+      <button role="tab" id="tab-v1" aria-controls="frame-v1" data-v="v1"><small>V1</small>Storefront</button>
+      <button role="tab" id="tab-v2" aria-controls="frame-v2" data-v="v2"><small>V2</small>Rebuild</button>
+      <button role="tab" id="tab-v3" aria-controls="frame-v3" data-v="v3"><small>V3</small>Primordial Cosmic</button>
+    </nav>
+    <a class="open" id="open" target="_blank" rel="noopener">Open full page &#8599;</a>
+  </header>
+
+  <div class="caption" aria-live="polite">
+    <span class="status" id="status"></span>
+    <span id="blurb"></span>
+  </div>
+
+  <main>
+    <iframe id="frame-v1" role="tabpanel" aria-labelledby="tab-v1" title="Pages Forward v1: static storefront"></iframe>
+    <iframe id="frame-v2" role="tabpanel" aria-labelledby="tab-v2" title="Pages Forward v2: Vite rebuild"></iframe>
+    <iframe id="frame-v3" role="tabpanel" aria-labelledby="tab-v3" title="Pages Forward v3: Primordial Cosmic concept"></iframe>
+  </main>
+
+  <script>
+    var VERSIONS = {
+      v1: { src: 'v1/', status: 'Live', dot: 'var(--live)', blurb: 'Offline-first storefront for the real inventory: cart, bank-transfer checkout, receipt upload, optional Supabase admin.' },
+      v2: { src: 'v2/', status: 'Prototype', dot: 'var(--gold)', blurb: 'Vite rebuild with a showcase, catalog, ebook reader and library. Runs on demo data here; cart and orders stay in your browser.' },
+      v3: { src: 'v3/', status: 'Concept', dot: 'var(--muted)', blurb: 'Primordial Cosmic: a premium bookstore direction. Not built yet; the design references live here.' }
+    };
+    var tabs = [].slice.call(document.querySelectorAll('[role=tab]'));
+    var current;
+
+    function select(id, push) {
+      if (!VERSIONS[id]) id = 'v1';
+      current = id;
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.v === id)); t.tabIndex = t.dataset.v === id ? 0 : -1; });
+      Object.keys(VERSIONS).forEach(function (key) {
+        var frame = document.getElementById('frame-' + key);
+        if (key === id) {
+          if (!frame.getAttribute('src')) frame.setAttribute('src', VERSIONS[key].src);
+          frame.setAttribute('data-active', '');
+        } else {
+          frame.removeAttribute('data-active');
+        }
+      });
+      var v = VERSIONS[id];
+      document.getElementById('status').textContent = v.status;
+      document.getElementById('status').style.setProperty('--dot', v.dot);
+      document.getElementById('blurb').textContent = v.blurb;
+      document.getElementById('open').setAttribute('href', v.src);
+      if (push && location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t.dataset.v, true); });
+      t.addEventListener('keydown', function (e) {
+        var next = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+        if (next === null) return;
+        var target = tabs[(next + tabs.length) % tabs.length];
+        target.focus();
+        select(target.dataset.v, true);
+      });
+    });
+    window.addEventListener('hashchange', function () { select(location.hash.slice(1), false); });
+    select(location.hash.slice(1), false);
+  </script>
+</body>
+
+</html>

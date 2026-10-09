@@ -12,7 +12,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
+          "value": "SAMEORIGIN"
         },
         {
           "key": "Referrer-Policy",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "source": "/assets/covers/(.*)",
+      "source": "/v1/assets/covers/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/js/(.*)",
+      "source": "/v1/js/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "source": "/css/(.*)",
+      "source": "/v1/css/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -51,5 +51,7 @@
         }
       ]
     }
-  ]
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
